@@ -23,7 +23,7 @@
                     class="text-center pb-1 px-2 mr-4 w-full">
                 <div class="grid grid-cols-2 gap-2 w-full pb-6">
                     <button class="bg-green-800 text-white font-bold p-2 mt-5">Search</button>
-                    <a href="{{url()->previous()}}" class="bg-gray-800 text-white font-bold p-2 mt-5 text-center"
+                    <a href="{{url('login') }}" class="bg-gray-800 text-white font-bold p-2 mt-5 text-center"
                         role="button">Back</a>
                 </div>
             </form>
