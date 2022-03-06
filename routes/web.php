@@ -17,7 +17,7 @@ use App\Http\Controllers\adopterController;
 |  Prettier for php: composer fix-cs
 */
 
-Route::resource("/animals", animalController::class)->middleware("isLoggedIn");
+Route::resource("/animals", "animalController")->middleware("isLoggedIn");
 Route::get("/animals/restore/{id}", [
     "uses" => "animalController@restore",
     "as" => "animals.restore",
@@ -26,6 +26,9 @@ Route::get("/animals/forceDelete/{id}", [
     "uses" => "animalController@forceDelete",
     "as" => "animals.forceDelete",
 ]);
+
+Route::get("/search", [animalController::class, "search"])->name("search");
+Route::get("/result", [animalController::class, "result"])->name("result");
 
 Route::resource("/rescuer", "rescuerController")->middleware("isLoggedIn");
 //Route::resource("/rescuer", rescuerController::class)->middleware("isLoggedIn");
@@ -82,7 +85,4 @@ Route::get("/dashboard", [personnelController::class, "dashboard"])->middleware(
 Route::get("/logout", [personnelController::class, "logout"])->middleware(
     "isLoggedIn"
 );
-Route::get("/personnel/create", [
-    personnelController::class,
-    "create",
-])->middleware("alreadyLoggedIn");
+Route::get("/personnel/create", [personnelController::class,"create",])->middleware("alreadyLoggedIn");
