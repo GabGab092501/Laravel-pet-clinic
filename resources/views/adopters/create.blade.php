@@ -57,14 +57,14 @@
                         w-1/12','id'=>'animals')) !!}
                         @endforeach
 
-                    <div class="grid grid-cols-2 gap-2 w-full">
-                        <button type="submit" class="bg-green-800 text-white font-bold p-2 mt-5">
-                            Submit
-                        </button>
-                        <a href="{{url()->previous()}}" class="bg-gray-800 text-white font-bold p-2 mt-5 text-center"
-                            role="button">Cancel</a>
+                        <div class="grid grid-cols-2 gap-2 w-full">
+                            <button type="submit" class="bg-green-800 text-white font-bold p-2 mt-5">
+                                Submit
+                            </button>
+                            <a href="{{url()->previous()}}"
+                                class="bg-gray-800 text-white font-bold p-2 mt-5 text-center" role="button">Cancel</a>
+                        </div>
                     </div>
-                </div>
             </form>
         </div>
         @endsection

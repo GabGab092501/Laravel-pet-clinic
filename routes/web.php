@@ -85,4 +85,7 @@ Route::get("/dashboard", [personnelController::class, "dashboard"])->middleware(
 Route::get("/logout", [personnelController::class, "logout"])->middleware(
     "isLoggedIn"
 );
-Route::get("/personnel/create", [personnelController::class,"create",])->middleware("alreadyLoggedIn");
+Route::get("/personnel/create", [
+    personnelController::class,
+    "create",
+])->middleware("alreadyLoggedIn");
