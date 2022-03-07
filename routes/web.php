@@ -6,6 +6,7 @@ use App\Http\Controllers\rescuerController;
 use App\Http\Controllers\personnelController;
 use App\Http\Controllers\diseaseInjuryController;
 use App\Http\Controllers\adopterController;
+use App\Http\Controllers\contactController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +17,9 @@ use App\Http\Controllers\adopterController;
 | contains the "web" middleware group. Now create something great!
 |  Prettier for php: composer fix-cs
 */
+Route::resource("/contact", "contactController");//->middleware("isLoggedIn");
+Route::get("/message", [contactController::class, "message"])->name("message");
+Route::post("/send", [contactController::class, "send"])->name("send");
 
 Route::resource("/animals", "animalController")->middleware("isLoggedIn");
 Route::get("/animals/restore/{id}", [
