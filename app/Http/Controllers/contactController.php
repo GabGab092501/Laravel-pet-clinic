@@ -11,26 +11,28 @@ class contactController extends Controller
 {
     public function message()
     {
-        return view('message');
+        return view("message");
     }
 
     /**
-    * 
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
-   public function send(Request $request)
-   {
-       $contacts = array(
-        'name' => $request->name,
-        'email' => $request->email,
-        'phone_number' => $request->phone_number,
-        'review' => $request->review,
-       );
-       Contact::create($contacts);
-       Mail::to('gabrielarafol.mendoza@tup.edu.ph')->send(new contactMail($contacts));
-       return back()->with('success','Feedback Successfully Send');
-   }
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function send(Request $request)
+    {
+        $contacts = [
+            "name" => $request->name,
+            "email" => $request->email,
+            "phone_number" => $request->phone_number,
+            "review" => $request->review,
+        ];
+        Contact::create($contacts);
+        Mail::to("gabrielarafol.mendoza@tup.edu.ph")->send(
+            new contactMail($contacts)
+        );
+        return back()->with("success", "Feedback Successfully Send");
+    }
 
     /**
      * Display a listing of the resource.

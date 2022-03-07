@@ -17,7 +17,7 @@ use App\Http\Controllers\contactController;
 | contains the "web" middleware group. Now create something great!
 |  Prettier for php: composer fix-cs
 */
-Route::resource("/contact", "contactController");//->middleware("isLoggedIn");
+Route::resource("/contact", "contactController"); //->middleware("isLoggedIn");
 Route::get("/message", [contactController::class, "message"])->name("message");
 Route::post("/send", [contactController::class, "send"])->name("send");
 

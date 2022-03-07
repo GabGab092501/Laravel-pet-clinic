@@ -31,16 +31,17 @@
                         <input type="text" class="block shadow-5xl p-2 my-5 w-full" id="email" name="email"
                             placeholder="Email" value="{{old('email')}}">
                     </div>
-            
+
                     <div>
                         <label for="phone_number" class="text-lg">Phone Number</label>
-                        <input type="text" class="block shadow-5xl p-2 my-5 w-full" id="phone_number" name="phone_number"
-                            placeholder="Phone Number" value="{{old('phone_number')}}">
+                        <input type="text" class="block shadow-5xl p-2 my-5 w-full" id="phone_number"
+                            name="phone_number" placeholder="Phone Number" value="{{old('phone_number')}}">
                     </div>
 
                     <div>
                         <label for="review" class="text-lg">Message Us</label>
-                        <textarea id="review" name="review" class="block shadow-5xl p-2 my-3 w-full" rows="4" cols="50" placeholder="Leave Your Message Here" value="{{old('review')}}"></textarea>
+                        <textarea id="review" name="review" class="block shadow-5xl p-2 my-3 w-full" rows="4" cols="50"
+                            placeholder="Leave Your Message Here" value="{{old('review')}}"></textarea>
                     </div>
 
                     <div class="grid grid-cols-2 gap-2 w-full">
@@ -53,5 +54,5 @@
                 </div>
             </form>
         </div>
-        
+
         @endsection
