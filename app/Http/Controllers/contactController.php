@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Mail\contactMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\View;
 use App\Models\Contact;
 
 class contactController extends Controller
 {
-    public function message()
+    public function review()
     {
-        return view("message");
+        return View::make("review");
     }
 
     /**
