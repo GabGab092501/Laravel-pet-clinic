@@ -17,11 +17,11 @@ use App\Http\Controllers\contactController;
 | contains the "web" middleware group. Now create something great!
 |  Prettier for php: composer fix-cs
 */
-Route::resource("/contact", "contactController"); //->middleware("isLoggedIn");
-Route::get("/message", [contactController::class, "message"])->name("message");
+Route::resource("/contact", "contactController"); //->middleware("auth");
+Route::get("/review", [contactController::class, "review"])->name("review");
 Route::post("/send", [contactController::class, "send"])->name("send");
 
-Route::resource("/animals", "animalController")->middleware("isLoggedIn");
+Route::resource("/animals", "animalController")->middleware("auth");
 Route::get("/animals/restore/{id}", [
     "uses" => "animalController@restore",
     "as" => "animals.restore",
@@ -34,8 +34,8 @@ Route::get("/animals/forceDelete/{id}", [
 Route::get("/search", [animalController::class, "search"])->name("search");
 Route::get("/result", [animalController::class, "result"])->name("result");
 
-Route::resource("/rescuer", "rescuerController")->middleware("isLoggedIn");
-//Route::resource("/rescuer", rescuerController::class)->middleware("isLoggedIn");
+Route::resource("/rescuer", "rescuerController")->middleware("auth");
+//Route::resource("/rescuer", rescuerController::class)->middleware("auth");
 Route::get("/rescuer/restore/{id}", [
     "uses" => "rescuerController@restore",
     "as" => "rescuer.restore",
@@ -46,7 +46,7 @@ Route::get("/rescuer/forceDelete/{id}", [
 ]);
 
 Route::resource("/diseaseinjury", diseaseInjuryController::class)->middleware(
-    "isLoggedIn"
+    "auth"
 );
 Route::get("/diseaseinjury/restore/{id}", [
     "uses" => "diseaseInjuryController@restore",
@@ -58,7 +58,7 @@ Route::get("/diseaseinjury/forceDelete/{id}", [
 ]);
 
 Route::resource("/personnel", personnelController::class)->middleware(
-    "isLoggedIn"
+    "auth"
 );
 Route::get("/personnel/restore/{id}", [
     "uses" => "personnelController@restore",
@@ -69,7 +69,7 @@ Route::get("/personnel/forceDelete/{id}", [
     "as" => "personnel.forceDelete",
 ]);
 
-Route::resource("/adopter", adopterController::class)->middleware("isLoggedIn");
+Route::resource("/adopter", adopterController::class)->middleware("auth");
 Route::get("/adopter/restore/{id}", [
     "uses" => "adopterController@restore",
     "as" => "adopter.restore",
@@ -79,17 +79,32 @@ Route::get("/adopter/forceDelete/{id}", [
     "as" => "adopter.forceDelete",
 ]);
 
-Route::get("/login", [personnelController::class, "login"])->middleware(
-    "alreadyLoggedIn"
-);
-Route::post("/check", [personnelController::class, "check"])->name("check");
-Route::get("/dashboard", [personnelController::class, "dashboard"])->middleware(
-    "isLoggedIn"
-);
-Route::get("/logout", [personnelController::class, "logout"])->middleware(
-    "isLoggedIn"
-);
+//Route::get("/login", [personnelController::class, "login"])->middleware(
+  //  "auth"
+//);
+//Route::post("/check", [personnelController::class, "check"])->name("check");
+//Route::get("/dashboard", [personnelController::class, "dashboard"])->middleware(
+  //  "auth"
+//);
+//Route::get("/logout", [personnelController::class, "logout"])->middleware(
+  //  "auth"
+//);
 Route::get("/personnel/create", [
     personnelController::class,
     "create",
-])->middleware("alreadyLoggedIn");
+])->middleware("auth");
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+//require __DIR__.'/auth.php';
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
