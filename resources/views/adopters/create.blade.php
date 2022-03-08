@@ -1,7 +1,7 @@
-@extends('home')
+@extends('body')
 
 @section('contents')
-<div class="pb-20 my-5">
+<div class="pb-20 my-2">
     <div class="text-center">
         <h1 class="text-5xl">
             Add Adopter
@@ -15,7 +15,7 @@
                 <div class="block">
                     <div>
                         <label for="first_name" class="text-lg">First Name</label>
-                        <input type="text" class="block shadow-5xl p-2 my-5 w-full" id="first_name" name="first_name"
+                        <input type="text" class="block shadow-5xl p-2 my-2 w-full" id="first_name" name="first_name"
                             placeholder="First Name" value="{{old('first_name')}}">
                         @if($errors->has('first_name'))
                         <p class="text-center text-red-500">{{ $errors->first('first_name') }}</p>
@@ -24,7 +24,7 @@
 
                     <div>
                         <label for="last_name" class="text-lg">Last Name</label>
-                        <input type="text" class="block shadow-5xl p-2 my-5 w-full" id="last_name" name="last_name"
+                        <input type="text" class="block shadow-5xl p-2 my-2 w-full" id="last_name" name="last_name"
                             placeholder="Last Name" value="{{old('last_name')}}">
                         @if($errors->has('last_name'))
                         <p class="text-center text-red-500">{{ $errors->first('last_name') }}</p>
@@ -33,7 +33,7 @@
 
                     <div>
                         <label for="phone_number" class="text-lg" r">Phone Number</label>
-                        <input type="text" class="block shadow-5xl p-2 my-5 w-full" id="phone_number"
+                        <input type="text" class="block shadow-5xl p-2 my-2 w-full" id="phone_number"
                             name="phone_number" placeholder="phone_number" value="{{old('phone_number')}}">
                         @if($errors->has('phone_number'))
                         <p class="text-center text-red-500">{{ $errors->first('phone_number') }}</p>

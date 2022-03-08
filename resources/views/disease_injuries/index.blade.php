@@ -1,4 +1,4 @@
-@extends('home')
+@extends('body')
 
 @section('contents')
 
@@ -16,7 +16,7 @@
 
 <div class="py-3">
     <table class="table-auto">
-        <tr class="text-white">
+        <tr class="text-white text-center">
             <th class="w-screen text-3xl">Id</th>
             <th class="w-screen text-3xl">Classify</th>
             <th class="w-screen text-3xl">Animal Name</th>
@@ -45,7 +45,7 @@
             <td class=" text-center">
                 {!! Form::open(array('route' => array('diseaseinjury.destroy', $disease_injury->id),'method'=>'DELETE'))
                 !!}
-                <button type="submit" class="text-center text-3xl bg-red-600 p-2 ml-6">
+                <button type="submit" class="text-center text-3xl bg-red-600 p-2 ml-6 my-1">
                     Delete &rarr;
                 </button>
                 {!! Form::close() !!}

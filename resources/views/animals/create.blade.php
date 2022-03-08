@@ -1,7 +1,7 @@
-@extends('home')
+@extends('body')
 
 @section('contents')
-<div class="pb-20 my-5">
+<div class="pb-20 my-2">
     <div class="text-center">
         <h1 class="text-5xl">
             Add Animal
@@ -15,7 +15,7 @@
                 <div class="block">
                     <div>
                         <label for="animal_name" class="text-lg">Animal Name</label>
-                        <input type="text" class="block shadow-5xl p-2 my-5 w-full" id="animal_name" name="animal_name"
+                        <input type="text" class="block shadow-5xl p-2 my-2 w-full" id="animal_name" name="animal_name"
                             placeholder="Animal Name" value="{{old('animal_name')}}">
                         @if($errors->has('animal_name'))
                         <p class="text-center text-red-500">{{ $errors->first('animal_name') }}</p>
@@ -24,7 +24,7 @@
 
                     <div>
                         <label for="age" class="text-lg">Age</label>
-                        <input type="text" class="block shadow-5xl p-2 my-5 w-full" id="age" name="age"
+                        <input type="text" class="block shadow-5xl p-2 my-2 w-full" id="age" name="age"
                             placeholder="Age" value="{{old('age')}}">
                         @if($errors->has('age'))
                         <p class="text-center text-red-500">{{ $errors->first('age') }}</p>
@@ -33,7 +33,7 @@
 
                     <div>
                         <label for="gender" class="text-lg">Gender</label>
-                        <input type="text" class="block shadow-5xl p-2 my-5 w-full" id="gender" name="gender"
+                        <input type="text" class="block shadow-5xl p-2 my-2 w-full" id="gender" name="gender"
                             placeholder="Gender" value="{{old('gender')}}">
                         @if($errors->has('gender'))
                         <p class="text-center text-red-500">{{ $errors->first('gender') }}</p>
@@ -42,7 +42,7 @@
 
                     <div>
                         <label for="type" class="text-lg">Type</label>
-                        <input type="text" class="block shadow-5xl p-2 my-5 w-full" id="type" name="type"
+                        <input type="text" class="block shadow-5xl p-2 my-2 w-full" id="type" name="type"
                             placeholder="Type of Animal" value="{{old('type')}}">
                         @if($errors->has('type'))
                         <p class="text-center text-red-500">{{ $errors->first('type') }}</p>

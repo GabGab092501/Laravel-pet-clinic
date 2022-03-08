@@ -1,4 +1,4 @@
-@extends('home')
+@extends('body')
 
 @section('contents')
 <div class="pb-20 my-5">

@@ -12,7 +12,7 @@
 <body
     style="background-image:linear-gradient(rgba(212, 212, 212, 0.1),rgba(212,212,212,0.1)), url(https://wallpapercave.com/wp/B1sODrM.jpg); background-size:cover;">
 
-    <div class="pb-20 my-5">
+    <div class="pb-20 my-2">
         <div class="text-center">
             <h1 class="text-5xl">
                 Add Personnel
@@ -26,7 +26,7 @@
                     <div class="block">
                         <div>
                             <label for="full_name" class="text-lg">Full Name</label>
-                            <input type="text" class="block shadow-5xl p-2 my-5 w-full" id="full_name" name="full_name"
+                            <input type="text" class="block shadow-5xl p-2 my-2 w-full" id="full_name" name="full_name"
                                 placeholder="Full Name" value="{{old('full_name')}}">
                             @if($errors->has('full_name'))
                             <p class="text-center text-red-500">{{ $errors->first('full_name') }}</p>
@@ -35,7 +35,7 @@
 
                         <div>
                             <label for="email" class="text-lg">Email</label>
-                            <input type="email" class="block shadow-5xl p-2 my-5 w-full" id="email" name="email"
+                            <input type="email" class="block shadow-5xl p-2 my-2 w-full" id="email" name="email"
                                 placeholder="Enter your Email" value="{{old('email')}}">
                             @if($errors->has('email'))
                             <p class="text-center text-red-500">{{ $errors->first('email') }}</p>
@@ -44,7 +44,7 @@
 
                         <div>
                             <label for="password" class="text-lg">Password</label>
-                            <input type="password" class="block shadow-5xl p-2 my-5 w-full" id="password"
+                            <input type="password" class="block shadow-5xl p-2 my-2 w-full" id="password"
                                 name="password" placeholder="Enter your Password" value="{{old('password')}}">
                             @if($errors->has('password'))
                             <p class="text-center text-red-500">{{ $errors->first('password') }}</p>
@@ -53,7 +53,7 @@
 
                         <div>
                             <label for="role" class="text-lg">Pick Your Role</label>
-                            <select name="role" id="role" class="block shadow-5xl p-2 my-5 w-full"
+                            <select name="role" id="role" class="block shadow-5xl p-2 my-2 w-full"
                                 value="{{old('role')}}">
                                 <option>Employee</option>
                                 <option>Veterinarian</option>

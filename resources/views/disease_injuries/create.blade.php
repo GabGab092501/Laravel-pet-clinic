@@ -1,7 +1,7 @@
-@extends('home')
+@extends('body')
 
 @section('contents')
-<div class="pb-20 my-5">
+<div class="pb-20 my-2">
     <div class="text-center">
         <h1 class="text-5xl">
             Add Disease/Injury
@@ -15,7 +15,7 @@
                 <div class="block">
                     <div>
                         <label for="classify" class="text-lg">Classify</label>
-                        <input type="text" class="block shadow-5xl p-2 my-5 w-full" id="classify" name="classify"
+                        <input type="text" class="block shadow-5xl p-2 my-2 w-full" id="classify" name="classify"
                             placeholder="Classify" value="{{old('classify')}}">
                         @if($errors->has('classify'))
                         <p class="text-center text-red-500">{{ $errors->first('classify') }}</p>

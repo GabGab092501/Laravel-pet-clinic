@@ -1,4 +1,4 @@
-@extends('home')
+@extends('body')
 
 @section('contents')
 
@@ -16,7 +16,7 @@
 
 <div class="py-3">
     <table class="table-auto">
-        <tr class="text-white">
+        <tr class="text-white text-center">
             <th class="w-screen text-3xl">Id</th>
             <th class="w-screen text-3xl">First Name</th>
             <th class="w-screen text-3xl">Last Name</th>
