@@ -48,7 +48,7 @@
         </div>
 
         <div class="row mb-0">
-            <div class="col-md-8">
+            <div class="col-md-7">
                 <button type="submit" class="btn btn-primary font-bold">
                     {{ __('Login') }}
                 </button>
@@ -57,8 +57,10 @@
                     {{ __('Forgot Your Password?') }}
                 </a>
                 @endif
+                <a href="{{ route('review') }}"
+                class="offset-sm-2 btn btn-danger text-white font-bold">Send Your Feedback</a>
                 <a href="{{ route('search') }}"
-                class="offset-md-4 btn btn-success text-white font-bold">Search Pet</a>
+                class="btn btn-success text-white font-bold">Search Pet</a>
             </div>
         </div>
     </form>
