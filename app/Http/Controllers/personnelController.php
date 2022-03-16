@@ -75,10 +75,10 @@ class personnelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    //public function create()
-    //{
+    public function create()
+    {
       //  return view("personnels.create");
-    //}
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -86,8 +86,8 @@ class personnelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    //public function store(personnelRequest $request)
-    //{
+    public function store(personnelRequest $request)
+    {
       //  $personnels = new Personnel();
       //  $personnels->full_name = $request->input("full_name");
       //  $personnels->email = $request->input("email");
@@ -102,7 +102,7 @@ class personnelController extends Controller
       //  }
       //  $personnels->save();
       //  return Redirect::to("login")->with("success", "New Personnel Added!");
-   // }
+    }
 
     /**
      * Display the specified resource.
