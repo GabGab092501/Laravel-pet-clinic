@@ -9,14 +9,12 @@
     </div>
     <div>
         <div class="flex justify-center pt-4">
-            <form action="/personnel/{{ $personnels->personnel_id }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
+            {{ Form::model($personnels,['route' => ['personnel.update',$personnels->id],'method'=>'PUT']) }}
                 <div class="block">
                     <div>
                         <label for="full_name" class="text-lg">Full Name</label>
-                        <input type="text" class="block shadow-5xl p-2 my-2 w-full" id="full_name" name="full_name"
-                            value="{{ $personnels->full_name }}">
+                        {{ Form::text('full_name',null,array('class'=>'block shadow-5xl p-2 my-2
+                        w-full','id'=>'full_name')) }}
                         @if($errors->has('full_name'))
                         <p class="text-center text-red-500">{{ $errors->first('full_name') }}</p>
                         @endif
@@ -24,45 +22,19 @@
 
                     <div>
                         <label for="email" class="text-lg">Email</label>
-                        <input type="text" class="block shadow-5xl p-2 my-2 w-full" id="email" name="email"
-                            value="{{ $personnels->email }}">
+                        {{ Form::email('email',null,array('class'=>'block shadow-5xl p-2 my-2
+                        w-full','id'=>'email')) }}
                         @if($errors->has('email'))
                         <p class="text-center text-red-500">{{ $errors->first('email') }}</p>
                         @endif
                     </div>
 
                     <div>
-                        <label for="password" class="text-lg">Password</label>
-                        <input type="password" class="block shadow-5xl p-2 my-2 w-full" id="password" name="password"
-                            value="{{old('password')}}">
-                        @if($errors->has('password'))
-                        <p class="text-center text-red-500">{{ $errors->first('password') }}</p>
-                        @endif
+                        <label for="role" class="text-lg mt-2">Pick Your Role</label>
+                        {{ Form::select('role',array('Employee' => 'Employee', 'Veterinarian' => 'Veterinarian', 'Volunteer' => 'Volunteer')),}}
                     </div>
-
-                    <div>
-                        <label for="role" class="text-lg">Pick Your Role</label>
-                        <select name="role" class="block shadow-5xl p-2 my-2 w-full" value="{{ $personnels->role }}">
-                            <option>Employee</option>
-                            <option>Veterinarian</option>
-                            <option>Volunteer</option>
-                        </select>
-                        @if($errors->has('role'))
-                        <p class="text-center text-red-500">{{ $errors->first('role') }}</p>
-                        @endif
-                    </div>
-
-                    <div>
-                        <label for="images" class="text-lg">Personnel Pic</label>
-                        <input type="file" class="block shadow-5xl p-2 w-full" id="full_name" name="images">
-                        <img src="{{ asset('uploads/personnels/'.$personnels->images)}}" alt="I am A Pic" width="100"
-                            height="100" class="ml-24 pb-2">
-                        @if($errors->has('images'))
-                        <p class="text-center text-red-500">{{ $errors->first('images') }}</p>
-                        @endif
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-2 w-full">
+                  
+                    <div class="grid grid-flow-col gap-2 -start w-full">
                         <button type="submit" class="bg-green-800 text-white font-bold p-2 mt-5">
                             Submit
                         </button>
