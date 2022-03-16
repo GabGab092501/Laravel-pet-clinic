@@ -57,10 +57,9 @@
                     {{ __('Forgot Your Password?') }}
                 </a>
                 @endif
-                <a href="{{ route('review') }}"
-                class="offset-sm-2 btn btn-danger text-white font-bold">Send Your Feedback</a>
-                <a href="{{ route('search') }}"
-                class="btn btn-success text-white font-bold">Search Pet</a>
+                <a href="{{ route('review') }}" class="offset-sm-2 btn btn-danger text-white font-bold">Send Your
+                    Feedback</a>
+                <a href="{{ route('search') }}" class="btn btn-success text-white font-bold">Search Pet</a>
             </div>
         </div>
     </form>

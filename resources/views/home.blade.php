@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h1 class="text-center text-5xl pb-8 pt-6 text-blue-600">Welcome To ACME Pet Clinic,  {{ Auth::user()->full_name }}</h1>
+<h1 class="text-center text-5xl pb-8 pt-6 text-blue-600">Welcome To ACME Pet Clinic, {{ Auth::user()->full_name }}</h1>
 <hr>
 <div class="py-3">
   <table class="table-auto">

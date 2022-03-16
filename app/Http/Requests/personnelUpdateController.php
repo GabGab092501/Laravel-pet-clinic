@@ -24,8 +24,8 @@ class personnelUpdateController extends FormRequest
     public function rules()
     {
         return [
-            'full_name' => ['required', 'string', 'min:5'],
-            'email' => ['required', 'string', 'email'],
+            "full_name" => ["required", "string", "min:5"],
+            "email" => ["required", "string", "email"],
         ];
     }
 }

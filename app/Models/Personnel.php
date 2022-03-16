@@ -11,9 +11,9 @@ use Laravel\Sanctum\HasApiTokens;
 class Personnel extends Authenticatable
 {
     public const VALIDATION_RULES = [
-        'full_name' => ['required', 'string', 'min:5'],
-        'email' => ['required', 'string', 'email', 'unique:personnels'],
-        'password' => ['required', 'min:5', 'confirmed'],
+        "full_name" => ["required", "string", "min:5"],
+        "email" => ["required", "string", "email", "unique:personnels"],
+        "password" => ["required", "min:5", "confirmed"],
     ];
 
     protected $dates = ["deleted_at"];
@@ -23,7 +23,7 @@ class Personnel extends Authenticatable
     protected $primaryKey = "id";
 
     protected $guarded = ["id"];
-    
+
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     /**

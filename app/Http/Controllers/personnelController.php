@@ -77,7 +77,7 @@ class personnelController extends Controller
      */
     public function create()
     {
-      //  return view("personnels.create");
+        //  return view("personnels.create");
     }
 
     /**
@@ -88,20 +88,20 @@ class personnelController extends Controller
      */
     public function store(personnelRequest $request)
     {
-      //  $personnels = new Personnel();
-      //  $personnels->full_name = $request->input("full_name");
-      //  $personnels->email = $request->input("email");
-      //  $personnels->password = Hash::make($request->input("password"));
-      //  $personnels->role = $request->input("role");
-      //  if ($request->hasfile("images")) {
-      //      $file = $request->file("images");
-      //      $extension = $file->getClientOriginalExtension();
-      //      $filename = time() . "." . $extension;
-      //      $file->move("uploads/personnels/", $filename);
-      //      $personnels->images = $filename;
-      //  }
-      //  $personnels->save();
-      //  return Redirect::to("login")->with("success", "New Personnel Added!");
+        //  $personnels = new Personnel();
+        //  $personnels->full_name = $request->input("full_name");
+        //  $personnels->email = $request->input("email");
+        //  $personnels->password = Hash::make($request->input("password"));
+        //  $personnels->role = $request->input("role");
+        //  if ($request->hasfile("images")) {
+        //      $file = $request->file("images");
+        //      $extension = $file->getClientOriginalExtension();
+        //      $filename = time() . "." . $extension;
+        //      $file->move("uploads/personnels/", $filename);
+        //      $personnels->images = $filename;
+        //  }
+        //  $personnels->save();
+        //  return Redirect::to("login")->with("success", "New Personnel Added!");
     }
 
     /**
