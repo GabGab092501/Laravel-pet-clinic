@@ -58,9 +58,8 @@ Route::get("/diseaseinjury/forceDelete/{id}", [
     "as" => "diseaseinjury.forceDelete",
 ]);
 
-Route::resource("/personnel", personnelController::class)->middleware(
-    "auth"
-);
+Route::resource("/personnel", personnelController::class)->middleware("auth");
+//Route::put('edit/{id}','personnelController@update')->name('personnel.update');
 Route::get("/personnel/restore/{id}", [
     "uses" => "personnelController@restore",
     "as" => "personnel.restore",
@@ -80,16 +79,11 @@ Route::get("/adopter/forceDelete/{id}", [
     "as" => "adopter.forceDelete",
 ]);
 
-//Route::get("/login", [personnelController::class, "login"])->middleware(
-  //  "auth"
-//);
+//Route::get('/login', [App\Http\Controllers\personnelController::class, "login"])->name('login');//->middleware("auth");
 //Route::post("/check", [personnelController::class, "check"])->name("check");
-//Route::get("/dashboard", [personnelController::class, "dashboard"])->middleware(
-  //  "auth"
-//);
-//Route::get("/logout", [personnelController::class, "logout"])->middleware(
-  //  "auth"
-//);
+//Route::get("/dashboard", [personnelController::class, "dashboard"]);//->middleware("auth");
+//Route::get("/logout", [personnelController::class, "logout"]);//->middleware("auth");
+
 Route::get("/personnel/create", [
     personnelController::class,
     "create",
@@ -101,7 +95,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+ })->middleware(['auth'])->name('dashboard');
 
 //require __DIR__.'/auth.php';
 
