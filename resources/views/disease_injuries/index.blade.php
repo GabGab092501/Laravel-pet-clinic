@@ -1,6 +1,6 @@
-@extends('body')
+@extends('layouts.app')
 
-@section('contents')
+@section('content')
 
 @if ($message = Session::get('success'))
 <div class="bg-red-500 p-4">
