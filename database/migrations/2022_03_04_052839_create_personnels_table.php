@@ -18,7 +18,8 @@ return new class extends Migration {
             $table->string(column: "email");
             $table->string(column: "password");
             $table->string(column: "role");
-            $table->string(column: "images");
+            //$table->string(column: "images");
+            $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
         });
