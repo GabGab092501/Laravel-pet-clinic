@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class DiseaseInjury extends Model
 {
     public const VALIDATION_RULES = [
-        "classify" => ["required", "alpha"],
+        "classify" => ["required", "alpha","string,","min:3"],
     ];
 
     use HasFactory;
