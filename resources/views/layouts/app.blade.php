@@ -43,24 +43,24 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav ms-auto text-2xl ml-48">
-                        <button> <a href="{{ URL('home') }}">
-                                <h5 class="mr-4">Home</h5>
-                            </a></button>
-                        <button> <a href="{{ URL('animals') }}">
-                                <h5 class="mr-4">Animals</h5>
-                            </a></button>
-                        <button><a href="{{ URL('rescuer') }}">
-                                <h5 class="mr-4">Rescuers</h5>
-                            </a></button>
-                        <button><a href={{ URL('personnel') }}>
-                                <h5 class="mr-4">Personnel</h5>
-                            </a></button>
-                        <button><a href="{{ URL('diseaseinjury') }}">
-                                <h5 class="mr-4">Disease / Injury</h5>
-                            </a></button>
-                        <button><a href="{{ URL('adopter') }}">
-                                <h5 class="mr-4">Adopters</h5>
-                            </a></button>
+                    <button> <a href="{{ URL('home') }}">
+                            <h5 class="mr-4">Home</h5>
+                        </a></button>
+                    <button> <a href="{{ URL('animals') }}">
+                            <h5 class="mr-4">Animals</h5>
+                        </a></button>
+                    <button><a href="{{ URL('rescuer') }}">
+                            <h5 class="mr-4">Rescuers</h5>
+                        </a></button>
+                    <button><a href="{{ URL('diseaseinjury') }}">
+                            <h5 class="mr-4">Disease / Injury</h5>
+                        </a></button>
+                    <button><a href="{{ URL('adopter') }}">
+                            <h5 class="mr-4">Adopters</h5>
+                        </a></button>
+                    <button><a href={{ URL('personnel') }}>
+                            <h5 class="mr-4">Personnel</h5>
+                        </a></button>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
