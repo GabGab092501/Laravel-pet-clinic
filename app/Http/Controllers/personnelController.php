@@ -13,48 +13,48 @@ use App\Models\Personnel;
 
 class personnelController extends Controller
 {
-    public function login()
-    {
-        return view("personnels.login");
-    }
+    // public function login()
+    // {
+    //     return view("personnels.login");
+    // }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function check(Request $req)
-    {
-        $check = Personnel::where("email", $req->email)->first();
-        if ($check) {
-            if (Hash::check($req->password, $check->password)) {
-                $req->session()->put("id", $check->id);
-                return redirect("dashboard");
-            } else {
-                return view("personnels.login");
-            }
-        } else {
-            return view("personnels.login");
-        }
-    }
+    // /**
+    //  * Store a newly created resource in storage.
+    //  *
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function check(Request $req)
+    // {
+    //     $check = Personnel::where("email", $req->email)->first();
+    //     if ($check) {
+    //         if (Hash::check($req->password, $check->password)) {
+    //             $req->session()->put("id", $check->id);
+    //             return redirect("dashboard");
+    //         } else {
+    //             return view("personnels.login");
+    //         }
+    //     } else {
+    //         return view("personnels.login");
+    //     }
+    // }
 
-    public function dashboard()
-    {
-        $personnel = [];
-        if (Session::has("id")) {
-            $personnel = Personnel::where("id", Session::get("id"))->first();
-        }
-        return view("personnels.dashboard", compact("personnel"));
-    }
+    // public function dashboard()
+    // {
+    //     $personnel = [];
+    //     if (Session::has("id")) {
+    //         $personnel = Personnel::where("id", Session::get("id"))->first();
+    //     }
+    //     return view("personnels.dashboard", compact("personnel"));
+    // }
 
-    public function logout()
-    {
-        if (Session::has("id")) {
-            Session::pull("id");
-            return redirect("login");
-        }
-    }
+    // public function logout()
+    // {
+    //     if (Session::has("id")) {
+    //         Session::pull("id");
+    //         return redirect("login");
+    //     }
+    // }
 
     /**
      * Display a listing of the resource.
@@ -75,10 +75,10 @@ class personnelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        return view("personnels.create");
-    }
+    //public function create()
+    //{
+      //  return view("personnels.create");
+    //}
 
     /**
      * Store a newly created resource in storage.
@@ -86,23 +86,23 @@ class personnelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(personnelRequest $request)
-    {
-        $personnels = new Personnel();
-        $personnels->full_name = $request->input("full_name");
-        $personnels->email = $request->input("email");
-        $personnels->password = Hash::make($request->input("password"));
-        $personnels->role = $request->input("role");
-        if ($request->hasfile("images")) {
-            $file = $request->file("images");
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . "." . $extension;
-            $file->move("uploads/personnels/", $filename);
-            $personnels->images = $filename;
-        }
-        $personnels->save();
-        return Redirect::to("login")->with("success", "New Personnel Added!");
-    }
+    //public function store(personnelRequest $request)
+    //{
+      //  $personnels = new Personnel();
+      //  $personnels->full_name = $request->input("full_name");
+      //  $personnels->email = $request->input("email");
+      //  $personnels->password = Hash::make($request->input("password"));
+      //  $personnels->role = $request->input("role");
+      //  if ($request->hasfile("images")) {
+      //      $file = $request->file("images");
+      //      $extension = $file->getClientOriginalExtension();
+      //      $filename = time() . "." . $extension;
+      //      $file->move("uploads/personnels/", $filename);
+      //      $personnels->images = $filename;
+      //  }
+      //  $personnels->save();
+      //  return Redirect::to("login")->with("success", "New Personnel Added!");
+   // }
 
     /**
      * Display the specified resource.
@@ -141,17 +141,6 @@ class personnelController extends Controller
         $personnels->email = $request->input("email");
         $personnels->password = Hash::make($request->input("password"));
         $personnels->role = $request->input("role");
-        if ($request->hasfile("images")) {
-            $destination = "uploads/personnels/" . $personnels->images;
-            if (File::exists($destination)) {
-                File::delete($destination);
-            }
-            $file = $request->file("images");
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . "." . $extension;
-            $file->move("uploads/personnels/", $filename);
-            $personnels->images = $filename;
-        }
         $personnels->update();
         return Redirect::to("personnel")->with(
             "success",
@@ -188,10 +177,6 @@ class personnelController extends Controller
     public function forceDelete($id)
     {
         $personnels = Personnel::findOrFail($id);
-        $destination = "uploads/personnels/" . $personnels->images;
-        if (File::exists($destination)) {
-            File::delete($destination);
-        }
         $personnels->forceDelete();
         return Redirect::route("personnel.index")->with(
             "success",
