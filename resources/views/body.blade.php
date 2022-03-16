@@ -13,7 +13,7 @@
     </div>
     <nav>
         <ul class="tracking-widest text-2xl">
-            <button> <a href="{{ URL('dashboard') }}">
+            <button> <a href="{{ URL('home') }}">
                     <h5>Home</h5>
                 </a></button>
             <button> <a href="{{ URL('animals') }}">
