@@ -18,7 +18,7 @@ use App\Http\Controllers\contactController;
 | contains the "web" middleware group. Now create something great!
 |  Prettier for php: composer fix-cs
 */
-Route::resource("/contact", "contactController"); //->middleware("auth");
+Route::resource("/contact", "contactController")->middleware("auth");
 Route::get("/review", [contactController::class, "review"])->name("review");
 Route::post("/send", [contactController::class, "send"])->name("send");
 
@@ -59,7 +59,6 @@ Route::get("/diseaseinjury/forceDelete/{id}", [
 ]);
 
 Route::resource("/personnel", personnelController::class)->middleware("auth");
-//Route::put('edit/{id}','personnelController@update')->name('personnel.update');
 Route::get("/personnel/restore/{id}", [
     "uses" => "personnelController@restore",
     "as" => "personnel.restore",
@@ -83,11 +82,6 @@ Route::get("/adopter/forceDelete/{id}", [
 //Route::post("/check", [personnelController::class, "check"])->name("check");
 //Route::get("/dashboard", [personnelController::class, "dashboard"]);//->middleware("auth");
 //Route::get("/logout", [personnelController::class, "logout"]);//->middleware("auth");
-
-Route::get("/personnel/create", [
-    personnelController::class,
-    "create",
-])->middleware("auth");
 
 Route::get('/', function () {
     return view('welcome');
