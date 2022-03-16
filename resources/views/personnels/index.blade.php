@@ -1,6 +1,6 @@
-@extends('body')
+@extends('layouts.app')
 
-@section('contents')
+@section('content')
 
 @if ($message = Session::get('success'))
 <div class="bg-red-500 p-4">
@@ -15,7 +15,6 @@
             <th class="w-screen text-3xl">Full Name</th>
             <th class="w-screen text-3xl">Email</th>
             <th class="w-screen text-3xl">Position</th>
-            <th class="w-screen text-3xl">Personnel Pic</th>
             <th class="w-screen text-3xl">Update</th>
             <th class="w-screen text-3xl">Delete</th>
             <th class="w-screen text-3xl">Restore</th>
@@ -35,9 +34,6 @@
             </td>
             <td class=" text-center text-3xl">
                 {{ $personnel->role }}
-            </td>
-            <td class="pl-12">
-                <img src="{{ asset('uploads/personnels/'.$personnel->images)}}" alt="I am A Pic" width="75" height="75">
             </td>
             <td class=" text-center">
                 <a href="personnel/{{ $personnel->id }}/edit" class="text-center text-2xl bg-green-600 p-2">
