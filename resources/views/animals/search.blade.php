@@ -28,7 +28,6 @@
                 </div>
             </form>
         </div>
-        <hr class="p-2">
         <div class="py-3">
             <table class="table-auto">
                 <tr class="text-white">
