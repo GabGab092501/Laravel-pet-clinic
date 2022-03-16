@@ -64,7 +64,7 @@
             @if($adopter->deleted_at)
             <td>
                 <a href="{{ route('adopter.restore', $adopter->id) }}">
-                    <p class="text-center text-red-700 text-2xl bg-blue-600 p-2">
+                    <p class="text-center text-red-700 text-2xl bg-purple-500 p-2">
                         Restore &rarr;
                     </p>
                 </a>
@@ -72,7 +72,7 @@
             @else
             <td>
                 <a href="#">
-                    <p class="text-center text-2xl bg-blue-600 p-2">
+                    <p class="text-center text-2xl bg-purple-500 p-2">
                         Restore &rarr;
                     </p>
                 </a>
@@ -80,7 +80,7 @@
             @endif
             <td>
                 <a href="{{ route('adopter.forceDelete', $adopter->id) }}">
-                    <p class="text-center text-2xl bg-black text-white p-2 ml-2 mr-4"
+                    <p class="text-center text-2xl bg-warning p-2 ml-2 mr-4"
                         onclick="return confirm('Do you want to delete this data permanently?')">
                         Destroy &rarr;
                     </p>

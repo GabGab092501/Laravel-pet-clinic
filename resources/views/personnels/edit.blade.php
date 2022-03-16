@@ -1,7 +1,7 @@
 @extends('body')
 
 @section('contents')
-<div class="pb-20 my-5">
+<div class="pb-20 my-2">
     <div class="text-center">
         <h1 class="text-5xl">
             Update Personnel
@@ -15,7 +15,7 @@
                 <div class="block">
                     <div>
                         <label for="full_name" class="text-lg">Full Name</label>
-                        <input type="text" class="block shadow-5xl p-2 my-5 w-full" id="full_name" name="full_name"
+                        <input type="text" class="block shadow-5xl p-2 my-2 w-full" id="full_name" name="full_name"
                             value="{{ $personnels->full_name }}">
                         @if($errors->has('full_name'))
                         <p class="text-center text-red-500">{{ $errors->first('full_name') }}</p>
@@ -24,7 +24,7 @@
 
                     <div>
                         <label for="email" class="text-lg">Email</label>
-                        <input type="text" class="block shadow-5xl p-2 my-5 w-full" id="email" name="email"
+                        <input type="text" class="block shadow-5xl p-2 my-2 w-full" id="email" name="email"
                             value="{{ $personnels->email }}">
                         @if($errors->has('email'))
                         <p class="text-center text-red-500">{{ $errors->first('email') }}</p>
@@ -33,7 +33,7 @@
 
                     <div>
                         <label for="password" class="text-lg">Password</label>
-                        <input type="password" class="block shadow-5xl p-2 my-5 w-full" id="password" name="password"
+                        <input type="password" class="block shadow-5xl p-2 my-2 w-full" id="password" name="password"
                             value="{{old('password')}}">
                         @if($errors->has('password'))
                         <p class="text-center text-red-500">{{ $errors->first('password') }}</p>
@@ -42,7 +42,7 @@
 
                     <div>
                         <label for="role" class="text-lg">Pick Your Role</label>
-                        <select name="role" class="block shadow-5xl p-2 my-5 w-full" value="{{ $personnels->role }}">
+                        <select name="role" class="block shadow-5xl p-2 my-2 w-full" value="{{ $personnels->role }}">
                             <option>Employee</option>
                             <option>Veterinarian</option>
                             <option>Volunteer</option>

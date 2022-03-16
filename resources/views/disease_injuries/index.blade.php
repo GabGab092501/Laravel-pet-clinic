@@ -53,14 +53,14 @@
             @if($disease_injury->deleted_at)
             <td>
                 <a href="{{ route('diseaseinjury.restore', $disease_injury->id) }}">
-                    <button class="text-center text-red-700 text-3xl bg-blue-600 p-2 ml-20">
+                    <button class="text-center text-red-700 text-3xl bg-purple-500 p-2 ml-16">
                         Restore &rarr;
                     </button>
                 </a>
             </td>
             @else
             <td>
-                <a href="#"><button class="text-center text-3xl bg-blue-600 p-2 ml-20">
+                <a href="#"><button class="text-center text-3xl bg-purple-500 p-2 ml-16">
                         Restore &rarr;
                     </button>
                 </a>
@@ -68,7 +68,7 @@
             @endif
             <td>
                 <a href="{{ route('diseaseinjury.forceDelete', $disease_injury->id) }}">
-                    <button class="text-center text-3xl bg-black text-white p-2 ml-20"
+                    <button class="text-center text-3xl bg-warning p-2 ml-16"
                         onclick="return confirm('Do you want to delete this data permanently?')">
                         Destroy &rarr;
                     </button>

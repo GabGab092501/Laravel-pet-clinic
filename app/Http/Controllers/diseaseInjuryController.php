@@ -38,7 +38,7 @@ class diseaseInjuryController extends Controller
             )
             ->orderBy("disease_injuries.id", "ASC")
             ->withTrashed()
-            ->paginate(2);
+            ->paginate(6);
         return view("disease_injuries.index", [
             "disease_injuries" => $disease_injuries,
         ]);

@@ -35,7 +35,7 @@ class rescuerController extends Controller
             )
             ->orderBy("rescuers.id", "ASC")
             ->withTrashed()
-            ->paginate(2);
+            ->paginate(6);
         return view("rescuers.index", ["rescuers" => $rescuers]);
         //return view("rescuers.index", compact("rescuers"));
     }

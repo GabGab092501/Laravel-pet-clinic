@@ -63,7 +63,7 @@ class personnelController extends Controller
      */
     public function index()
     {
-        $personnels = Personnel::withTrashed()->paginate(5);
+        $personnels = Personnel::withTrashed()->paginate(6);
         //$personnels = Personnel::all();
         return view("personnels.index", [
             "personnels" => $personnels,

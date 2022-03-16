@@ -125,7 +125,7 @@ class animalController extends Controller
             )
             ->orderBy("animals.id", "ASC")
             ->withTrashed()
-            ->paginate(2);
+            ->paginate(6);
         return view("animals.index", ["animals" => $animals]);
     }
 

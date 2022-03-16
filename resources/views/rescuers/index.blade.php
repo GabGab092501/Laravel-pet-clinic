@@ -66,7 +66,7 @@
       @if($rescuer->deleted_at)
       <td>
         <a href="{{ route('rescuer.restore', $rescuer->id) }}">
-          <p class="text-center text-red-700 text-2xl bg-blue-600 p-2">
+          <p class="text-center text-red-700 text-2xl bg-purple-500 p-2">
             Restore &rarr;
           </p>
         </a>
@@ -74,7 +74,7 @@
       @else
       <td>
         <a href="#">
-          <p class="text-center text-2xl bg-blue-600 p-2">
+          <p class="text-center text-2xl bg-purple-500 p-2">
             Restore &rarr;
           </p>
         </a>
@@ -83,7 +83,7 @@
 
       <td>
         <a href="{{ route('rescuer.forceDelete', $rescuer->id) }}">
-          <p class="text-center text-2xl bg-black text-white p-2 ml-3 mr-4"
+          <p class="text-center text-2xl bg-warning p-2 ml-3 mr-4"
             onclick="return confirm('Do you want to delete this data permanently?')">
             Destroy &rarr;
           </p>

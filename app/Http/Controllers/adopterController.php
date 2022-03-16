@@ -42,7 +42,7 @@ class adopterController extends Controller
             )
             ->orderBy("adopters.id", "ASC")
             ->withTrashed()
-            ->paginate(2);
+            ->paginate(6);
         return view("adopters.index", ["adopters" => $adopters]);
     }
 

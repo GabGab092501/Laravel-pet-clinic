@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\animalController;
 use App\Http\Controllers\rescuerController;
 use App\Http\Controllers\personnelController;
