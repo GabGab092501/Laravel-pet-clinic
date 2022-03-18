@@ -27,13 +27,13 @@
                     @foreach ($animals as $animals_id => $animal)
                     <div class="inline">
                         @if (in_array($animals_id, $animal_disease_injury))
-                        {!!Form::label('animals', $animal,array('class'=>'inline-block w-1/12')) !!}
+                        {!!Form::label('animals', $animal,array('class'=>'inline-block w-1/5')) !!}
                         {!! Form::checkbox('animals_id[]',$animals_id, true, array('class'=>'inline-block
-                        w-1/12','animals_id'=>'animals')) !!}
+                        w-1/5','animals_id'=>'animals')) !!}
                         @else
-                        {!!Form::label('animals', $animal,array('class'=>'inline-block w-1/12')) !!}
+                        {!!Form::label('animals', $animal,array('class'=>'inline-block w-1/5')) !!}
                         {!! Form::checkbox('animals_id[]',$animals_id, null, array('class'=>'inline-block
-                        w-1/12','id'=>'animals')) !!}
+                        w-1/5','id'=>'animals')) !!}
                         @endif
                         @endforeach
                     </div>

@@ -11,12 +11,12 @@
 
 <body
     style="background-image:linear-gradient(rgba(212, 212, 212, 0.1),rgba(212,212,212,0.1)), url(https://wallpapercave.com/wp/B1sODrM.jpg); background-size:cover;">
-
+    @forelse ($animals as $animal)
     <h1 class="text-center text-5xl pb-8 text-blue-600">This Pet Is Adoptable! Congratulations!</h1>
     <hr>
     <div class="py-3">
         <table class="table-auto">
-            <tr class="text-white">
+            <tr class="text-white text-center">
                 <th class="w-screen text-3xl">Id</th>
                 <th class="w-screen text-3xl">Animal Name</th>
                 <th class="w-screen text-3xl">Age</th>
@@ -25,7 +25,6 @@
                 <th class="w-screen text-3xl">Animal Pic</th>
             </tr>
 
-            @forelse ($animals as $animal)
             <tr>
                 <td class=" text-center text-3xl">
                     {{ $animal->id }}
@@ -46,7 +45,7 @@
                     <img src="{{ asset('uploads/animals/'.$animal->images)}}" alt="I am A Pic" width="75" height="75">
                 </td>
                 @empty
-                <p>No Consultation Data in the Database</p>
+                <p class="text-center text-3xl py-8">The Animal You Search Is Not In The Database.</p>
                 @endforelse
         </table>
     </div>

@@ -32,7 +32,7 @@
                 <div>
                     <label for="role" class="text-lg mt-2">Pick Your Role</label>
                     {{ Form::select('role',array('Employee' => 'Employee', 'Veterinarian' => 'Veterinarian', 'Volunteer'
-                    => 'Volunteer')),}}
+                    => 'Volunteer'))}}
                 </div>
 
                 <div class="grid grid-flow-col gap-2 -start w-full">

@@ -58,7 +58,8 @@ Route::get("/diseaseinjury/forceDelete/{id}", [
     "as" => "diseaseinjury.forceDelete",
 ]);
 
-Route::resource("/personnel", personnelController::class)->middleware("auth");
+Route::resource("/personnel", "personnelController")->middleware("auth");
+//Route::resource("/personnel", personnelController::class)->middleware("auth");
 Route::get("/personnel/restore/{id}", [
     "uses" => "personnelController@restore",
     "as" => "personnel.restore",

@@ -30,7 +30,7 @@
         </div>
         <div class="py-3">
             <table class="table-auto">
-                <tr class="text-white">
+                <tr class="text-white text-center">
                     <th class="w-screen text-3xl">Id</th>
                     <th class="w-screen text-3xl">Animal Name</th>
                     <th class="w-screen text-3xl">Age</th>
@@ -65,7 +65,7 @@
                             height="75">
                     </td>
                     @empty
-                    <p>No Consultation Data in the Database</p>
+                    <p>No Animals Data in the Database</p>
                     @endforelse
             </table>
         </div>
