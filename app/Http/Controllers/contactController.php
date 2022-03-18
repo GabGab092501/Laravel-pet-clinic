@@ -6,6 +6,7 @@ use App\Mail\contactMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Redirect;
 use App\Models\Contact;
 
 class contactController extends Controller
@@ -42,7 +43,10 @@ class contactController extends Controller
      */
     public function index()
     {
-        //
+        $contacts = Contact::withTrashed()->paginate(6);
+        return view("contacts.index", [
+            "contacts" => $contacts,
+        ]);
     }
 
     /**
@@ -108,6 +112,31 @@ class contactController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Contact::destroy($id);
+        return Redirect::to("contact")->with(
+            "success",
+            "Contact Data Deleted!"
+        );
+    }
+
+    public function restore($id)
+    {
+        Contact::onlyTrashed()
+            ->findOrFail($id)
+            ->restore();
+        return Redirect::route("contact.index")->with(
+            "success",
+            "Contact Data Restored!"
+        );
+    }
+
+    public function forceDelete($id)
+    {
+        $contacts = Contact::findOrFail($id);
+        $contacts->forceDelete();
+        return Redirect::route("contact.index")->with(
+            "success",
+            "Contact Data Permanently Deleted!"
+        );
     }
 }
