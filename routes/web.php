@@ -19,6 +19,14 @@ use App\Http\Controllers\contactController;
 |  Prettier for php: composer fix-cs
 */
 Route::resource("/contact", "contactController")->middleware("auth");
+Route::get("/contact/restore/{id}", [
+    "uses" => "contactController@restore",
+    "as" => "contact.restore",
+]);
+Route::get("/contact/forceDelete/{id}", [
+    "uses" => "contactController@forceDelete",
+    "as" => "contact.forceDelete",
+]);
 Route::get("/review", [contactController::class, "review"])->name("review");
 Route::post("/send", [contactController::class, "send"])->name("send");
 
