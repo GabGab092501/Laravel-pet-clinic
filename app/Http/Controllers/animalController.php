@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Animal;
+use App\Models\Animal; //comment
 use App\Models\Rescuer;
 use App\Models\Adopter;
 use Illuminate\Http\Request;
