@@ -32,16 +32,16 @@
     @forelse ($rescuers as $rescuer)
 
     <tr>
-      <td class=" text-center text-3xl">
+      <td class="text-center text-3xl">
         {{ $rescuer->id }}
       </td>
-      <td class=" text-center text-3xl">
+      <td class="text-center text-3xl">
         {{ $rescuer->first_name }}
       </td>
-      <td class=" text-center text-3xl">
+      <td class="text-center text-3xl">
         {{ $rescuer->last_name }}
       </td>
-      <td class=" text-center text-3xl">
+      <td class="text-center text-3xl">
         {{ $rescuer->phone_number }}
       </td>
       <td class="pl-10">

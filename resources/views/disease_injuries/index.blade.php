@@ -28,13 +28,13 @@
 
         @forelse ($disease_injuries as $disease_injury)
         <tr>
-            <td class=" text-center text-3xl">
+            <td class="text-center text-3xl">
                 {{ $disease_injury->id }}
             </td>
-            <td class=" text-center text-3xl">
+            <td class="text-center text-3xl">
                 {{ $disease_injury->classify }}
             </td>
-            <td class=" text-center text-3xl">
+            <td class="text-center text-3xl">
                 {{ $disease_injury->animal_name }}
             </td>
             <td class=" text-center">

@@ -23,16 +23,16 @@
 
         @forelse ($personnels as $personnel)
         <tr>
-            <td class=" text-center text-3xl">
+            <td class="text-center text-3xl">
                 {{ $personnel->id }}
             </td>
-            <td class=" text-center text-3xl">
+            <td class="text-center text-3xl">
                 {{ $personnel->full_name }}
             </td>
-            <td class=" text-center text-3xl">
+            <td class="text-center text-3xl">
                 {{ $personnel->email }}
             </td>
-            <td class=" text-center text-3xl">
+            <td class="text-center text-3xl">
                 {{ $personnel->role }}
             </td>
             <td class=" text-center">
