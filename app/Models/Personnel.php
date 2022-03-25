@@ -14,6 +14,7 @@ class Personnel extends Authenticatable
         "full_name" => ["required", "string", "min:5"],
         "email" => ["required", "string", "email", "unique:personnels"],
         "password" => ["required", "min:5", "confirmed"],
+        'g-recaptcha-response' => 'required|captcha',
     ];
 
     protected $dates = ["deleted_at"];
