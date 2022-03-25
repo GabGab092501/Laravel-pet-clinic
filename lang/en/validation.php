@@ -201,6 +201,10 @@ return [
             'required' => 'You need to Classify the kind of disease or injury the animal have',
             'alpha' => 'You can only put letters here',
         ],
+        'g-recaptcha-response' => [
+            'required' => 'Please verify that you are not a robot.',
+            'captcha' => 'Captcha error! try again later or contact site admin.',
+        ],
     ],
 
     /*
