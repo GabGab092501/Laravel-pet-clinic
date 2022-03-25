@@ -15,41 +15,44 @@ use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 class personnelController extends Controller
 {
-    // public function login()
-    // {
-    //     return view("personnels.login");
-    // }
+    public function Email(){
+        return view('personnels.email');
+    }
 
-    // /**
-    //  * Store a newly created resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function check(Request $req)
-    // {
-    //     $check = Personnel::where("email", $req->email)->first();
-    //     if ($check) {
-    //         if (Hash::check($req->password, $check->password)) {
-    //             $req->session()->put("id", $check->id);
-    //             return redirect("dashboard");
-    //         } else {
-    //             return view("personnels.login");
-    //         }
-    //     } else {
-    //         return view("personnels.login");
-    //     }
-    // }
+    public function Reset(){
+        return view('personnels.reset');
+    }
 
-    // public function dashboard()
-    // {
-    //     $personnel = [];
-    //     if (Session::has("id")) {
-    //         $personnel = Personnel::where("id", Session::get("id"))->first();
-    //     }
-    //     return view("personnels.dashboard", compact("personnel"));
-    // }
+    public function getSignup(){
+        return view('personnels.signup');
+    }
 
+    public function postSignup(personnelRequest $request){
+         $personnels = new Personnel([
+            "full_name" => $request->full_name,
+            "email" => $request->email,
+            "password" => Hash::make($request->password),
+            "role" => $request->role,
+        ]);
+
+         $personnels->save();
+         Auth::login($personnels);
+         return redirect::route('personnels.dashboard')->withSuccessMessage("New Personnel Added!");
+    }
+
+    public function Dashboard(){
+        return view('personnels.dashboard');
+    }
+
+    public function getLogout(){
+        Auth::logout();
+        return view('personnels.signin');
+    }
+
+    public function getSignin(){
+        return view('personnels.signin');
+    }
+    
     // public function logout()
     // {
     //     if (Session::has("id")) {
