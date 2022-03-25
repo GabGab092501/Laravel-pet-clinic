@@ -23,6 +23,7 @@
 
 <body
     style="background-image:linear-gradient(rgba(212, 212, 212, 0.1),rgba(212,212,212,0.1)), url(https://wallpapercave.com/wp/B1sODrM.jpg); background-size:cover;">
+    @include('sweetalert::alert')
     <div id="app"></div>
 
     <nav
@@ -43,7 +44,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav ms-auto text-2xl ml-48">
-                    <button> <a href="{{ URL('home') }}">
+                    <button> <a href="{{ URL('dashboard') }}">
                             <h5 class="mr-4">Home</h5>
                         </a></button>
                     <button> <a href="{{ URL('animals') }}">
@@ -70,15 +71,15 @@
                 <ul class="navbar-nav ms-auto text-2xl">
                     <!-- Authentication Links -->
                     @guest
-                    @if (Route::has('login'))
+                    @if (Route::has('personnel.signin'))
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <a class="nav-link text-white" href="{{ route('personnel.signin') }}">{{ __('Sign In') }}</a>
                     </li>
                     @endif
 
-                    @if (Route::has('register'))
+                    @if (Route::has('personnel.signup'))
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        <a class="nav-link text-white" href="{{ route('personnel.signup') }}">{{ __('Sign Up') }}</a>
                     </li>
                     @endif
                     @else
@@ -89,12 +90,12 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                            <a class="dropdown-item" href="{{ route('personnel.logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            <form id="logout-form" action="{{ route('personnel.logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
                         </div>
@@ -110,5 +111,4 @@
     </main>
     </div>
 </body>
-
 </html>
