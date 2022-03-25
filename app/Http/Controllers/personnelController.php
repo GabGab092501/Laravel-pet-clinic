@@ -53,13 +53,13 @@ class personnelController extends Controller
         return view('personnels.signin');
     }
     
-    // public function logout()
-    // {
-    //     if (Session::has("id")) {
-    //         Session::pull("id");
-    //         return redirect("login");
-    //     }
-    // }
+    public function postSignin(loginRequest $request){
+         if(Auth::attempt(['email' => $request->input('email'),'password' => $request->input('password')])){
+            return redirect::route('personnels.dashboard');
+        }else{
+            return redirect()->back();
+        };
+     }
 
     /**
      * Display a listing of the resource.
