@@ -70,6 +70,11 @@ class personnelController extends Controller
     {
         $personnels = Personnel::withTrashed()->paginate(6);
         //$personnels = Personnel::all();
+
+        if(session(key: 'success_message')){
+            Alert::image('Congratulations!',session(key: 'success_message'),'https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s','200','200','I Am A Pic');
+        }
+
         return view("personnels.index", [
             "personnels" => $personnels,
         ]);
@@ -147,10 +152,7 @@ class personnelController extends Controller
         $personnels->password = Hash::make($request->input("password"));
         $personnels->role = $request->input("role");
         $personnels->update();
-        return Redirect::to("personnel")->with(
-            "success",
-            "Personnel Data Updated!"
-        );
+        return Redirect::to("personnel")->withSuccessMessage("Personnel Data Updated!");
     }
 
     /**
@@ -162,10 +164,7 @@ class personnelController extends Controller
     public function destroy($id)
     {
         Personnel::destroy($id);
-        return Redirect::to("personnel")->with(
-            "success",
-            "Personnel Data Deleted!"
-        );
+        return Redirect::to("personnel")->withSuccessMessage("Personnel Data Deleted!");
     }
 
     public function restore($id)
@@ -173,19 +172,13 @@ class personnelController extends Controller
         Personnel::onlyTrashed()
             ->findOrFail($id)
             ->restore();
-        return Redirect::route("personnel.index")->with(
-            "success",
-            "Personnel Data Restored!"
-        );
+        return Redirect::route("personnel.index")->withSuccessMessage("Personnel Data Restored!");
     }
 
     public function forceDelete($id)
     {
         $personnels = Personnel::findOrFail($id);
         $personnels->forceDelete();
-        return Redirect::route("personnel.index")->with(
-            "success",
-            "Personnel Data Permanently Deleted!"
-        );
+        return Redirect::route("personnel.index")->withSuccessMessage("Personnel Data Permanently Deleted!");
     }
 }
