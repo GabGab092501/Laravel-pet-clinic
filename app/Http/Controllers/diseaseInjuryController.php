@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\diseaseInjuryRequest;
 use App\Models\DiseaseInjury;
 use App\Models\Animal;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class diseaseInjuryController extends Controller
 {
@@ -39,6 +40,11 @@ class diseaseInjuryController extends Controller
             ->orderBy("disease_injuries.id", "ASC")
             ->withTrashed()
             ->paginate(6);
+
+            if(session(key: 'success_message')){
+                Alert::image('Congratulations!',session(key: 'success_message'),'https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s','200','200','I Am A Pic');
+            }
+
         return view("disease_injuries.index", [
             "disease_injuries" => $disease_injuries,
         ]);
@@ -72,10 +78,7 @@ class diseaseInjuryController extends Controller
                 ]);
             }
         }
-        return Redirect::to("/diseaseinjury")->with(
-            "success",
-            "Disease/Injury has been added!"
-        );
+        return Redirect::to("/diseaseinjury")->withSuccessMessage("Disease/Injury Has Been Added!");
     }
 
     /**
@@ -141,10 +144,7 @@ class diseaseInjuryController extends Controller
             }
         }
         $disease_injuries->update($request->all());
-        return Redirect::to("/diseaseinjury")->with(
-            "success",
-            "Disease/Injury Data has been updated!/"
-        );
+        return Redirect::to("/diseaseinjury")->withSuccessMessage("Disease/Injury Has Been Updated!");
     }
 
     /**
@@ -156,10 +156,7 @@ class diseaseInjuryController extends Controller
     public function destroy($id)
     {
         DiseaseInjury::destroy($id);
-        return Redirect::to("/diseaseinjury")->with(
-            "success",
-            "Adopter Data Deleted!"
-        );
+        return Redirect::to("/diseaseinjury")->withSuccessMessage("Disease/Injury Has Been Deleted!");
     }
 
     public function restore($id)
@@ -167,10 +164,7 @@ class diseaseInjuryController extends Controller
         DiseaseInjury::onlyTrashed()
             ->findOrFail($id)
             ->restore();
-        return Redirect::route("diseaseinjury.index")->with(
-            "success",
-            "Disease/Injury Data Restored!"
-        );
+        return Redirect::route("diseaseinjury.index")->withSuccessMessage("Disease/Injury Has Been Restored!");
     }
 
     public function forceDelete($id)
@@ -178,9 +172,6 @@ class diseaseInjuryController extends Controller
         DiseaseInjury::withTrashed()
             ->findOrFail($id)
             ->forceDelete();
-        return Redirect::route("diseaseinjury.index")->with(
-            "success",
-            "Disease/Injury Data Permanently Deleted!"
-        );
+        return Redirect::route("diseaseinjury.index")->withSuccessMessage("Disease/Injury Has Been Permanently Deleted!");
     }
 }

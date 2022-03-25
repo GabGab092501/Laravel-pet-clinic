@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\animalRequest;
+use RealRashid\SweetAlert\Facades\Alert;
+
 class animalController extends Controller
 {
     public function search()
@@ -126,6 +128,11 @@ class animalController extends Controller
             ->orderBy("animals.id", "ASC")
             ->withTrashed()
             ->paginate(6);
+
+            if(session(key: 'success_message')){
+                Alert::image('Congratulations!',session(key: 'success_message'),'https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s','200','200','I Am A Pic');
+            }
+
         return view("animals.index", ["animals" => $animals]);
     }
 
@@ -164,7 +171,7 @@ class animalController extends Controller
             $animals->images = $filename;
         }
         $animals->save();
-        return Redirect::to("/animals")->with("success", "New Animal Added!");
+        return Redirect::to("/animals")->withSuccessMessage("New Animal Added!");
     }
 
     /**
@@ -221,10 +228,7 @@ class animalController extends Controller
             $animals->images = $filename;
         }
         $animals->update();
-        return Redirect::to("/animals")->with(
-            "success",
-            "Animal Data Updated!"
-        );
+        return Redirect::to("/animals")->withSuccessMessage("Animal Data Updated!");
     }
 
     /**
@@ -236,10 +240,7 @@ class animalController extends Controller
     public function destroy($id)
     {
         Animal::destroy($id);
-        return Redirect::to("/animals")->with(
-            "success",
-            "Animal Data Deleted!"
-        );
+        return Redirect::to("/animals")->withSuccessMessage("Animal Data Deleted!");
     }
 
     public function restore($id)
@@ -247,10 +248,7 @@ class animalController extends Controller
         Animal::onlyTrashed()
             ->findOrFail($id)
             ->restore();
-        return Redirect::route("animals.index")->with(
-            "success",
-            "Animal Data Restored!"
-        );
+        return Redirect::route("animals.index")->withSuccessMessage("Animal Data Restored!");
     }
 
     public function forceDelete($id)
@@ -261,9 +259,6 @@ class animalController extends Controller
             File::delete($destination);
         }
         $animals->forceDelete();
-        return Redirect::route("animals.index")->with(
-            "success",
-            "Animal Data Permanently Deleted!"
-        );
+        return Redirect::route("animals.index")->withSuccessMessage("Animal Data Permanently Deleted!");
     }
 }

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\View;
 use App\Models\Rescuer;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class rescuerController extends Controller
 {
@@ -36,6 +37,11 @@ class rescuerController extends Controller
             ->orderBy("rescuers.id", "ASC")
             ->withTrashed()
             ->paginate(6);
+
+            if(session(key: 'success_message')){
+                Alert::image('Congratulations!',session(key: 'success_message'),'https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s','200','200','I Am A Pic');
+            }
+
         return view("rescuers.index", ["rescuers" => $rescuers]);
         //return view("rescuers.index", compact("rescuers"));
     }
@@ -70,7 +76,7 @@ class rescuerController extends Controller
             $rescuers->images = $filename;
         }
         $rescuers->save();
-        return Redirect::to("rescuer")->with("success", "New Rescuer Added!");
+        return Redirect::to("rescuer")->withSuccessMessage("New Rescuer Added!");
     }
 
     /**
@@ -121,10 +127,7 @@ class rescuerController extends Controller
             $rescuers->images = $filename;
         }
         $rescuers->update();
-        return Redirect::to("rescuer")->with(
-            "success",
-            "Rescuer Data Updated!"
-        );
+        return Redirect::to("rescuer")->withSuccessMessage("New Rescuer Updated!");
     }
 
     /**
@@ -136,10 +139,7 @@ class rescuerController extends Controller
     public function destroy($id)
     {
         Rescuer::destroy($id);
-        return Redirect::to("rescuer")->with(
-            "success",
-            "Rescuer Data Deleted!"
-        );
+        return Redirect::to("rescuer")->withSuccessMessage("New Rescuer Deleted!");
     }
 
     public function restore($id)
@@ -147,10 +147,7 @@ class rescuerController extends Controller
         Rescuer::onlyTrashed()
             ->findOrFail($id)
             ->restore();
-        return Redirect::route("rescuer.index")->with(
-            "success",
-            "Rescuer Data Restored!"
-        );
+        return Redirect::route("rescuer.index")->withSuccessMessage("New Rescuer Restored!");
     }
 
     public function forceDelete($id)
@@ -161,9 +158,6 @@ class rescuerController extends Controller
             File::delete($destination);
         }
         $rescuers->forceDelete();
-        return Redirect::route("rescuer.index")->with(
-            "success",
-            "Rescuer Data Permanently Deleted!"
-        );
+        return Redirect::route("rescuer.index")->withSuccessMessage("New Rescuer Permanently Deleted!");
     }
 }
