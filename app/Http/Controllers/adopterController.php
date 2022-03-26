@@ -77,8 +77,7 @@ class adopterController extends Controller
         $adopters->phone_number = $request->input("phone_number");
         if ($request->hasfile("images")) {
             $file = $request->file("images");
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . "." . $extension;
+            $filename = uniqid().'_'.$file->getClientOriginalName();
             $file->move("uploads/adopters/", $filename);
             $adopters->images = $filename;
         }
@@ -164,8 +163,7 @@ class adopterController extends Controller
                 File::delete($destination);
             }
             $file = $request->file("images");
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . "." . $extension;
+            $filename = uniqid().'_'.$file->getClientOriginalName();
             $file->move("uploads/adopters/", $filename);
             $adopters->images = $filename;
         }

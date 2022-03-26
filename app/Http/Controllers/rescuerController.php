@@ -70,8 +70,7 @@ class rescuerController extends Controller
         $rescuers->phone_number = $request->input("phone_number");
         if ($request->hasfile("images")) {
             $file = $request->file("images");
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . "." . $extension;
+            $filename = uniqid().'_'.$file->getClientOriginalName();
             $file->move("uploads/rescuers/", $filename);
             $rescuers->images = $filename;
         }
@@ -121,8 +120,7 @@ class rescuerController extends Controller
                 File::delete($destination);
             }
             $file = $request->file("images");
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . "." . $extension;
+            $filename = uniqid().'_'.$file->getClientOriginalName();
             $file->move("uploads/rescuers/", $filename);
             $rescuers->images = $filename;
         }

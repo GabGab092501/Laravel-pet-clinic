@@ -165,8 +165,7 @@ class animalController extends Controller
         $animals->rescuer_id = $request->input("rescuer_id");
         if ($request->hasfile("images")) {
             $file = $request->file("images");
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . "." . $extension;
+            $filename = uniqid().'_'.$file->getClientOriginalName();
             $file->move("uploads/animals/", $filename);
             $animals->images = $filename;
         }
@@ -222,8 +221,7 @@ class animalController extends Controller
                 File::delete($destination);
             }
             $file = $request->file("images");
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . "." . $extension;
+            $filename = uniqid().'_'.$file->getClientOriginalName();
             $file->move("uploads/animals/", $filename);
             $animals->images = $filename;
         }
