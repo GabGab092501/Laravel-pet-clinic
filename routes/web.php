@@ -118,12 +118,12 @@ Route::get('logout', [
 Route::post('signin', [
     'uses' => 'personnelController@postSignin',
     'as' => 'personnel.signin',
-]);//->middleware('guest');
+])->middleware('guest');
 
 Route::get('signin', [
     'uses' => 'personnelController@getSignin',
     'as' => 'personnel.signin',
-]);//->middleware('guest');
+])->middleware('guest');
 
    Route::post('email', [
     'uses' => 'personnelController@Email',
