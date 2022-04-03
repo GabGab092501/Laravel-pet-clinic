@@ -21,7 +21,7 @@ class Customer extends Model
 
     protected $dates = ["deleted_at"];
 
-    protected $table = "rescuers";
+    protected $table = "customers";
 
     protected $primaryKey = "id";
 
