@@ -3,10 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\animalController;
-use App\Http\Controllers\rescuerController;
+use App\Http\Controllers\customerController;
 use App\Http\Controllers\personnelController;
 use App\Http\Controllers\diseaseInjuryController;
-use App\Http\Controllers\adopterController;
+use App\Http\Controllers\serviceController;
 use App\Http\Controllers\contactController;
 use App\Http\Controllers\UploadController;
 /*
@@ -19,6 +19,7 @@ use App\Http\Controllers\UploadController;
 | contains the "web" middleware group. Now create something great!
 |  Prettier for php: composer fix-cs
 */
+
 Route::resource("/contact", "contactController")->middleware("auth");
 Route::get("/contact/restore/{id}", [
     "uses" => "contactController@restore",
@@ -44,15 +45,15 @@ Route::get("/animals/forceDelete/{id}", [
 Route::get("/search", [animalController::class, "search"])->name("search");
 Route::get("/result", [animalController::class, "result"])->name("result");
 
-Route::resource("/rescuer", "rescuerController")->middleware("auth");
-//Route::resource("/rescuer", rescuerController::class);
-Route::get("/rescuer/restore/{id}", [
-    "uses" => "rescuerController@restore",
-    "as" => "rescuer.restore",
+Route::resource("/customer", "customerController")->middleware("auth");
+//Route::resource("/customer", customerController::class);
+Route::get("/customer/restore/{id}", [
+    "uses" => "customerController@restore",
+    "as" => "customer.restore",
 ]);
-Route::get("/rescuer/forceDelete/{id}", [
-    "uses" => "rescuerController@forceDelete",
-    "as" => "rescuer.forceDelete",
+Route::get("/customer/forceDelete/{id}", [
+    "uses" => "customerController@forceDelete",
+    "as" => "customer.forceDelete",
 ]);
 
 Route::resource("/diseaseinjury", diseaseInjuryController::class)->middleware(
@@ -78,14 +79,14 @@ Route::get("/personnel/forceDelete/{id}", [
     "as" => "personnel.forceDelete",
 ]);
 
-Route::resource("/adopter", adopterController::class)->middleware("auth");
-Route::get("/adopter/restore/{id}", [
-    "uses" => "adopterController@restore",
-    "as" => "adopter.restore",
+Route::resource("/service", serviceController::class)->middleware("auth");
+Route::get("/service/restore/{id}", [
+    "uses" => "serviceController@restore",
+    "as" => "service.restore",
 ]);
-Route::get("/adopter/forceDelete/{id}", [
-    "uses" => "adopterController@forceDelete",
-    "as" => "adopter.forceDelete",
+Route::get("/service/forceDelete/{id}", [
+    "uses" => "serviceController@forceDelete",
+    "as" => "service.forceDelete",
 ]);
 
 Route::get("/", function () {
