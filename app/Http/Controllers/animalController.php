@@ -163,7 +163,12 @@ class animalController extends Controller
      */
     public function show($id)
     {
-        //
+        $animals = Animal::find($id);
+        $customers = Customer::pluck("first_name", "id");
+        return view("animals.show", [
+            "animals" => $animals,
+            "customers" => $customers,
+        ]);
     }
 
     /**

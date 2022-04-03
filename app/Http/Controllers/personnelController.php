@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Personnel;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+
 class personnelController extends Controller
 {
     public function Email()
@@ -144,7 +145,8 @@ class personnelController extends Controller
      */
     public function show($id)
     {
-        //
+        $personnels = Personnel::find($id);
+        return view("personnels.show")->with("personnels", $personnels);
     }
 
     /**

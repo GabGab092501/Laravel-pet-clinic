@@ -24,7 +24,7 @@
         @forelse ($services as $service)
         <tr>
             <td class=" text-center text-3xl">
-                {{ $service->id }}
+                <a href="{{route('service.show',$service->id)}}">{{$service->id}}</a>
             </td>
             <td class=" text-center text-3xl">
                 {{ $service->service_name }}

@@ -78,7 +78,8 @@ class serviceController extends Controller
      */
     public function show($id)
     {
-        //
+        $services = Service::find($id);
+        return view("services.show")->with("services", $services);
     }
 
     /**

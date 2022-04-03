@@ -18,7 +18,7 @@
         @forelse ($personnels as $personnel)
         <tr>
             <td class="text-center text-3xl">
-                {{ $personnel->id }}
+                <a href="{{route('personnel.show',$personnel->id)}}">{{$personnel->id}}</a>
             </td>
             <td class="text-center text-3xl">
                 {{ $personnel->full_name }}

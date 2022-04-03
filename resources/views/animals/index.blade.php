@@ -27,7 +27,7 @@
         @forelse ($animals as $animal)
         <tr>
             <td class=" text-center text-3xl">
-                {{ $animal->id }}
+                <a href="{{route('animals.show',$animal->id)}}">{{$animal->id}}</a>
             </td>
             <td class=" text-center text-3xl">
                 {{ $animal->animal_name }}
