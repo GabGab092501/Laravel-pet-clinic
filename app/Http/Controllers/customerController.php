@@ -49,7 +49,7 @@ class customerController extends Controller
             );
         }
 
-        return view("Customers.index", ["Customers" => $Customers]);
+        return view("customers.index", ["customers" => $Customers]);
         //return view("Customers.index", compact("Customers"));
     }
 
@@ -60,7 +60,7 @@ class customerController extends Controller
      */
     public function create()
     {
-        return View::make("Customers.create");
+        return View::make("customers.create");
     }
 
     /**
@@ -78,11 +78,11 @@ class customerController extends Controller
         if ($request->hasfile("images")) {
             $file = $request->file("images");
             $filename = uniqid() . "_" . $file->getClientOriginalName();
-            $file->move("uploads/Customers/", $filename);
+            $file->move("uploads/customers/", $filename);
             $Customers->images = $filename;
         }
         $Customers->save();
-        return Redirect::to("Customer")->withSuccessMessage(
+        return Redirect::to("customer")->withSuccessMessage(
             "New Customer Added!"
         );
     }
@@ -95,7 +95,8 @@ class customerController extends Controller
      */
     public function show($id)
     {
-        //
+        $Customers = Customer::find($id);
+        return View::make("customers.show", compact("Customers"));
     }
 
     /**
@@ -107,7 +108,7 @@ class customerController extends Controller
     public function edit($id)
     {
         $Customers = Customer::find($id);
-        return View::make("Customers.edit", compact("Customers"));
+        return View::make("customers.edit", compact("Customers"));
     }
 
     /**
@@ -124,17 +125,17 @@ class customerController extends Controller
         $Customers->last_name = $request->input("last_name");
         $Customers->phone_number = $request->input("phone_number");
         if ($request->hasfile("images")) {
-            $destination = "uploads/Customers/" . $Customers->images;
+            $destination = "uploads/customers/" . $Customers->images;
             if (File::exists($destination)) {
                 File::delete($destination);
             }
             $file = $request->file("images");
             $filename = uniqid() . "_" . $file->getClientOriginalName();
-            $file->move("uploads/Customers/", $filename);
+            $file->move("uploads/customers/", $filename);
             $Customers->images = $filename;
         }
         $Customers->update();
-        return Redirect::to("Customer")->withSuccessMessage(
+        return Redirect::to("customer")->withSuccessMessage(
             "New Customer Updated!"
         );
     }
@@ -148,7 +149,7 @@ class customerController extends Controller
     public function destroy($id)
     {
         Customer::destroy($id);
-        return Redirect::to("Customer")->withSuccessMessage(
+        return Redirect::to("customer")->withSuccessMessage(
             "New Customer Deleted!"
         );
     }
@@ -158,7 +159,7 @@ class customerController extends Controller
         Customer::onlyTrashed()
             ->findOrFail($id)
             ->restore();
-        return Redirect::route("Customer.index")->withSuccessMessage(
+        return Redirect::route("customer.index")->withSuccessMessage(
             "New Customer Restored!"
         );
     }
@@ -166,12 +167,12 @@ class customerController extends Controller
     public function forceDelete($id)
     {
         $Customers = Customer::findOrFail($id);
-        $destination = "uploads/Customers/" . $Customers->images;
+        $destination = "uploads/customers/" . $Customers->images;
         if (File::exists($destination)) {
             File::delete($destination);
         }
         $Customers->forceDelete();
-        return Redirect::route("Customer.index")->withSuccessMessage(
+        return Redirect::route("customer.index")->withSuccessMessage(
             "New Customer Permanently Deleted!"
         );
     }

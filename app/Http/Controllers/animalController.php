@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Animal;
-use App\Models\Rescuer;
-use App\Models\Adopter;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\File;
@@ -14,67 +13,67 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class animalController extends Controller
 {
-    public function search()
-    {
-        $animals = Animal::leftJoin(
-            "animal_disease_injury",
-            "animals.id",
-            "=",
-            "animal_disease_injury.animals_id"
-        )
-            ->leftJoin(
-                "disease_injuries",
-                "disease_injuries.id",
-                "=",
-                "animal_disease_injury.disease_injury_id"
-            )
-            ->select(
-                "disease_injuries.classify",
-                "animals.id",
-                "animals.animal_name",
-                "animals.age",
-                "animals.gender",
-                "animals.type",
-                "animals.images"
-            )
-            ->orderBy("animals.id", "ASC")
-            ->get();
-        return view("animals.search", [
-            "animals" => $animals,
-        ]);
-    }
+    // public function search()
+    // {
+    //     $animals = Animal::leftJoin(
+    //         "animal_disease_injury",
+    //         "animals.id",
+    //         "=",
+    //         "animal_disease_injury.animals_id"
+    //     )
+    //         ->leftJoin(
+    //             "disease_injuries",
+    //             "disease_injuries.id",
+    //             "=",
+    //             "animal_disease_injury.disease_injury_id"
+    //         )
+    //         ->select(
+    //             "disease_injuries.classify",
+    //             "animals.id",
+    //             "animals.animal_name",
+    //             "animals.age",
+    //             "animals.gender",
+    //             "animals.type",
+    //             "animals.images"
+    //         )
+    //         ->orderBy("animals.id", "ASC")
+    //         ->get();
+    //     return view("animals.search", [
+    //         "animals" => $animals,
+    //     ]);
+    // }
 
-    public function result()
-    {
-        $result = $_GET["result"];
-        $animals = Animal::leftJoin(
-            "animal_disease_injury",
-            "animals.id",
-            "=",
-            "animal_disease_injury.animals_id"
-        )
-            ->leftJoin(
-                "disease_injuries",
-                "disease_injuries.id",
-                "=",
-                "animal_disease_injury.disease_injury_id"
-            )
-            ->select(
-                "animals.id",
-                "animals.animal_name",
-                "animals.age",
-                "animals.gender",
-                "animals.type",
-                "animals.images"
-            )
+    // public function result()
+    // {
+    //     $result = $_GET["result"];
+    //     $animals = Animal::leftJoin(
+    //         "animal_disease_injury",
+    //         "animals.id",
+    //         "=",
+    //         "animal_disease_injury.animals_id"
+    //     )
+    //         ->leftJoin(
+    //             "disease_injuries",
+    //             "disease_injuries.id",
+    //             "=",
+    //             "animal_disease_injury.disease_injury_id"
+    //         )
+    //         ->select(
+    //             "animals.id",
+    //             "animals.animal_name",
+    //             "animals.age",
+    //             "animals.gender",
+    //             "animals.type",
+    //             "animals.images"
+    //         )
 
-            ->where("animals.animal_name", "LIKE", "%" . $result . "%")
-            ->get();
-        return view("animals.result", [
-            "animals" => $animals,
-        ]);
-    }
-
+    //         ->where("animals.animal_name", "LIKE", "%" . $result . "%")
+    //         ->get();
+    //     return view("animals.result", [
+    //         "animals" => $animals,
+    //     ]);
+    // }
+    //commented but will be needed soon
     /**
      * Display a listing of the resource.
      *
@@ -83,46 +82,20 @@ class animalController extends Controller
     public function index()
     {
         $animals = Animal::join(
-            "rescuers",
-            "rescuers.id",
+            "customers",
+            "customers.id",
             "=",
-            "animals.rescuer_id"
+            "animals.customer_id"
         )
-            ->leftJoin(
-                "animal_adopter",
-                "animals.id",
-                "=",
-                "animal_adopter.animals_id"
-            )
-            ->leftJoin(
-                "adopters",
-                "adopters.id",
-                "=",
-                "animal_adopter.adopter_id"
-            )
-            ->leftJoin(
-                "animal_disease_injury",
-                "animals.id",
-                "=",
-                "animal_disease_injury.animals_id"
-            )
-            ->leftJoin(
-                "disease_injuries",
-                "disease_injuries.id",
-                "=",
-                "animal_disease_injury.disease_injury_id"
-            )
             ->select(
-                "rescuers.first_name",
-                "adopters.first_name as fname",
-                "disease_injuries.classify",
+                "customers.first_name",
                 "animals.id",
                 "animals.animal_name",
                 "animals.age",
                 "animals.gender",
                 "animals.type",
                 "animals.images",
-                "animals.rescuer_id",
+                "animals.customer_id",
                 "animals.deleted_at"
             )
             ->orderBy("animals.id", "ASC")
@@ -150,9 +123,9 @@ class animalController extends Controller
      */
     public function create()
     {
-        $rescuers = Rescuer::pluck("first_name", "id");
+        $customers = Customer::pluck("first_name", "id");
         return view("animals.create", [
-            "rescuers" => $rescuers,
+            "customers" => $customers,
         ]);
     }
 
@@ -169,7 +142,7 @@ class animalController extends Controller
         $animals->age = $request->input("age");
         $animals->gender = $request->input("gender");
         $animals->type = $request->input("type");
-        $animals->rescuer_id = $request->input("rescuer_id");
+        $animals->customer_id = $request->input("customer_id");
         if ($request->hasfile("images")) {
             $file = $request->file("images");
             $filename = uniqid() . "_" . $file->getClientOriginalName();
@@ -202,10 +175,10 @@ class animalController extends Controller
     public function edit($id)
     {
         $animals = Animal::find($id);
-        $rescuers = Rescuer::pluck("first_name", "id");
+        $customers = Customer::pluck("first_name", "id");
         return view("animals.edit", [
             "animals" => $animals,
-            "rescuers" => $rescuers,
+            "customers" => $customers,
         ]);
     }
 
@@ -223,7 +196,7 @@ class animalController extends Controller
         $animals->age = $request->input("age");
         $animals->gender = $request->input("gender");
         $animals->type = $request->input("type");
-        $animals->rescuer_id = $request->input("rescuer_id");
+        $animals->customer_id = $request->input("customer_id");
         if ($request->hasfile("images")) {
             $destination = "uploads/animals/" . $animals->images;
             if (File::exists($destination)) {
