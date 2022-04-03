@@ -19,11 +19,11 @@
             <button> <a href="{{ URL('animals') }}">
                     <h5>Animal</h5>
                 </a></button>
-            <button><a href="{{ URL('rescuer') }}">
-                    <h5>Rescuer</h5>
+            <button><a href="{{ URL('customer') }}">
+                    <h5>Customer</h5>
                 </a></button>
-            <button><a href="{{ URL('diseaseinjury') }}">
-                    <h5>Disease / Injury</h5>
+            <button><a href="{{ URL('service') }}">
+                    <h5>Services</h5>
                 </a></button>
             <button><a href="{{ URL('adopter') }}">
                     <h5>Adopters</h5>

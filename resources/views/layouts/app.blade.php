@@ -50,11 +50,11 @@
                     <button> <a href="{{ URL('animals') }}">
                             <h5 class="mr-4">Animal</h5>
                         </a></button>
-                    <button><a href="{{ URL('rescuer') }}">
-                            <h5 class="mr-4">Rescuer</h5>
+                    <button><a href="{{ URL('customer') }}">
+                            <h5 class="mr-4">Customer</h5>
                         </a></button>
-                    <button><a href="{{ URL('diseaseinjury') }}">
-                            <h5 class="mr-4">Disease / Injury</h5>
+                    <button><a href="{{ URL('service') }}">
+                            <h5 class="mr-4">Service</h5>
                         </a></button>
                     <button><a href="{{ URL('adopter') }}">
                             <h5 class="mr-4">Adopters</h5>
@@ -95,7 +95,8 @@
                                 {{ __('Logout') }}
                             </a>
 
-                            <form id="logout-form" action="{{ route('personnel.logout') }}" method="POST" class="d-none">
+                            <form id="logout-form" action="{{ route('personnel.logout') }}" method="POST"
+                                class="d-none">
                                 @csrf
                             </form>
                         </div>
@@ -111,4 +112,5 @@
     </main>
     </div>
 </body>
+
 </html>
