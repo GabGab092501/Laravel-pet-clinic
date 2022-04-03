@@ -45,9 +45,16 @@ class adopterController extends Controller
             ->withTrashed()
             ->paginate(6);
 
-            if(session(key: 'success_message')){
-                Alert::image('Congratulations!',session(key: 'success_message'),'https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s','200','200','I Am A Pic');
-            }
+        if (session(key: "success_message")) {
+            Alert::image(
+                "Congratulations!",
+                session(key: "success_message"),
+                "https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s",
+                "200",
+                "200",
+                "I Am A Pic"
+            );
+        }
 
         return view("adopters.index", ["adopters" => $adopters]);
     }
@@ -77,7 +84,7 @@ class adopterController extends Controller
         $adopters->phone_number = $request->input("phone_number");
         if ($request->hasfile("images")) {
             $file = $request->file("images");
-            $filename = uniqid().'_'.$file->getClientOriginalName();
+            $filename = uniqid() . "_" . $file->getClientOriginalName();
             $file->move("uploads/adopters/", $filename);
             $adopters->images = $filename;
         }
@@ -90,7 +97,9 @@ class adopterController extends Controller
                 ]);
             }
         }
-        return Redirect::to("/adopter")->withSuccessMessage("New Adopter Added!");
+        return Redirect::to("/adopter")->withSuccessMessage(
+            "New Adopter Added!"
+        );
     }
 
     /**
@@ -163,12 +172,14 @@ class adopterController extends Controller
                 File::delete($destination);
             }
             $file = $request->file("images");
-            $filename = uniqid().'_'.$file->getClientOriginalName();
+            $filename = uniqid() . "_" . $file->getClientOriginalName();
             $file->move("uploads/adopters/", $filename);
             $adopters->images = $filename;
         }
         $adopters->update();
-        return Redirect::to("/adopter")->withSuccessMessage("Adopter Data Updated!");
+        return Redirect::to("/adopter")->withSuccessMessage(
+            "Adopter Data Updated!"
+        );
     }
 
     /**
@@ -180,7 +191,9 @@ class adopterController extends Controller
     public function destroy($id)
     {
         Adopter::destroy($id);
-        return Redirect::to("/adopter")->withSuccessMessage("Adopter Data Deleted!");
+        return Redirect::to("/adopter")->withSuccessMessage(
+            "Adopter Data Deleted!"
+        );
     }
 
     public function restore($id)
@@ -188,7 +201,9 @@ class adopterController extends Controller
         Adopter::onlyTrashed()
             ->findOrFail($id)
             ->restore();
-        return Redirect::route("adopter.index")->withSuccessMessage("Adopter Data Restored!");
+        return Redirect::route("adopter.index")->withSuccessMessage(
+            "Adopter Data Restored!"
+        );
     }
 
     public function forceDelete($id)
@@ -199,6 +214,8 @@ class adopterController extends Controller
             File::delete($destination);
         }
         $adopters->forceDelete();
-        return Redirect::route("adopter.index")->withSuccessMessage("Adopter Data Permanently Deleted!");
+        return Redirect::route("adopter.index")->withSuccessMessage(
+            "Adopter Data Permanently Deleted!"
+        );
     }
 }

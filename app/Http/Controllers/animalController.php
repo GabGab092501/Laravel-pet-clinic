@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Animal;  
+use App\Models\Animal;
 use App\Models\Rescuer;
 use App\Models\Adopter;
 use Illuminate\Http\Request;
@@ -129,9 +129,16 @@ class animalController extends Controller
             ->withTrashed()
             ->paginate(6);
 
-            if(session(key: 'success_message')){
-                Alert::image('Congratulations!',session(key: 'success_message'),'https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s','200','200','I Am A Pic');
-            }
+        if (session(key: "success_message")) {
+            Alert::image(
+                "Congratulations!",
+                session(key: "success_message"),
+                "https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s",
+                "200",
+                "200",
+                "I Am A Pic"
+            );
+        }
 
         return view("animals.index", ["animals" => $animals]);
     }
@@ -165,12 +172,14 @@ class animalController extends Controller
         $animals->rescuer_id = $request->input("rescuer_id");
         if ($request->hasfile("images")) {
             $file = $request->file("images");
-            $filename = uniqid().'_'.$file->getClientOriginalName();
+            $filename = uniqid() . "_" . $file->getClientOriginalName();
             $file->move("uploads/animals/", $filename);
             $animals->images = $filename;
         }
         $animals->save();
-        return Redirect::to("/animals")->withSuccessMessage("New Animal Added!");
+        return Redirect::to("/animals")->withSuccessMessage(
+            "New Animal Added!"
+        );
     }
 
     /**
@@ -221,12 +230,14 @@ class animalController extends Controller
                 File::delete($destination);
             }
             $file = $request->file("images");
-            $filename = uniqid().'_'.$file->getClientOriginalName();
+            $filename = uniqid() . "_" . $file->getClientOriginalName();
             $file->move("uploads/animals/", $filename);
             $animals->images = $filename;
         }
         $animals->update();
-        return Redirect::to("/animals")->withSuccessMessage("Animal Data Updated!");
+        return Redirect::to("/animals")->withSuccessMessage(
+            "Animal Data Updated!"
+        );
     }
 
     /**
@@ -238,7 +249,9 @@ class animalController extends Controller
     public function destroy($id)
     {
         Animal::destroy($id);
-        return Redirect::to("/animals")->withSuccessMessage("Animal Data Deleted!");
+        return Redirect::to("/animals")->withSuccessMessage(
+            "Animal Data Deleted!"
+        );
     }
 
     public function restore($id)
@@ -246,7 +259,9 @@ class animalController extends Controller
         Animal::onlyTrashed()
             ->findOrFail($id)
             ->restore();
-        return Redirect::route("animals.index")->withSuccessMessage("Animal Data Restored!");
+        return Redirect::route("animals.index")->withSuccessMessage(
+            "Animal Data Restored!"
+        );
     }
 
     public function forceDelete($id)
@@ -257,6 +272,8 @@ class animalController extends Controller
             File::delete($destination);
         }
         $animals->forceDelete();
-        return Redirect::route("animals.index")->withSuccessMessage("Animal Data Permanently Deleted!");
+        return Redirect::route("animals.index")->withSuccessMessage(
+            "Animal Data Permanently Deleted!"
+        );
     }
 }
