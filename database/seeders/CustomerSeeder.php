@@ -14,6 +14,5 @@ class CustomerSeeder extends Seeder
     public function run()
     {
         \App\Models\Customer::factory()->count(1000)->create(); 
-    
     }
 }
