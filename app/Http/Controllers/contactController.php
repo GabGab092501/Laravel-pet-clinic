@@ -46,8 +46,15 @@ class contactController extends Controller
     {
         $contacts = Contact::withTrashed()->paginate(6);
 
-        if(session(key: 'success_message')){
-            Alert::image('Congratulations!',session(key: 'success_message'),'https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s','200','200','I Am A Pic');
+        if (session(key: "success_message")) {
+            Alert::image(
+                "Congratulations!",
+                session(key: "success_message"),
+                "https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s",
+                "200",
+                "200",
+                "I Am A Pic"
+            );
         }
 
         return view("contacts.index", [
@@ -119,7 +126,9 @@ class contactController extends Controller
     public function destroy($id)
     {
         Contact::destroy($id);
-        return Redirect::to("contact")->withSuccessMessage("Contact Data Deleted!");
+        return Redirect::to("contact")->withSuccessMessage(
+            "Contact Data Deleted!"
+        );
     }
 
     public function restore($id)
@@ -127,13 +136,17 @@ class contactController extends Controller
         Contact::onlyTrashed()
             ->findOrFail($id)
             ->restore();
-        return Redirect::route("contact.index")->withSuccessMessage("Contact Data Restored!");
+        return Redirect::route("contact.index")->withSuccessMessage(
+            "Contact Data Restored!"
+        );
     }
 
     public function forceDelete($id)
     {
         $contacts = Contact::findOrFail($id);
         $contacts->forceDelete();
-        return Redirect::route("contact.index")->withSuccessMessage("Contact Data Permanently Deleted!");
+        return Redirect::route("contact.index")->withSuccessMessage(
+            "Contact Data Permanently Deleted!"
+        );
     }
 }

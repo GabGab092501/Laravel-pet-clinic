@@ -11,14 +11,14 @@ class Reminder extends Command
      *
      * @var string
      */
-    protected $signature = 'message:reminder';
+    protected $signature = "message:reminder";
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Artisan command to remind the user';
+    protected $description = "Artisan command to remind the user";
 
     /**
      * Execute the console command.
@@ -27,6 +27,6 @@ class Reminder extends Command
      */
     public function handle()
     {
-        echo 'My Own Command';
+        echo "My Own Command";
     }
 }

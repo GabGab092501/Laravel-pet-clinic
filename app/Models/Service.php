@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class Adopter extends Model
+
+class Service extends Model
 {
     public const VALIDATION_RULES = [
-        "first_name" => ["required", "alpha", "min:3"],
-        "last_name" => ["required", "alpha", "min:3"],
-        "phone_number" => ["required", "numeric", "min:6"],
+        "service_name" => ["required", "alpha", "min:3"],
+        "cost" => ["required", "numeric", "min:3"],
         "images" => ["required", "image", "mimes:jpg,png,jpeg,gif", "max:5048"],
     ];
 
@@ -20,9 +20,9 @@ class Adopter extends Model
 
     protected $dates = ["deleted_at"];
 
-    protected $table = "adopters";
+    protected $table = "services";
 
-    protected $fillable = ["first_name", "last_name", "phone_number", "images"];
+    protected $fillable = ["service_name", "cost", "images"];
 
     protected $primaryKey = "id";
 

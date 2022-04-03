@@ -3,8 +3,8 @@
 @section('content')
 
 <div class="pt-8 pb-4 px-8">
-  <a href="rescuer/create" class="p-3 border-none italic text-white bg-black text-lg">
-    Add a new rescuer &rarr;
+  <a href="customer/create" class="p-3 border-none italic text-white bg-black text-lg">
+    Add a new customer &rarr;
   </a>
 </div>
 
@@ -15,51 +15,51 @@
       <th class="w-screen text-3xl">First Name</th>
       <th class="w-screen text-3xl">Last Name</th>
       <th class="w-screen text-3xl">Phone Number</th>
-      <th class="w-screen text-3xl">Rescuer Pic</th>
-      <th class="w-screen text-3xl">Rescued Animal</th>
+      <th class="w-screen text-3xl">Customer Pic</th>
+      <th class="w-screen text-3xl">Animal</th>
       <th class="w-screen text-3xl">Update</th>
       <th class="w-screen text-3xl">Delete</th>
       <th class="w-screen text-3xl">Restore</th>
       <th class="w-screen text-3xl">Destroy</th>
     </tr>
 
-    @forelse ($rescuers as $rescuer)
+    @forelse ($customers as $customer)
 
     <tr>
       <td class="text-center text-3xl">
-        {{ $rescuer->id }}
+        <a href="{{route('customer.show',$customer->id)}}">{{$customer->id}}</a>
       </td>
       <td class="text-center text-3xl">
-        {{ $rescuer->first_name }}
+        {{ $customer->first_name }}
       </td>
       <td class="text-center text-3xl">
-        {{ $rescuer->last_name }}
+        {{ $customer->last_name }}
       </td>
       <td class="text-center text-3xl">
-        {{ $rescuer->phone_number }}
+        {{ $customer->phone_number }}
       </td>
       <td class="pl-10">
-        <img src="{{ asset('uploads/rescuers/'.$rescuer->images)}}" alt="I am A Pic" width="75" height="75">
+        <img src="{{ asset('uploads/customers/'.$customer->images)}}" alt="I am A Pic" width="75" height="75">
       </td>
       <td class=" text-center text-3xl">
-        {{ $rescuer->animal_name }}
+        {{ $customer->animal_name }}
       </td>
       <td class=" text-center">
-        <a href="rescuer/{{ $rescuer->id }}/edit" class="text-center text-2xl bg-green-600 p-2">
+        <a href="customer/{{ $customer->id }}/edit" class="text-center text-2xl bg-green-600 p-2">
           Update &rarr;
         </a>
       </td>
       <td class=" text-center">
-        {!! Form::open(array('route' => array('rescuer.destroy', $rescuer->id),'method'=>'DELETE')) !!}
+        {!! Form::open(array('route' => array('customer.destroy', $customer->id),'method'=>'DELETE')) !!}
         <button type="submit" class="text-center text-2xl bg-red-600 p-2 my-2">
           Delete &rarr;
         </button>
         {!! Form::close() !!}
       </td>
 
-      @if($rescuer->deleted_at)
+      @if($customer->deleted_at)
       <td>
-        <a href="{{ route('rescuer.restore', $rescuer->id) }}">
+        <a href="{{ route('customer.restore', $customer->id) }}">
           <p class="text-center text-red-700 text-2xl bg-purple-500 p-2 my-2">
             Restore &rarr;
           </p>
@@ -76,7 +76,7 @@
       @endif
 
       <td>
-        <a href="{{ route('rescuer.forceDelete', $rescuer->id) }}">
+        <a href="{{ route('customer.forceDelete', $customer->id) }}">
           <p class="text-center text-2xl bg-warning p-2 ml-3 mr-4 my-2"
             onclick="return confirm('Do you want to delete this data permanently?')">
             Destroy &rarr;
@@ -85,10 +85,10 @@
       </td>
     </tr>
     @empty
-    <p>No Rescuer Data in the Database</p>
+    <p>No customer Data in the Database</p>
     @endforelse
   </table>
-  <div class="pt-6 px-4">{{ $rescuers->links( )}}</div>
+  <div class="pt-6 px-4">{{ $customers->links( )}}</div>
 </div>
 </div>
 @endsection

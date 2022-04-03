@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class Rescuer extends Model
+
+class Customer extends Model
 {
     public const VALIDATION_RULES = [
         "first_name" => ["required", "alpha", "min:3"],
@@ -20,7 +21,7 @@ class Rescuer extends Model
 
     protected $dates = ["deleted_at"];
 
-    protected $table = "rescuers";
+    protected $table = "customers";
 
     protected $primaryKey = "id";
 

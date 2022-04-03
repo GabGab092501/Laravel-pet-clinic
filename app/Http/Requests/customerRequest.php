@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Adopter;
+use App\Models\Customer;
 use Illuminate\Foundation\Http\FormRequest;
 
-class adopterRequest extends FormRequest
+class customerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,6 @@ class adopterRequest extends FormRequest
      */
     public function rules()
     {
-        return Adopter::VALIDATION_RULES;
+        return Customer::VALIDATION_RULES;
     }
 }

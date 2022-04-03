@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Rescuer;
+use App\Models\Service;
 use Illuminate\Foundation\Http\FormRequest;
 
-class rescuerRequest extends FormRequest
+class serviceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,6 @@ class rescuerRequest extends FormRequest
      */
     public function rules()
     {
-        return Rescuer::VALIDATION_RULES;
+        return Service::VALIDATION_RULES;
     }
 }

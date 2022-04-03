@@ -3,8 +3,8 @@
 @section('content')
 
 <div class="pt-8 pb-4 px-8">
-    <a href="adopter/create" class="p-3 border-none italic text-white bg-black text-lg">
-        Add a new adopter &rarr;
+    <a href="service/create" class="p-3 border-none italic text-white bg-black text-lg">
+        Add a new service &rarr;
     </a>
 </div>
 
@@ -12,52 +12,44 @@
     <table class="table-auto">
         <tr class="text-white text-center">
             <th class="w-screen text-3xl">Id</th>
-            <th class="w-screen text-3xl">First Name</th>
-            <th class="w-screen text-3xl">Last Name</th>
-            <th class="w-screen text-3xl">Phone Number</th>
-            <th class="w-screen text-3xl">Adopter Pic</th>
-            <th class="w-screen text-3xl">Adopted Animal</th>
+            <th class="w-screen text-3xl">Service Name</th>
+            <th class="w-screen text-3xl">Cost</th>
+            <th class="w-screen text-3xl">Animal Pic</th>
             <th class="w-screen text-3xl">Update</th>
             <th class="w-screen text-3xl">Delete</th>
             <th class="w-screen text-3xl">Restore</th>
             <th class="w-screen text-3xl">Destroy</th>
         </tr>
 
-        @forelse ($adopters as $adopter)
+        @forelse ($services as $service)
         <tr>
             <td class=" text-center text-3xl">
-                {{ $adopter->id }}
+                <a href="{{route('service.show',$service->id)}}">{{$service->id}}</a>
             </td>
             <td class=" text-center text-3xl">
-                {{ $adopter->first_name }}
+                {{ $service->service_name }}
             </td>
             <td class=" text-center text-3xl">
-                {{ $adopter->last_name }}
-            </td>
-            <td class=" text-center text-3xl">
-                {{ $adopter->phone_number }}
+                {{ $service->cost }}
             </td>
             <td class="pl-10">
-                <img src="{{ asset('uploads/adopters/'.$adopter->images)}}" alt="I am A Pic" width="75" height="75">
-            </td>
-            <td class=" text-center text-3xl">
-                {{ $adopter->animal_name }}
+                <img src="{{ asset('uploads/services/'.$service->images)}}" alt="I am A Pic" width="75" height="75">
             </td>
             <td class=" text-center">
-                <a href="adopter/{{ $adopter->id }}/edit" class="text-center text-2xl bg-green-600 p-2">
+                <a href="service/{{ $service->id }}/edit" class="text-center text-2xl bg-green-600 p-2">
                     Update &rarr;
                 </a>
             </td>
             <td class=" text-center">
-                {!! Form::open(array('route' => array('adopter.destroy', $adopter->id),'method'=>'DELETE')) !!}
+                {!! Form::open(array('route' => array('service.destroy', $service->id),'method'=>'DELETE')) !!}
                 <button type="submit" class="text-center text-2xl bg-red-600 p-2">
                     Delete &rarr;
                 </button>
                 {!! Form::close() !!}
             </td>
-            @if($adopter->deleted_at)
+            @if($service->deleted_at)
             <td>
-                <a href="{{ route('adopter.restore', $adopter->id) }}">
+                <a href="{{ route('service.restore', $service->id) }}">
                     <p class="text-center text-red-700 text-2xl bg-purple-500 p-2">
                         Restore &rarr;
                     </p>
@@ -73,7 +65,7 @@
             </td>
             @endif
             <td>
-                <a href="{{ route('adopter.forceDelete', $adopter->id) }}">
+                <a href="{{ route('service.forceDelete', $service->id) }}">
                     <p class="text-center text-2xl bg-warning p-2 ml-2 mr-4"
                         onclick="return confirm('Do you want to delete this data permanently?')">
                         Destroy &rarr;
@@ -82,10 +74,10 @@
             </td>
         </tr>
         @empty
-        <p>No Adopter Data in the Database</p>
+        <p>No service Data in the Database</p>
         @endforelse
     </table>
-    <div class="pt-6 px-4">{{ $adopters->links()}}</div>
+    <div class="pt-6 px-4">{{ $services->links()}}</div>
 </div>
 </div>
 @endsection

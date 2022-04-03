@@ -16,9 +16,7 @@
             <th class="w-screen text-3xl">Age</th>
             <th class="w-screen text-3xl">Gender</th>
             <th class="w-screen text-3xl">Type of Animal</th>
-            <th class="w-screen text-3xl">Rescuer</th>
-            <th class="w-screen text-3xl">Adopter</th>
-            <th class="w-screen text-3xl">Disease/Injury</th>
+            <th class="w-screen text-3xl">Owner</th>
             <th class="w-screen text-3xl">Animal Pic</th>
             <th class="w-screen text-3xl">Update</th>
             <th class="w-screen text-3xl">Delete</th>
@@ -29,7 +27,7 @@
         @forelse ($animals as $animal)
         <tr>
             <td class=" text-center text-3xl">
-                {{ $animal->id }}
+                <a href="{{route('animals.show',$animal->id)}}">{{$animal->id}}</a>
             </td>
             <td class=" text-center text-3xl">
                 {{ $animal->animal_name }}
@@ -45,12 +43,6 @@
             </td>
             <td class=" text-center text-3xl">
                 {{ $animal->first_name }}
-            </td>
-            <td class=" text-center text-3xl">
-                {{ $animal->fname }}
-            </td>
-            <td class=" text-center text-3xl">
-                {{ $animal->classify }}
             </td>
             <td class="pl-6">
                 <img src="{{ asset('uploads/animals/'.$animal->images)}}" alt="I am A Pic" width="75" height="75">
