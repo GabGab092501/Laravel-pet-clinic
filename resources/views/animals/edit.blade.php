@@ -46,7 +46,7 @@
                 </div>
 
                 <div>
-                    <label for="images" class="block text-lg pb-3">Adopter Pic</label>
+                    <label for="images" class="block text-lg pb-3">Animal Pic</label>
                     {{ Form::file('images',null,array('class'=>'block shadow-5xl p-2 my-2 w-full','id'=>'images')) }}
                     <img src="{{ asset('uploads/animals/'.$animals->images)}}" alt="I am A Pic" width="100" height="100"
                         class="ml-24 py-2">
@@ -56,11 +56,12 @@
                 </div>
 
                 <div>
-                    <label for="rescuer_id" class="text-lg">Type</label>
-                    {!! Form::select('rescuer_id',$rescuers, $animals->rescuer_id,['class' => 'block shadow-5xl p-2 my-2
+                    <label for="customer_id" class="text-lg">Type</label>
+                    {!! Form::select('customer_id',$customers, $animals->customer_id,['class' => 'block shadow-5xl p-2
+                    my-2
                     w-full']) !!}
-                    @if($errors->has('rescuer_id'))
-                    <p class="text-center text-red-500">{{ $errors->first('rescuer_id') }}</p>
+                    @if($errors->has('customer_id'))
+                    <p class="text-center text-red-500">{{ $errors->first('customer_id') }}</p>
                     @endif
                 </div>
 

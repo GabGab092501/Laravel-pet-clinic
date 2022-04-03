@@ -58,10 +58,10 @@
                         @endif
                     </div>
 
-                    <label for="rescuer_id" class="text-lg">Rescuer</label>
-                    <select name="rescuer_id" id="rescuer_id" class="block shadow-5xl p-2 w-full">
-                        @foreach ($rescuers as $id => $rescuer)
-                        <option value="{{ $id }}">{{ $rescuer }}</option>
+                    <label for="customer_id" class="text-lg">Customer</label>
+                    <select name="customer_id" id="customer_id" class="block shadow-5xl p-2 w-full">
+                        @foreach ($customers as $id => $customer)
+                        <option value="{{ $id }}">{{ $customer }}</option>
                         @endforeach
                     </select>
 
