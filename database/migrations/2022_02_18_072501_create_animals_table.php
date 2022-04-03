@@ -13,16 +13,6 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create("customers", function (Blueprint $table) {
-            $table->increments("id");
-            $table->string(column: "first_name");
-            $table->string(column: "last_name");
-            $table->string(column: "phone_number");
-            $table->string(column: "images");
-            $table->timestamps();
-            $table->softDeletes();
-        });
-
         Schema::create("animals", function (Blueprint $table) {
             $table->increments("id");
             $table->string(column: "animal_name");
@@ -41,14 +31,7 @@ return new class extends Migration
         });
 
 
-        Schema::create("services", function (Blueprint $table) {
-            $table->increments("id");
-            $table->string(column: "service_name");
-            $table->string(column: "cost");
-            $table->string(column: "images");
-            $table->timestamps();
-            $table->softDeletes();
-        });
+       
     }
 
     /**
@@ -58,8 +41,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists("customers");
         Schema::dropIfExists("animals");
-        Schema::dropIfExists("services");
     }
 };
