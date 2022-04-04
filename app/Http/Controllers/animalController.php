@@ -13,67 +13,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class animalController extends Controller
 {
-    // public function search()
-    // {
-    //     $animals = Animal::leftJoin(
-    //         "animal_disease_injury",
-    //         "animals.id",
-    //         "=",
-    //         "animal_disease_injury.animals_id"
-    //     )
-    //         ->leftJoin(
-    //             "disease_injuries",
-    //             "disease_injuries.id",
-    //             "=",
-    //             "animal_disease_injury.disease_injury_id"
-    //         )
-    //         ->select(
-    //             "disease_injuries.classify",
-    //             "animals.id",
-    //             "animals.animal_name",
-    //             "animals.age",
-    //             "animals.gender",
-    //             "animals.type",
-    //             "animals.images"
-    //         )
-    //         ->orderBy("animals.id", "ASC")
-    //         ->get();
-    //     return view("animals.search", [
-    //         "animals" => $animals,
-    //     ]);
-    // }
-
-    // public function result()
-    // {
-    //     $result = $_GET["result"];
-    //     $animals = Animal::leftJoin(
-    //         "animal_disease_injury",
-    //         "animals.id",
-    //         "=",
-    //         "animal_disease_injury.animals_id"
-    //     )
-    //         ->leftJoin(
-    //             "disease_injuries",
-    //             "disease_injuries.id",
-    //             "=",
-    //             "animal_disease_injury.disease_injury_id"
-    //         )
-    //         ->select(
-    //             "animals.id",
-    //             "animals.animal_name",
-    //             "animals.age",
-    //             "animals.gender",
-    //             "animals.type",
-    //             "animals.images"
-    //         )
-
-    //         ->where("animals.animal_name", "LIKE", "%" . $result . "%")
-    //         ->get();
-    //     return view("animals.result", [
-    //         "animals" => $animals,
-    //     ]);
-    // }
-    //commented but will be needed soon
     /**
      * Display a listing of the resource.
      *
