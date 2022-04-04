@@ -9,6 +9,7 @@ use App\Http\Controllers\diseaseInjuryController;
 use App\Http\Controllers\serviceController;
 use App\Http\Controllers\contactController;
 use App\Http\Controllers\UploadController;
+use App\Http\Controllers\consolationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,9 +42,6 @@ Route::get("/animals/forceDelete/{id}", [
     "uses" => "animalController@forceDelete",
     "as" => "animals.forceDelete",
 ]);
-
-Route::get("/search", [animalController::class, "search"])->name("search");
-Route::get("/result", [animalController::class, "result"])->name("result");
 
 Route::resource("/customer", "customerController")->middleware("auth");
 //Route::resource("/customer", customerController::class);
@@ -88,6 +86,20 @@ Route::get("/service/forceDelete/{id}", [
     "uses" => "serviceController@forceDelete",
     "as" => "service.forceDelete",
 ]);
+
+Route::resource("/consultation", consultationController::class)->middleware("auth");
+Route::get("/consultation/restore/{id}", [
+    "uses" => "consultationController@restore",
+    "as" => "consultation.restore",
+]);
+Route::get("/consultation/forceDelete/{id}", [
+    "uses" => "consultationController@forceDelete",
+    "as" => "consultation.forceDelete",
+]);
+Route::get('/search', 'App\Http\Controllers\consultationController@search')->name("search")->middleware("auth");
+//Route::get("/search", [consultationController::class, "search"])->name("search");
+Route::get('/result', 'App\Http\Controllers\consultationController@result')->name("result")->middleware("auth");
+//Route::get("/result", [consultationController::class, "result"])->name("result");
 
 Route::get("/", function () {
     return view("welcome");
