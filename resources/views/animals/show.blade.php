@@ -50,7 +50,7 @@
 
                 <div class="grid w-full">
                     <a href="{{url()->previous()}}" class="bg-gray-800 text-white font-bold p-2 mt-5 text-center"
-                        role="button">Cancel</a>
+                        role="button">Back</a>
                 </div>
             </div>
             </form>

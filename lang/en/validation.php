@@ -197,6 +197,21 @@ return [
             'required' => 'The Role Type is required',
             'alpha' => 'You can only put letters here',
         ],
+        'date' => [
+            'required' => 'Date is required',
+        ],
+        'disease_injury' => [
+            'required' => 'Disease or Injury is required',
+        ],
+        'price' => [
+            'required' => 'Price is required',
+            'numeric' => 'You can only put numbers here',
+            'min' => 'Price must start at 1',
+            'max' => 'Price must not exceed at 10000',
+        ],
+        'comment' => [
+            'required' => 'Comment is required',
+        ],
         'service_name' => [
             'required' => 'Service name is required',
             'alpha' => 'You can only put letters here',
