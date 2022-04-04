@@ -4,7 +4,7 @@
 <div class="pb-20 my-2">
     <div class="text-center">
         <h1 class="text-5xl">
-            Show Vervices
+            Show Services
         </h1>
     </div>
     <div>
@@ -34,7 +34,7 @@
 
                 <div class="grid w-full">
                     <a href="{{url()->previous()}}" class="bg-gray-800 text-white font-bold p-2 mt-5 text-center"
-                        role="button">Cancel</a>
+                        role="button">Back</a>
                 </div>
             </div>
             </form>
