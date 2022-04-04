@@ -214,7 +214,6 @@ return [
         ],
         'service_name' => [
             'required' => 'Service name is required',
-            'alpha' => 'You can only put letters here',
             'min' => 'Try again! Your name is too short',
         ],
         'cost' => [
