@@ -17,10 +17,10 @@ class CustomerFactory extends Factory
     public function definition()
     {
         return [
-            "first_name" =>$this->faker->name,
-            "last_name"  =>$this->faker->name,
-            "phone_number" =>$this->faker->numerify('###-###-####'),
-            "images" => "https://i.picsum.photos/id/805/200/200.jpg?hmac=_YsptA4tmhnOwjWiLyYwiOuvOs30wULvKSLP6KESMg0",
+            "first_name" => $this->faker->name,
+            "last_name"  => $this->faker->name,
+            "phone_number" => $this->faker->numerify('###-###-####'),
+            'images' => $this->faker->image('public/uploads/customers', 640, 480, null, false),
         ];
     }
 }

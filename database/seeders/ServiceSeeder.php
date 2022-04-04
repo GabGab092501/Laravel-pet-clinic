@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,6 +14,6 @@ class ServiceSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Service::factory()->count(1000)->create(); 
+        \App\Models\Service::factory()->count(10)->create();
     }
 }

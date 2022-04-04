@@ -17,9 +17,9 @@ class ServiceFactory extends Factory
     public function definition()
     {
         return [
-            "service_name" =>$this->faker->name,
-            "cost"  =>$this->faker->randomDigit,
-            "images" => "https://i.picsum.photos/id/805/200/200.jpg?hmac=_YsptA4tmhnOwjWiLyYwiOuvOs30wULvKSLP6KESMg0",
+            "service_name" => $this->faker->name,
+            "cost"  => $this->faker->randomFloat(2, 0, 10000),
+            'images' => $this->faker->image('public/uploads/services', 640, 480, null, false),
         ];
     }
 }
