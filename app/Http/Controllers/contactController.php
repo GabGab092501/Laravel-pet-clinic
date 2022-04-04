@@ -8,13 +8,17 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Contact;
+use App\Models\Service;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class contactController extends Controller
 {
     public function review()
     {
-        return View::make("review");
+        $services = Service::pluck("service_name", "id");
+        return view("review", [
+            "services" => $services,
+        ]);
     }
 
     /**
@@ -29,6 +33,7 @@ class contactController extends Controller
             "email" => $request->email,
             "phone_number" => $request->phone_number,
             "review" => $request->review,
+            "service_id" => $request->service_id,
         ];
         Contact::create($contacts);
         Mail::to("gabrielarafol.mendoza@tup.edu.ph")->send(
@@ -44,7 +49,25 @@ class contactController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::withTrashed()->paginate(6);
+        $contacts = Contact::join(
+            "services",
+            "services.id",
+            "=",
+            "contacts.service_id"
+        )
+            ->select(
+                "services.service_name",
+                "contacts.id",
+                "contacts.name",
+                "contacts.email",
+                "contacts.phone_number",
+                "contacts.review",
+                "contacts.service_id",
+                "contacts.deleted_at"
+            )
+            ->orderBy("contacts.id", "ASC")
+            ->withTrashed()
+            ->paginate(6);
 
         if (session(key: "success_message")) {
             Alert::image(

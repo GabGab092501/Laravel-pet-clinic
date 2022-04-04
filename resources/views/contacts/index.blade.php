@@ -10,11 +10,12 @@
 
 <div class="py-3">
   <table class="table-auto text-center">
-    <tr class="text-white">
+    <tr class="text-center">
       <th class="w-screen text-3xl">Id</th>
       <th class="w-screen text-3xl">Full Name</th>
       <th class="w-screen text-3xl">Email</th>
       <th class="w-screen text-3xl">Phone Number</th>
+      <th class="w-screen text-3xl">Service Type</th>
       <th class="w-screen text-3xl">Review</th>
       <th class="w-screen text-3xl">Delete</th>
       <th class="w-screen text-3xl">Restore</th>
@@ -24,23 +25,26 @@
     @forelse ($contacts as $contact)
 
     <tr>
-      <td class="text-center text-3xl">
+      <td class="text-white text-center text-2xl">
         {{ $contact->id }}
       </td>
-      <td class="text-center text-3xl">
+      <td class="text-white text-center text-2xl">
         {{ $contact->name }}
       </td>
-      <td class="text-center text-3xl">
+      <td class="text-white text-center text-2xl">
         {{ $contact->email }}
       </td>
-      <td class="text-center text-3xl">
+      <td class="text-white text-center text-2xl">
         {{ $contact->phone_number }}
       </td>
-      <td class="text-center text-3xl text-purple-600">
+      <td class="text-white text-center text-2xl">
+        {{ $contact->service_name }}
+      </td>
+      <td class="text-white text-center text-2xl">
         {{ $contact->review }}
       </td>
 
-      <td class=" text-center">
+      <td class="text-center">
         {!! Form::open(array('route' => array('contact.destroy', $contact->id),'method'=>'DELETE')) !!}
         <button type="submit" class="text-center text-2xl bg-red-600 p-2 my-2">
           Delete &rarr;

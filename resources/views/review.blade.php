@@ -38,8 +38,15 @@
                             name="phone_number" placeholder="Phone Number" value="{{old('phone_number')}}">
                     </div>
 
+                    <label for="service_id" class="text-lg">Service</label>
+                    <select name="service_id" id="service_id" class="block shadow-5xl p-2 w-full">
+                        @foreach ($services as $id => $service)
+                        <option value="{{ $id }}">{{ $service }}</option>
+                        @endforeach
+                    </select>
+
                     <div>
-                        <label for="review" class="text-lg">Message Us</label>
+                        <label for="review" class="text-lg">Feedback</label>
                         <textarea id="review" name="review" class="block shadow-5xl p-2 my-3 w-full" rows="4" cols="50"
                             placeholder="Leave Your Message Here" value="{{old('review')}}"></textarea>
                     </div>
