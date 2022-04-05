@@ -152,7 +152,7 @@ return [
         ],
         'phone_number' => [
             'required' => 'Phone number is required',
-            'numeric' => 'You can only put numbers here',
+            'min' => 'Try again! Your number is too short',
         ],
         'images' => [
             'required' => 'Image is required',
