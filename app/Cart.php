@@ -21,13 +21,15 @@ class Cart
         $addService = ['cost' => $services->cost, 'services' => $services];
         if ($this->services) {
             if (array_key_exists($id, $this->services)) {
-                $addService = $this->services[$id];
+
+                $addService = array_unique($id);
             }
         }
         $addService['cost'] = $services->cost;
         $this->services[$id] = $addService;
         $this->totalCost += $services->cost;
     }
+
 
     public function removeService($id)
     {
