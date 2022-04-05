@@ -10,6 +10,8 @@ use App\Http\Controllers\serviceController;
 use App\Http\Controllers\contactController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\consolationController;
+use App\Http\Controllers\transactionController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -101,6 +103,10 @@ Route::get('/search', 'App\Http\Controllers\consultationController@search')->nam
 Route::get('/result', 'App\Http\Controllers\consultationController@result')->name("result")->middleware("auth");
 //Route::get("/result", [consultationController::class, "result"])->name("result");
 
+
+Route::resource("/transaction", transactionController::class)->middleware("auth");
+
+
 Route::get("/", function () {
     return view("welcome");
 });
@@ -158,4 +164,25 @@ Route::post("reset", [
 Route::get("reset", [
     "uses" => "personnelController@Reset",
     "as" => "personnel.reset",
+]);
+
+Route::get('shopping-cart', [
+    'uses' => 'App\Http\Controllers\transactionController@getCart',
+    'as' => 'transaction.shoppingCart'
+]);
+
+Route::get('checkout', [
+    'uses' => 'App\Http\Controllers\transactionController@postCheckout',
+    'as' => 'checkout',
+    'middleware' => 'auth'
+]);
+
+Route::get('add-to-cart/{id}', [
+    'uses' => 'App\Http\Controllers\transactionController@getAddToCart',
+    'as' => 'transaction.addToCart'
+]);
+
+Route::get('remove/{id}', [
+    'uses' => 'App\Http\Controllers\transactionController@getRemoveItem',
+    'as' => 'transaction.remove'
 ]);
