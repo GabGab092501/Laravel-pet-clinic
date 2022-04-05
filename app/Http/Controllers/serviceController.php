@@ -106,6 +106,16 @@ class serviceController extends Controller
         $services = Service::find($id);
         $services->service_name = $request->input("service_name");
         $services->cost = $request->input("cost");
+        if ($request->hasfile("images")) {
+            $destination = "uploads/services/" . $services->images;
+            if (File::exists($destination)) {
+                File::delete($destination);
+            }
+            $file = $request->file("images");
+            $filename = uniqid() . "_" . $file->getClientOriginalName();
+            $file->move("uploads/services/", $filename);
+            $services->images = $filename;
+        }
         $services->update();
         return Redirect::to("/service")->withSuccessMessage(
             "Service Data Updated!"
