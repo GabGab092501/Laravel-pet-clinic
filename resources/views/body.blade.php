@@ -7,10 +7,12 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <header class="flex justify-between items-center px-10 py-6 text-white bg-gray-800">
-    <div class="px-1 grid grid-flow-col font-bold text-2xl">
-        <h1 class="px-1 font-bold bg-black border-black border-4 rounded-l-lg">Pet</h1>
-        <h1 class="pr-1 bg-yellow-600 border-yellow-600 border-4 text-black rounded-r-lg">Clinic</h1>
-    </div>
+    <a href="{{ URL('transaction') }}">
+        <div class="px-1 grid grid-flow-col font-bold text-2xl">
+            <h1 class="px-1 font-bold bg-black border-black border-4 rounded-l-lg">Pet</h1>
+            <h1 class="pr-1 bg-yellow-600 border-yellow-600 border-4 text-black rounded-r-lg">Clinic</h1>
+        </div>
+    </a>
     <nav>
         <ul class="tracking-widest text-2xl">
             <button> <a href="{{ URL('dashboard') }}">
