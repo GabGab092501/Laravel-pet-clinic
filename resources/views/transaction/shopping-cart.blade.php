@@ -7,11 +7,11 @@
         <div>
             <ul>
                 @foreach($services as $service)
-                <li class="">
+                <li>
                     <span class="pr-6">{{ $service['cost'] }}</span>
                     <div class="btn-group">
                         <a class="btn btn-danger my-2 py-2"
-                            href="{{ route('transaction.remove',['id'=>$service['services']['id']]) }}">Reduce All</a>
+                            href="{{ route('transaction.remove',['id'=>$service['services']['id']]) }}">Remove</a>
                     </div>
                 </li>
                 @endforeach

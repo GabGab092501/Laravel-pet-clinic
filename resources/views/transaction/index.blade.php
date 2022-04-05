@@ -7,12 +7,18 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
-<body class="grid grid-flow-col gap-3 p-12"
+@if ($message = Session::get('error'))
+<div class="bg-red-500 p-4">
+    <strong class="text-white text-3xl pl-4">{{ $message }}</strong>
+</div>
+@endif
+
+<body class="grid grid-flow-col gap-3 p-12 w-full"
     style="background-image:linear-gradient(rgba(212, 212, 212, 0.1),rgba(212,212,212,0.1)), url(https://wallpapercave.com/wp/B1sODrM.jpg); background-size:cover;">
     @foreach ($services->chunk(1) as $serviceChunk)
     <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
         @foreach ($serviceChunk as $service)
-        <img src="{{ asset('uploads/services/'.$service->images)}}" alt="I am A Pic" width="300">
+        <img src="{{ asset('uploads/services/'.$service->images)}}" alt="I am A Pic" width="400">
         <div class="p-3">
             <h5 class="mb-2 text-2xl font-bold tracking-tight">{{ $service->service_name }}
             </h5>

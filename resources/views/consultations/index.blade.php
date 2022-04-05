@@ -13,14 +13,6 @@
         Add a new consultation &rarr;
     </a>
 
-    <span class="flex justify-center ">
-        <form action="{{ url('result') }}" type="GET">
-            <input type="result" name="result" id="result" placeholder="Search" class="text-center pb-1 px-2 w-full">
-            <div class="grid w-full">
-                <button class="bg-green-800 text-white font-bold p-2 mt-5">Search</button>
-            </div>
-    </span>
-
 </div>
 
 <div class="py-3">
@@ -68,14 +60,12 @@
                 </a>
             </td>
             <td class="text-center">
-                {!! Form::open(array('route' => array('consultation.destroy',
-                $consultation->id),'method'=>'DELETE'))
-                !!}
-                <button type="submit" class="text-center text-lg bg-red-600 p-2">
-                    Delete &rarr;
+                {!! Form::open(array('route' => array('consultation.destroy', $consultation->id),'method'=>'DELETE')) !!}
+                <button type="submit" class="text-center text-xl bg-red-600 p-2 my-2">
+                  Delete &rarr;
                 </button>
                 {!! Form::close() !!}
-            </td>
+              </td>
             @if($consultation->deleted_at)
             <td>
                 <a href="{{ route('consultation.restore', $consultation->id) }}">
@@ -106,6 +96,15 @@
         <p>No Consultation Data in the Database</p>
         @endforelse
     </table>
+
+    <span class="flex justify-center pt-6">
+        <form action="{{ url('result') }}" type="GET">
+            <input type="result" name="result" id="result" class="text-center pb-1 px-2 w-full">
+            <div class="grid w-full">
+                <button class="bg-green-800 text-white font-bold p-2 mt-3">Search</button>
+            </div>
+    </span>
+
     <div class="pt-6 px-4">{{ $consultations->links( )}}</div>
 </div>
 </div>
