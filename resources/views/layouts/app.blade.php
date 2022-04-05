@@ -16,6 +16,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -30,10 +31,12 @@
         class="flex justify-between items-center px-10 py-6 text-white navbar navbar-expand-md navbar-light bg-gray-800 shadow-sm">
         <div class="container">
 
-            <div class="px-1 grid grid-flow-col font-bold text-2xl">
-                <h1 class="px-1 font-bold bg-black border-black border-4 rounded-l-lg">Pet</h1>
-                <h1 class="pr-1 bg-yellow-600 border-yellow-600 border-4 text-black rounded-r-lg">Clinic</h1>
-            </div>
+            <a href="{{ URL('transaction') }}">
+                <div class="px-1 grid grid-flow-col font-bold text-2xl">
+                    <h1 class="px-1 font-bold bg-black border-black border-4 rounded-l-lg">Pet</h1>
+                    <h1 class="pr-1 bg-yellow-600 border-yellow-600 border-4 text-black rounded-r-lg">Clinic</h1>
+                </div>
+            </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -65,11 +68,19 @@
                     <button><a href={{ URL('personnel') }}>
                             <h5 class="mr-4">Personnel</h5>
                         </a></button>
+                    <li class="nav-item">
+                        <a href="{{ route('transaction.shoppingCart') }}">
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i> Shopping Cart
+                            <span class="text-xs text-white">{{ Session::has('cart') ? Session::get('cart')->totalCost :
+                                '' }}</span>
+                        </a>
+                    </li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto text-2xl">
                     <!-- Authentication Links -->
+
                     @guest
                     @if (Route::has('personnel.signin'))
                     <li class="nav-item">
