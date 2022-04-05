@@ -144,17 +144,15 @@ return [
     'custom' => [
         'first_name' => [
             'required' => 'First name is required',
-            'alpha' => 'You can only put letters here',
             'min' => 'Try again! Your name is too short',
         ],
         'last_name' => [
             'required' => 'Last name is required',
-            'alpha' => 'You can only put letters here',
             'min' => 'Try again! Your name is too short',
         ],
         'phone_number' => [
             'required' => 'Phone number is required',
-            'numeric' => 'You can only put numbers here',
+            'min' => 'Try again! Your number is too short',
         ],
         'images' => [
             'required' => 'Image is required',
@@ -197,9 +195,29 @@ return [
             'required' => 'The Role Type is required',
             'alpha' => 'You can only put letters here',
         ],
-        'classify' => [
-            'required' => 'You need to Classify the kind of disease or injury the animal have',
-            'alpha' => 'You can only put letters here',
+        'date' => [
+            'required' => 'Date is required',
+        ],
+        'disease_injury' => [
+            'required' => 'Disease or Injury is required',
+        ],
+        'price' => [
+            'required' => 'Price is required',
+            'numeric' => 'You can only put numbers here',
+            'min' => 'Price must start at 1',
+            'max' => 'Price must not exceed at 10000',
+        ],
+        'comment' => [
+            'required' => 'Comment is required',
+        ],
+        'service_name' => [
+            'required' => 'Service name is required',
+            'min' => 'Try again! Your name is too short',
+        ],
+        'cost' => [
+            'required' => 'Cost is required',
+            'numeric' => 'You can only put numbers here',
+            'min' => 'Try again! Your name is too short',
         ],
         'g-recaptcha-response' => [
             'required' => 'Please verify that you are not a robot.',

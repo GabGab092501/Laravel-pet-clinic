@@ -13,53 +13,69 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Personnel;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+
 class personnelController extends Controller
 {
-    public function Email(){
-        return view('personnels.email');
+    public function Email()
+    {
+        return view("personnels.email");
     }
 
-    public function Reset(){
-        return view('personnels.reset');
+    public function Reset()
+    {
+        return view("personnels.reset");
     }
 
-    public function getSignup(){
-        return view('personnels.signup');
+    public function getSignup()
+    {
+        return view("personnels.signup");
     }
 
-    public function postSignup(personnelRequest $request){
-         $personnels = new Personnel([
+    public function postSignup(personnelRequest $request)
+    {
+        $personnels = new Personnel([
             "full_name" => $request->full_name,
             "email" => $request->email,
             "password" => Hash::make($request->password),
             "role" => $request->role,
         ]);
 
-         $personnels->save();
-         Auth::login($personnels);
-         return redirect::route('personnels.dashboard')->withSuccessMessage("New Personnel Added!");
+        $personnels->save();
+        Auth::login($personnels);
+        return redirect::route("personnels.dashboard")->withSuccessMessage(
+            "New Personnel Added!"
+        );
     }
 
-    public function Dashboard(){
-        return view('personnels.dashboard');
+    public function Dashboard()
+    {
+        return view("personnels.dashboard");
     }
 
-    public function getLogout(){
+    public function getLogout()
+    {
         Auth::logout();
-        return view('personnels.signin');
+        return view("personnels.signin");
     }
 
-    public function getSignin(){
-        return view('personnels.signin');
+    public function getSignin()
+    {
+        return view("personnels.signin");
     }
-    
-    public function postSignin(loginRequest $request){
-         if(Auth::attempt(['email' => $request->input('email'),'password' => $request->input('password')])){
-            return redirect::route('personnels.dashboard');
-        }else{
+
+    public function postSignin(loginRequest $request)
+    {
+        if (
+            Auth::attempt([
+                "email" => $request->input("email"),
+                "password" => $request->input("password"),
+            ])
+        ) {
+            return redirect::route("personnels.dashboard");
+        } else {
             return redirect()->back();
-        };
-     }
+        }
+    }
 
     /**
      * Display a listing of the resource.
@@ -71,8 +87,15 @@ class personnelController extends Controller
         $personnels = Personnel::withTrashed()->paginate(6);
         //$personnels = Personnel::all();
 
-        if(session(key: 'success_message')){
-            Alert::image('Congratulations!',session(key: 'success_message'),'https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s','200','200','I Am A Pic');
+        if (session(key: "success_message")) {
+            Alert::image(
+                "Congratulations!",
+                session(key: "success_message"),
+                "https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s",
+                "200",
+                "200",
+                "I Am A Pic"
+            );
         }
 
         return view("personnels.index", [
@@ -122,7 +145,8 @@ class personnelController extends Controller
      */
     public function show($id)
     {
-        //
+        $personnels = Personnel::find($id);
+        return view("personnels.show")->with("personnels", $personnels);
     }
 
     /**
@@ -152,7 +176,9 @@ class personnelController extends Controller
         $personnels->password = Hash::make($request->input("password"));
         $personnels->role = $request->input("role");
         $personnels->update();
-        return Redirect::to("personnel")->withSuccessMessage("Personnel Data Updated!");
+        return Redirect::to("personnel")->withSuccessMessage(
+            "Personnel Data Updated!"
+        );
     }
 
     /**
@@ -164,7 +190,9 @@ class personnelController extends Controller
     public function destroy($id)
     {
         Personnel::destroy($id);
-        return Redirect::to("personnel")->withSuccessMessage("Personnel Data Deleted!");
+        return Redirect::to("personnel")->withSuccessMessage(
+            "Personnel Data Deleted!"
+        );
     }
 
     public function restore($id)
@@ -172,13 +200,17 @@ class personnelController extends Controller
         Personnel::onlyTrashed()
             ->findOrFail($id)
             ->restore();
-        return Redirect::route("personnel.index")->withSuccessMessage("Personnel Data Restored!");
+        return Redirect::route("personnel.index")->withSuccessMessage(
+            "Personnel Data Restored!"
+        );
     }
 
     public function forceDelete($id)
     {
         $personnels = Personnel::findOrFail($id);
         $personnels->forceDelete();
-        return Redirect::route("personnel.index")->withSuccessMessage("Personnel Data Permanently Deleted!");
+        return Redirect::route("personnel.index")->withSuccessMessage(
+            "Personnel Data Permanently Deleted!"
+        );
     }
 }

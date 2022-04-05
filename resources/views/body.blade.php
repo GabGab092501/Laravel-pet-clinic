@@ -7,10 +7,12 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <header class="flex justify-between items-center px-10 py-6 text-white bg-gray-800">
-    <div class="px-1 grid grid-flow-col font-bold text-2xl">
-        <h1 class="px-1 font-bold bg-black border-black border-4 rounded-l-lg">Pet</h1>
-        <h1 class="pr-1 bg-yellow-600 border-yellow-600 border-4 text-black rounded-r-lg">Clinic</h1>
-    </div>
+    <a href="{{ URL('transaction') }}">
+        <div class="px-1 grid grid-flow-col font-bold text-2xl">
+            <h1 class="px-1 font-bold bg-black border-black border-4 rounded-l-lg">Pet</h1>
+            <h1 class="pr-1 bg-yellow-600 border-yellow-600 border-4 text-black rounded-r-lg">Clinic</h1>
+        </div>
+    </a>
     <nav>
         <ul class="tracking-widest text-2xl">
             <button> <a href="{{ URL('dashboard') }}">
@@ -19,14 +21,14 @@
             <button> <a href="{{ URL('animals') }}">
                     <h5>Animal</h5>
                 </a></button>
-            <button><a href="{{ URL('rescuer') }}">
-                    <h5>Rescuer</h5>
+            <button><a href="{{ URL('customer') }}">
+                    <h5>Customer</h5>
                 </a></button>
-            <button><a href="{{ URL('diseaseinjury') }}">
-                    <h5>Disease / Injury</h5>
+            <button><a href="{{ URL('service') }}">
+                    <h5>Services</h5>
                 </a></button>
-            <button><a href="{{ URL('adopter') }}">
-                    <h5>Adopters</h5>
+            <button><a href="{{ URL('consultation') }}">
+                    <h5>Consultations</h5>
                 </a></button>
             <button><a href="{{ URL('contact') }}">
                     <h5 class="mr-4">Feedback</h5>
