@@ -144,12 +144,10 @@ return [
     'custom' => [
         'first_name' => [
             'required' => 'First name is required',
-            'alpha' => 'You can only put letters here',
             'min' => 'Try again! Your name is too short',
         ],
         'last_name' => [
             'required' => 'Last name is required',
-            'alpha' => 'You can only put letters here',
             'min' => 'Try again! Your name is too short',
         ],
         'phone_number' => [

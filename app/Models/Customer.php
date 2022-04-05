@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Customer extends Model
 {
     public const VALIDATION_RULES = [
-        "first_name" => ["required", "alpha", "min:3"],
-        "last_name" => ["required", "alpha", "min:3"],
+        "first_name" => ["required", "min:3"],
+        "last_name" => ["required", "min:3"],
         "phone_number" => ["required", "numeric", "min:6"],
         "images" => ["required", "image", "mimes:jpg,png,jpeg,gif", "max:5048"],
     ];
