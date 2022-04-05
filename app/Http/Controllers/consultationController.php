@@ -9,7 +9,6 @@ use App\Models\Consultation;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\consultationRequest;
-use Error;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class consultationController extends Controller
@@ -255,7 +254,7 @@ class consultationController extends Controller
     public function destroy($id)
     {
         Consultation::destroy($id);
-        return Redirect::to("/consultation")->withSuccessMessage(
+        return Redirect::route("consultation.index")->withSuccessMessage(
             "Consultation Data Deleted!"
         );
     }
