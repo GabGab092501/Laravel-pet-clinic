@@ -64,6 +64,57 @@ class transactionController extends Controller
         unset($this->services[$id]);
     }
 
+    // public function postCheckout(Request $request)
+    // {
+    //     if (!Session::has('cart')) {
+    //         return redirect()->route('item.index');
+    //     }
+    //     $oldCart = Session::get('cart');
+    //     $cart = new Cart($oldCart);
+    //     //dd($cart);
+    //     try {
+    //         DB::beginTransaction();
+    //         $order = new Order();
+    //         //dd($order);
+    //         $customer =  Customer::where('user_id', Auth::id())->first();
+    //         //dd($customer);
+    //         $order->customer_id = $customer->customer_id;
+    //         $order->date_placed = now();
+    //         $order->date_shipped = Carbon::now()->addDays(5);
+    //         $order->shipvia = $request->shipper_id;
+    //         $order->shipping = $request->shipping;
+    //         $order->status = 'Processing';
+    //         $order->save();
+    //         //dd($order);
+    //         foreach ($cart->items as $items) {
+    //             $id = $items['item']['item_id'];
+    //             //dd($id);
+    //             DB::table('orderline')->insert(
+    //                 [
+    //                     'item_id' => $id,
+    //                     'orderinfo_id' => $order->orderinfo_id,
+    //                     'quantity' => $items['qty']
+    //                 ]
+    //             );
+    //             //dd($items);
+    //             $stock = Stock::find($id);
+    //             //$stock = DB::table('stock')->where('item_id', $id)->first();
+    //             //dd($stock);
+    //             $stock->quantity = $stock->quantity - $items['qty'];
+    //             $stock->save();
+    //         }
+    //         // dd($order);
+    //     } catch (\Exception $e) {
+    //         // dd($e);
+    //         DB::rollback();
+    //         // dd($order);
+    //         return redirect()->route('item.shoppingCart')->with('error', $e->getMessage());
+    //     }
+    //     DB::commit();
+    //     Session::forget('cart');
+    //     return redirect()->route('item.index')->with('success', 'Successfully Purchased Your Items!!!');
+    // }
+
     /**
      * Show the form for creating a new resource.
      *
