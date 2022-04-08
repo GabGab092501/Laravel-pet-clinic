@@ -12,6 +12,92 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class customerController extends Controller
 {
+
+    public function search()
+    {
+        $customers = Customer::rightJoin(
+            "animals",
+            "animals.customer_id",
+            "=",
+            "customers.id"
+        )
+            ->rightjoin(
+                "transaction_line",
+                "transaction_line.animal_id",
+                "=",
+                "animals.id"
+            )
+            ->leftjoin(
+                "services",
+                "services.id",
+                "=",
+                "transaction_line.service_id"
+            )
+            ->leftjoin(
+                "transactions",
+                "transactions.id",
+                "=",
+                "transaction_line.transaction_id"
+            )
+            ->select(
+                "customers.first_name",
+                "animals.animal_name",
+                "services.service_name",
+                "services.cost",
+                "transactions.id",
+                "customers.deleted_at"
+            )
+
+            ->orderBy("customers.id", "ASC")
+            ->get();
+        return view("customers.search", [
+            "customers" => $customers,
+        ]);
+    }
+
+    public function result()
+    {
+        $result = $_GET["result"];
+        $customers = Customer::rightJoin(
+            "animals",
+            "animals.customer_id",
+            "=",
+            "customers.id"
+        )
+            ->rightjoin(
+                "transaction_line",
+                "transaction_line.animal_id",
+                "=",
+                "animals.id"
+            )
+            ->leftjoin(
+                "services",
+                "services.id",
+                "=",
+                "transaction_line.service_id"
+            )
+            ->leftjoin(
+                "transactions",
+                "transactions.id",
+                "=",
+                "transaction_line.transaction_id"
+            )
+            ->select(
+                "customers.first_name",
+                "animals.animal_name",
+                "services.service_name",
+                "services.cost",
+                "transactions.id",
+                "customers.deleted_at"
+            )
+
+            ->where("customers.first_name", "LIKE", "%" . $result . "%")
+            ->get();
+        return view("customers.result", [
+            "customers" => $customers,
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
