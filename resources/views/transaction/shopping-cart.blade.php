@@ -1,19 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
+
+@if ($message = Session::get('error'))
+<div class="bg-red-500 p-4 absolute">
+    <strong class="text-white text-3xl pl-4">{{ $message }}</strong>
+</div>
+@endif
+
 @if(Session::has('cart'))
-<div class="grid justify-center gap-3">
+<div class="grid justify-center gap-3 w-full">
     <div class="row">
         <div>
             <ul>
+                @foreach($animals as $animal)
                 @foreach($services as $service)
                 <li>
+                    <span class="pr-6">{{ $animal['name'] }}</span>
                     <span class="pr-6">{{ $service['cost'] }}</span>
                     <div class="btn-group">
                         <a class="btn btn-danger my-2 py-2"
                             href="{{ route('transaction.remove',['id'=>$service['services']['id']]) }}">Remove</a>
                     </div>
                 </li>
+                @endforeach
                 @endforeach
             </ul>
         </div>
