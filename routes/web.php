@@ -98,11 +98,11 @@ Route::get("/consultation/forceDelete/{id}", [
     "uses" => "consultationController@forceDelete",
     "as" => "consultation.forceDelete",
 ]);
-Route::get('/search', 'App\Http\Controllers\consultationController@search')->name("search")->middleware("auth");
+//Route::get('/search', 'App\Http\Controllers\consultationController@search')->name("search")->middleware("auth");
 //Route::get("/search", [consultationController::class, "search"])->name("search");
 Route::get('/result', 'App\Http\Controllers\consultationController@result')->name("result")->middleware("auth");
 //Route::get("/result", [consultationController::class, "result"])->name("result");
-
+Route::get('/result', 'App\Http\Controllers\customerController@result')->name("result")->middleware("auth");
 
 Route::resource("/transaction", transactionController::class)->middleware("auth");
 
@@ -172,14 +172,18 @@ Route::get('shopping-cart', [
 ]);
 
 Route::get('checkout', [
-    'uses' => 'App\Http\Controllers\transactionController@postCheckout',
+    'uses' => 'transactionController@postCheckout',
     'as' => 'checkout',
-    'middleware' => 'auth'
 ]);
 
 Route::get('add-to-cart/{id}', [
     'uses' => 'App\Http\Controllers\transactionController@getAddToCart',
     'as' => 'transaction.addToCart'
+]);
+
+Route::get('add-animal/{id}', [
+    'uses' => 'App\Http\Controllers\transactionController@getAnimal',
+    'as' => 'transaction.addAnimal'
 ]);
 
 Route::get('remove/{id}', [
