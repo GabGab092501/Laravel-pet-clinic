@@ -88,6 +88,15 @@
     <p>No customer Data in the Database</p>
     @endforelse
   </table>
+
+  <span class="flex justify-center pt-6">
+    <form action="{{ url('result') }}" type="GET">
+      <input type="result" name="result" id="result" class="text-center pb-1 px-2 w-full">
+      <div class="grid w-full">
+        <button class="bg-green-800 text-white font-bold p-2 mt-3">Search</button>
+      </div>
+  </span>
+
   <div class="pt-6 px-4">{{ $customers->links( )}}</div>
 </div>
 </div>
