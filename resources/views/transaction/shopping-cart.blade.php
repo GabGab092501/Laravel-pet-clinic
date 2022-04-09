@@ -3,7 +3,7 @@
 @section('content')
 
 @if ($message = Session::get('error'))
-<div class="bg-red-500 p-4 absolute">
+<div class="bg-red-500 p-4">
     <strong class="text-white text-3xl pl-4">{{ $message }}</strong>
 </div>
 @endif
