@@ -8,6 +8,7 @@ use App\Cart;
 use App\Models\Animal;
 use App\Models\Personnel;
 use App\Models\Transaction;
+use App\Models\Transaction_line;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
@@ -120,6 +121,20 @@ class transactionController extends Controller
         DB::commit();
         Session::forget('cart');
         return redirect()->route('transaction.index')->with('error', 'Congratulations You Have Successfully Checkout!');
+    }
+
+    public function getReceipt($id)
+    {
+        $transactions = Transaction_line::find($id);
+        $animals = Animal::pluck("animal_name", "id");
+        $services = Service::pluck("cost", "id");
+        $services2 = Service::pluck("service_name", "id");
+        return view("transaction.receipt", [
+            "transaction_line" => $transactions,
+            "services" => $services,
+            "services" => $services2,
+            "animals" => $animals,
+        ]);
     }
 
     /**

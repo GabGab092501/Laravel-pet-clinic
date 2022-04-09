@@ -35,7 +35,7 @@
                     <a href=" {{ route('transaction.addAnimal', ['id'=>$animal->id]) }} " class="btn btn-primary"
                         role="button"><i class="fas fa-cart-plus"></i> Add to Animal</a>
 
-                    <a href="{{ route('personnels.dashboard') }}" class="btn btn-success" role="button">Back</a>
+                    <a href="#" class="btn btn-success" role="button">More Info</a>
                 </div>
             </div>
         </div>
@@ -57,7 +57,7 @@
                     <a href=" {{ route('transaction.addToCart', ['id'=>$service->id]) }} " class="btn btn-primary"
                         role="button"><i class="fas fa-cart-plus"></i> Add to Cart</a>
 
-                    <a href="{{ route('personnels.dashboard') }}" class="btn btn-success" role="button">Back</a>
+                    <a href="#" class="btn btn-success" role="button">More Info</a>
                 </div>
             </div>
         </div>
@@ -65,3 +65,5 @@
         @endforeach
     </section>
 </body>
+
+</html>
