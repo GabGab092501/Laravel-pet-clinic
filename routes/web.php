@@ -176,10 +176,7 @@ Route::get('checkout', [
     'as' => 'checkout',
 ]);
 
-Route::get('receipt/{id}', [
-    'uses' => 'transactionController@getReceipt',
-    'as' => 'transaction.receipt',
-]);
+Route::get('/receipt', 'App\Http\Controllers\transactionController@getReceipt')->name("receipt")->middleware("auth");
 
 Route::get('add-to-cart/{id}', [
     'uses' => 'App\Http\Controllers\transactionController@getAddToCart',
