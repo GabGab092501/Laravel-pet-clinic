@@ -120,7 +120,7 @@ class transactionController extends Controller
         }
         DB::commit();
         Session::forget('cart');
-        return redirect()->route('transaction.index')->with('error', 'Congratulations You Have Successfully Checkout!');
+        return redirect()->route('receipt');
     }
 
     public function getReceipt()

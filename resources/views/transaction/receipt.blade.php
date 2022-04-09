@@ -9,6 +9,11 @@
 
 <body style="background-image:linear-gradient(rgba(212, 212, 212, 0.1),rgba(212,212,212,0.1)),
     url(https://wallpapercave.com/wp/B1sODrM.jpg); background-size:cover;">
+    <div class="pt-8 pb-4 px-8">
+        <a href="{{url()->previous()}}" class="p-3 border-none italic text-white bg-black text-lg">
+            Go Back &rarr;
+        </a>
+    </div>
     </div>
     <h1 class="text-center text-white text-3xl pt-4">RECEIPT</h1>
     <div class="flex justify-center p-4 w-full">
