@@ -8,7 +8,7 @@ use App\Cart;
 use App\Models\Animal;
 use App\Models\Personnel;
 use App\Models\Transaction;
-use App\Models\Transaction_line;
+use App\Models\Customer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
@@ -123,17 +123,47 @@ class transactionController extends Controller
         return redirect()->route('transaction.index')->with('error', 'Congratulations You Have Successfully Checkout!');
     }
 
-    public function getReceipt($id)
+    public function getReceipt()
     {
-        $transactions = Transaction_line::find($id);
-        $animals = Animal::pluck("animal_name", "id");
-        $services = Service::pluck("cost", "id");
-        $services2 = Service::pluck("service_name", "id");
+        $customers = Customer::rightJoin(
+            "animals",
+            "animals.customer_id",
+            "=",
+            "customers.id"
+        )
+            ->rightjoin(
+                "transaction_line",
+                "transaction_line.animal_id",
+                "=",
+                "animals.id"
+            )
+            ->leftjoin(
+                "services",
+                "services.id",
+                "=",
+                "transaction_line.service_id"
+            )
+            ->leftjoin(
+                "transactions",
+                "transactions.id",
+                "=",
+                "transaction_line.transaction_id"
+            )
+            ->select(
+                "customers.first_name",
+                "animals.animal_name",
+                "services.service_name",
+                "services.cost",
+                "transactions.id",
+                "customers.deleted_at"
+            )
+
+            ->orderBy("customers.id", "ASC")
+            ->latest('id')
+            ->take('2')
+            ->get();
         return view("transaction.receipt", [
-            "transaction_line" => $transactions,
-            "services" => $services,
-            "services" => $services2,
-            "animals" => $animals,
+            "customers" => $customers,
         ]);
     }
 
