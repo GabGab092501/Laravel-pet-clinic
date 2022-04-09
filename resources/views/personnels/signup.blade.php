@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="pl-32 container w-full">
 
     <h1 class="text-5xl">
         {{ __('Sign Up') }}
@@ -17,9 +17,9 @@
                 <input id="full_name" type="text" class="form-control @error('full_name') is-invalid @enderror"
                     name="full_name" value="{{ old('full_name') }}">
 
-                    @if($errors->has('full_name'))
-                    <p class="text-center text-red-500 pt-3 font-bold">{{ $errors->first('full_name') }}</p>
-                    @endif
+                @if($errors->has('full_name'))
+                <p class="text-center text-red-500 pt-3 font-bold">{{ $errors->first('full_name') }}</p>
+                @endif
             </div>
         </div>
 
@@ -30,9 +30,9 @@
                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
                     value="{{ old('email') }}">
 
-                    @if($errors->has('email'))
-                    <p class="text-center text-red-500 pt-3 font-bold">{{ $errors->first('email') }}</p>
-                    @endif
+                @if($errors->has('email'))
+                <p class="text-center text-red-500 pt-3 font-bold">{{ $errors->first('email') }}</p>
+                @endif
             </div>
         </div>
 
@@ -43,9 +43,9 @@
                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
                     name="password">
 
-                    @if($errors->has('password'))
-                    <p class="text-center text-red-500 pt-3 font-bold">{{ $errors->first('password') }}</p>
-                    @endif
+                @if($errors->has('password'))
+                <p class="text-center text-red-500 pt-3 font-bold">{{ $errors->first('password') }}</p>
+                @endif
             </div>
         </div>
 
@@ -53,8 +53,7 @@
             <label for="password-confirm" class="col-form-label">{{ __('Confirm Password') }}</label>
 
             <div class="col-md-6">
-                <input id="password-confirm" type="password" class="form-control" name="password_confirmation"
-                    >
+                <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
             </div>
         </div>
 
@@ -72,13 +71,13 @@
         <div class="row mb-3">
             <label for="captcha" class="col-form-label">Captcha</label>
             <div class="pl-32 ml-12">
-            {!! NoCaptcha::renderJs() !!}
-            {!! NoCaptcha::display() !!}
+                {!! NoCaptcha::renderJs() !!}
+                {!! NoCaptcha::display() !!}
             </div>
             <p class="col-md-6">
                 @if($errors->has('g-recaptcha-response'))
-                <p class="pl-48 ml-4 text-red-500 pt-3 font-bold">{{ $errors->first('g-recaptcha-response') }}</p>
-                @endif
+            <p class="pl-48 ml-4 text-red-500 pt-3 font-bold">{{ $errors->first('g-recaptcha-response') }}</p>
+            @endif
             </p>
         </div>
 

@@ -41,7 +41,7 @@
 </header>
 
 <body
-    style="background-image:linear-gradient(rgba(212, 212, 212, 0.1),rgba(212,212,212,0.1)), url(https://wallpapercave.com/wp/B1sODrM.jpg); background-size:cover;">
+    style="background-image:linear-gradient(rgba(212, 212, 212, 0.1),rgba(212,212,212,0.1)), url(https://wallpapercave.com/wp/B1sODrM.jpg); background-size:cover; overflow-x: hidden;">
     @include('sweetalert::alert')
     @yield('contents')
 </body>
