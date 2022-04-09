@@ -106,7 +106,6 @@ Route::get('/result', 'App\Http\Controllers\customerController@result')->name("r
 
 Route::resource("/transaction", transactionController::class)->middleware("auth");
 
-
 Route::get("/", function () {
     return view("welcome");
 });
@@ -168,7 +167,8 @@ Route::get("reset", [
 
 Route::get('shopping-cart', [
     'uses' => 'App\Http\Controllers\transactionController@getCart',
-    'as' => 'transaction.shoppingCart'
+    'as' => 'transaction.shoppingCart',
+    'middleware' => 'auth'
 ]);
 
 Route::get('checkout', [
@@ -177,6 +177,14 @@ Route::get('checkout', [
 ]);
 
 Route::get('/receipt', 'App\Http\Controllers\transactionController@getReceipt')->name("receipt")->middleware("auth");
+
+
+Route::get('data', [
+    'uses' => 'App\Http\Controllers\transactionController@getData',
+    'as' => 'data',
+    'middleware' => 'auth'
+]);
+
 
 Route::get('add-to-cart/{id}', [
     'uses' => 'App\Http\Controllers\transactionController@getAddToCart',

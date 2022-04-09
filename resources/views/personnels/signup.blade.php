@@ -4,14 +4,14 @@
 <div class="pl-32 container w-full">
 
     <h1 class="text-5xl">
-        {{ __('Sign Up') }}
+        Sign Up
     </h1>
 
     <form method="POST" action="{{ route('personnel.signup') }}">
         @csrf
 
         <div class="row mb-3">
-            <label for="full_name" class="col-form-label">{{ __('Full Name') }}</label>
+            <label for="full_name" class="col-form-label">Full Name</label>
 
             <div class="col-md-6">
                 <input id="full_name" type="text" class="form-control @error('full_name') is-invalid @enderror"
@@ -24,7 +24,7 @@
         </div>
 
         <div class="row mb-3">
-            <label for="email" class="col-form-label">{{ __('Email Address') }}</label>
+            <label for="email" class="col-form-label">Email Address</label>
 
             <div class="col-md-6">
                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
@@ -37,7 +37,7 @@
         </div>
 
         <div class="row mb-3">
-            <label for="password" class="col-form-label">{{ __('Password') }}</label>
+            <label for="password" class="col-form-label">Password</label>
 
             <div class="col-md-6">
                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
@@ -50,7 +50,7 @@
         </div>
 
         <div class="row mb-3">
-            <label for="password-confirm" class="col-form-label">{{ __('Confirm Password') }}</label>
+            <label for="password-confirm" class="col-form-label">Confirm Password</label>
 
             <div class="col-md-6">
                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation">

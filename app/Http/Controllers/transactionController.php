@@ -9,9 +9,12 @@ use App\Models\Animal;
 use App\Models\Personnel;
 use App\Models\Transaction;
 use App\Models\Customer;
+use App\Models\Transaction_line;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class transactionController extends Controller
 {
@@ -22,9 +25,69 @@ class transactionController extends Controller
      */
     public function index()
     {
+        $customers = Customer::rightJoin(
+            "animals",
+            "animals.customer_id",
+            "=",
+            "customers.id"
+        )
+            ->rightjoin(
+                "transaction_line",
+                "transaction_line.animal_id",
+                "=",
+                "animals.id"
+            )
+            ->leftjoin(
+                "services",
+                "services.id",
+                "=",
+                "transaction_line.service_id"
+            )
+            ->leftjoin(
+                "transactions",
+                "transactions.id",
+                "=",
+                "transaction_line.transaction_id"
+            )
+            ->leftjoin(
+                "personnels",
+                "personnels.id",
+                "=",
+                "transactions.personnel_id"
+            )
+            ->select(
+                "transactions.id",
+                "animals.animal_name",
+                "services.service_name",
+                "personnels.full_name",
+                "transactions.date",
+                "transactions.deleted_at",
+                "transaction_line.deleted_at",
+            )
+
+            ->orderBy("transaction_line.transaction_id", "ASC")
+            ->withTrashed()
+            ->paginate(6);
+        if (session(key: "success_message")) {
+            Alert::image(
+                "Congratulations!",
+                session(key: "success_message"),
+                "https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s",
+                "200",
+                "200",
+                "I Am A Pic"
+            );
+        }
+        return view("transaction.index", [
+            "customers" => $customers,
+        ]);
+    }
+
+    public function getData()
+    {
         $animals = Animal::all();
         $services = Service::all();
-        return view('transaction.index', [
+        return view('transaction.data', [
             'services' => $services,
             'animals' => $animals,
         ]);
@@ -174,12 +237,7 @@ class transactionController extends Controller
      */
     public function create()
     {
-        // $personnels = Personnel::pluck("full_name", "id");
-        // $animals = Animal::pluck("animal_name", "id");
-        // return view("transaction.create", [
-        //     "personnels" => $personnels,
-        //     "animals" => $animals,
-        // ]);
+        //
     }
 
     /**
@@ -190,36 +248,7 @@ class transactionController extends Controller
      */
     public function store(Request $request)
     {
-        // if (!Session::has('cart')) {
-        //     return redirect()->route('transaction.index');
-        // }
-        // $oldCart = Session::get('cart');
-        // $cart = new Cart($oldCart);
-        // try {
-        //     DB::beginTransaction();
-        //     $transactions = new Transaction();
-        //     $personnels =  Personnel::where('id', Auth::id())->first();
-        //     $transactions->personnel_id = $personnels->id;
-        //     $transactions->date = now();
-        //     $transactions->save();
-
-        //     foreach ($cart->services as $services) {
-        //         $id = $services['services']['id'];
-
-        //         DB::table('transaction_line')->insert(
-        //             [
-        //                 'id' => $id,
-        //                 'transaction_id' => $transactions->id,
-        //             ]
-        //         );
-        //     }
-        // } catch (\Exception $e) {
-        //     DB::rollback();
-        //     return redirect()->route('transaction.shoppingCart')->with('error', $e->getMessage());
-        // }
-        // DB::commit();
-        // Session::forget('cart');
-        // return redirect()->route('transaction.index')->with('success', 'Successfully Purchased Your Items!!!');
+        //
     }
 
     /**
@@ -241,7 +270,18 @@ class transactionController extends Controller
      */
     public function edit($id)
     {
-        //
+        // $transactions = Transaction::find($id);
+        // $transaction_line = Transaction_line::find($id);
+        // $personnels = Personnel::pluck("full_name", "id");
+        // $animals = Animal::pluck("animal_name", "id");
+        // $services = Service::pluck("service_name", "id");
+        // return view("transaction.edit", [
+        //     "transactions" => $transactions,
+        //     "transaction_line" => $transaction_line,
+        //     "personnels" => $personnels,
+        //     "animals" => $animals,
+        //     "services" => $services,
+        // ]);
     }
 
     /**
@@ -253,7 +293,18 @@ class transactionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // $transactions = Transaction::find($id);
+        // $transactions->date = $request->input("date");
+        // $transactions->personnel_id = $request->input("personnel_id");
+        // $transactions->update();
+
+        // $transaction_line = Transaction_line::find($id);
+        // $transaction_line->animal_id = $request->input("animal_id");
+        // $transaction_line->service_id = $request->input("service_id");
+        // $transaction_line->update();
+        // return Redirect::to("/transaction")->withSuccessMessage(
+        //     "Transaction Data Updated!"
+        // );
     }
 
     /**
@@ -264,6 +315,13 @@ class transactionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // $post = Transaction::findOrFail($id);
+        // $postGroups = Transaction::where('id', $post->id)->get();
+        // DB::table('transaction_line')->whereIn('transaction_id', $postGroups->pluck('id'))->delete();
+        // Transaction::where('transaction_id', $post->id)->delete();
+
+        // return Redirect::to("/transaction")->withSuccessMessage(
+        //     "Transaction Data Deleted!"
+        // );
     }
 }

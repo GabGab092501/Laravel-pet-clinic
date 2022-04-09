@@ -11919,9 +11919,6 @@ select {
 .fixed {
   position: fixed;
 }
-.absolute {
-  position: absolute;
-}
 .relative {
   position: relative;
 }
@@ -12083,6 +12080,9 @@ select {
 .cursor-default {
   cursor: default;
 }
+.grid-flow-row {
+  grid-auto-flow: row;
+}
 .grid-flow-col {
   grid-auto-flow: column;
 }
@@ -12106,9 +12106,6 @@ select {
 }
 .justify-between {
   justify-content: space-between;
-}
-.justify-evenly {
-  justify-content: space-evenly;
 }
 .justify-items-center {
   justify-items: center;
@@ -12164,9 +12161,6 @@ select {
 }
 .border-b {
   border-bottom-width: 1px;
-}
-.border-b-2 {
-  border-bottom-width: 2px;
 }
 .border-none {
   border-style: none;
@@ -12339,6 +12333,9 @@ select {
 .pl-10 {
   padding-left: 2.5rem;
 }
+.pl-24 {
+  padding-left: 6rem;
+}
 .pt-24 {
   padding-top: 6rem;
 }
@@ -12353,9 +12350,6 @@ select {
 }
 .pt-32 {
   padding-top: 8rem;
-}
-.pl-24 {
-  padding-left: 6rem;
 }
 .text-center {
   text-align: center;

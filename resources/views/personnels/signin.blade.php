@@ -3,14 +3,14 @@
 @section('content')
 <div class="pl-24 container">
     <h1 class="text-5xl pt-24">
-        {{ __('Sign In') }}
+        Sign In
     </h1>
 
     <form method="POST" action="{{ route('personnel.signin') }}">
         @csrf
 
         <div class="row mb-3">
-            <label for="email" class="col-form-label">{{ __('Email Address') }}</label>
+            <label for="email" class="col-form-label">Email Address</label>
 
             <div class="col-md-6">
                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email"
@@ -23,7 +23,7 @@
         </div>
 
         <div class="row mb-3">
-            <label for="password" class="col-form-label">{{ __('Password') }}</label>
+            <label for="password" class="col-form-label">Password</label>
 
             <div class="col-md-6">
                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
@@ -33,7 +33,7 @@
                         ? 'checked' : '' }}>
 
                     <label class="form-check-label" for="remember">
-                        {{ __('Remember Me') }}
+                        Remember Me
                     </label>
                     @if($errors->has('password'))
                     <p class="text-center text-red-500 font-bold">{{ $errors->first('password') }}</p>
@@ -47,7 +47,7 @@
                 <input type="submit" value="Sign In" class="btn btn-primary font-bold">
                 @if (Route::has('personnel.email'))
                 <a class="btn btn-link" href="{{ route('personnel.email') }}">
-                    {{ __('Forgot Your Password?') }}
+                    Forgot Your Password
                 </a>
                 @endif
                 <a href="{{ route('review') }}" class="offset-sm-5 btn btn-danger text-white font-bold">Send Your
