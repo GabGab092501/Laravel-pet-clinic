@@ -60,12 +60,13 @@
                 </a>
             </td>
             <td class="text-center">
-                {!! Form::open(array('route' => array('consultation.destroy', $consultation->id),'method'=>'DELETE')) !!}
+                {!! Form::open(array('route' => array('consultation.destroy', $consultation->id),'method'=>'DELETE'))
+                !!}
                 <button type="submit" class="text-center text-xl bg-red-600 p-2 my-2">
-                  Delete &rarr;
+                    Delete &rarr;
                 </button>
                 {!! Form::close() !!}
-              </td>
+            </td>
             @if($consultation->deleted_at)
             <td>
                 <a href="{{ route('consultation.restore', $consultation->id) }}">
@@ -98,7 +99,7 @@
     </table>
 
     <span class="flex justify-center pt-6">
-        <form action="{{ url('result') }}" type="GET">
+        <form action="{{ url('results') }}" type="GET">
             <input type="result" name="result" id="result" class="text-center pb-1 px-2 w-full">
             <div class="grid w-full">
                 <button class="bg-green-800 text-white font-bold p-2 mt-3">Search</button>
