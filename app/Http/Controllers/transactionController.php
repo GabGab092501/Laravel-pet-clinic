@@ -221,9 +221,9 @@ class transactionController extends Controller
                 "customers.deleted_at"
             )
 
-            ->orderBy("customers.id", "ASC")
-            ->latest('id')
-            ->take('2')
+            ->orderBy("transactions.id", "DESC")
+            ->latest('transactions.id')
+            ->take('6')
             ->get();
         return view("transaction.receipt", [
             "customers" => $customers,
