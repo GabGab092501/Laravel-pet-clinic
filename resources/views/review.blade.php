@@ -55,8 +55,8 @@
                         <button type="submit" class="bg-green-800 text-white font-bold p-2 mt-5">
                             Submit
                         </button>
-                        <a href="{{url()->previous()}}" class="bg-gray-800 text-white font-bold p-2 mt-5 text-center"
-                            role="button">Cancel</a>
+                        <a href="{{route('personnel.signin')}}"
+                            class="bg-gray-800 text-white font-bold p-2 mt-5 text-center" role="button">Go Back</a>
                     </div>
                 </div>
             </form>
