@@ -47,7 +47,7 @@ class consultationController extends Controller
         ]);
     }
 
-    public function result()
+    public function results()
     {
         $result = $_GET["result"];
         $consultations = Consultation::join(
