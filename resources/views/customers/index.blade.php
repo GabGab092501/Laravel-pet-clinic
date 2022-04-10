@@ -38,7 +38,7 @@
       <td class="text-center text-3xl">
         {{ $customer->phone_number }}
       </td>
-      <td class="pl-10">
+      <td class="pl-12">
         <img src="{{ asset('uploads/customers/'.$customer->images)}}" alt="I am A Pic" width="75" height="75">
       </td>
       <td class=" text-center text-3xl">
@@ -89,6 +89,8 @@
     @endforelse
   </table>
 
+  <div class="pt-6 px-4">{{ $customers->links( )}}</div>
+
   <span class="flex justify-center pt-6">
     <form action="{{ url('result') }}" type="GET">
       <input type="result" name="result" id="result" class="text-center pb-1 px-2 w-full">
@@ -96,8 +98,6 @@
         <button class="bg-green-800 text-white font-bold p-2 mt-3">Search</button>
       </div>
   </span>
-
-  <div class="pt-6 px-4">{{ $customers->links( )}}</div>
 </div>
 </div>
 @endsection
