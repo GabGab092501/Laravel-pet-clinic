@@ -100,7 +100,7 @@ Route::get("/consultation/forceDelete/{id}", [
 ]);
 //Route::get('/search', 'App\Http\Controllers\consultationController@search')->name("search")->middleware("auth");
 //Route::get("/search", [consultationController::class, "search"])->name("search");
-Route::get('/result', 'App\Http\Controllers\consultationController@result')->name("result")->middleware("auth");
+Route::get('/results', 'App\Http\Controllers\consultationController@results')->name("results")->middleware("auth");
 //Route::get("/result", [consultationController::class, "result"])->name("result");
 Route::get('/result', 'App\Http\Controllers\customerController@result')->name("result")->middleware("auth");
 
