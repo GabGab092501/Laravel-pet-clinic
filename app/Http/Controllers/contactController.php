@@ -114,7 +114,12 @@ class contactController extends Controller
      */
     public function show($id)
     {
-        //
+        $contacts = Contact::find($id);
+        $services = Service::pluck("service_name", "id");
+        return view("contacts.show", [
+            "contacts" => $contacts,
+            "services" => $services,
+        ]);
     }
 
     /**
