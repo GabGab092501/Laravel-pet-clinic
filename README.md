@@ -6,3 +6,6 @@
 -   setup env from env example
 -   `php artisan key:generate`
 -   `php artisan serve`
+-   `php artisan db:seed to run seeder`
+    `php artisan route::clear to clear route problems`
+    `php artisan view::clear to clear view problems`
