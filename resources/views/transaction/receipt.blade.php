@@ -22,44 +22,44 @@
             <table>
                 <thead class="bg-gray-50">
                     <tr>
-                        <th class="px-4 py-2 text-xs text-gray-500 ">
+                        <th class="text-center px-4 py-2 text-xs text-gray-500 ">
                             Transaction Id
                         </th>
-                        <th class="px-4 py-2 text-xs text-gray-500 ">
+                        <th class="text-center px-4 py-2 text-xs text-gray-500 ">
                             Customer
                         </th>
-                        <th class="px-4 py-2 text-xs text-gray-500 ">
-                            Service
-                        </th>
-                        <th class="px-4 py-2 text-xs text-gray-500 ">
+                        <th class="text-center px-4 py-2 text-xs text-gray-500 ">
                             Animal
                         </th>
-                        <th class="px-4 py-2 text-xs text-gray-500 ">
+                        <th class="text-center px-4 py-2 text-xs text-gray-500 ">
+                            Service
+                        </th>
+                        <th class="text-center px-4 py-2 text-xs text-gray-500 ">
                             Cost
                         </th>
                     </tr>
                 </thead>
                 <tbody class="bg-white">
                     <tr class="whitespace-nowrap">
-                        <td class="px-6 py-4">
+                        <td class="text-center px-6 py-4">
                             <div class="text-sm text-gray-900">
                                 {{ $customer->id }}
                             </div>
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="text-center px-6 py-4">
                             <div class="text-sm text-gray-900">
                                 {{ $customer->first_name }}
                             </div>
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="text-center px-6 py-4">
                             <div class="text-sm text-gray-900">
                                 {{ $customer->animal_name }}
                             </div>
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="text-center px-6 py-4">
                             {{ $customer->service_name }}
                         </td>
-                        <td class="px-6 py-4 text-sm text-gray-500">
+                        <td class="text-center px-6 py-4 text-sm text-gray-500">
                             {{ $customer->cost }}
                         </td>
                     </tr>
