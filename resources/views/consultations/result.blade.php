@@ -11,8 +11,9 @@
 
 <body
     style="background-image:linear-gradient(rgba(212, 212, 212, 0.1),rgba(212,212,212,0.1)), url(https://wallpapercave.com/wp/B1sODrM.jpg); background-size:cover;">
-    <hr>
     <div class="py-3">
+        <h1 class="text-center text-blue-600 text-3xl font-bold py-6">CONSULTATION HISTORY</h1>
+        <hr>
         <table class="table-auto">
             <tr class="text-white text-center">
                 <th class="w-screen text-4xl">Animal</th>
@@ -20,7 +21,6 @@
                 <th class="w-screen text-4xl">Disease or Injury</th>
                 <th class="w-screen text-4xl">Vet</th>
             </tr>
-
             @forelse ($consultations as $consultation)
             <tr>
                 <td class=" text-center text-4xl">
@@ -42,7 +42,7 @@
     </div>
     </tr>
     <hr>
-    <h1 class="text-center text-5xl pb-8 text-red-600">Thank you for Choosing ACME Pet Clinic</h1>
+    <h1 class="text-center text-5xl py-8 text-red-600">Thank you for Choosing ACME Pet Clinic</h1>
     <div class="flex justify-end">
         <a href="{{url()->previous()}}" class="bg-gray-800 text-white text-2xl font-bold p-2 mr-10 text-center"
             role="button">Go Back &rarr;</a>
