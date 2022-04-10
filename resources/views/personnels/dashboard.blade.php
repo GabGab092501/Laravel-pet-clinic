@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-  <audio autoplay="" loop="" src="Joe Lamont  Victims Of Love.mp3"></audio>
-<h1 class="text-center text-5xl pb-8 pt-6 text-blue-600">Welcome To ACME Pet Clinic, {{ Auth::user()->full_name }}</h1>
+<h1 class="text-center text-5xl pb-8 pt-6 font-bold text-blue-600">Welcome To ACME Pet Clinic, {{
+  Auth::user()->full_name }}</h1>
 <hr>
 <div class="py-3">
   <table class="table-auto">
