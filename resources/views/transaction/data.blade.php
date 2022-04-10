@@ -15,7 +15,7 @@
 
 <body style="background-image:linear-gradient(rgba(212, 212, 212, 0.1),rgba(212,212,212,0.1)),
     url(https://wallpapercave.com/wp/B1sODrM.jpg); background-size:cover;">
-    <div class="pt-8 pb-4 px-8">
+    <div class="pt-8 pb-4 px-8 grid justify-end">
         <a href="{{url()->previous()}}" class="p-3 border-none italic text-white bg-black text-lg">
             Go Back &rarr;
         </a>
@@ -26,12 +26,13 @@
         <div
             class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
             @foreach ($serviceChunk as $animal)
-            <img src="{{ asset('uploads/animals/'.$animal->images)}}" alt="I am A Pic" width="400">
+            <img src="{{ asset('uploads/animals/'.$animal->images)}}" alt="I am A Pic" width="400"
+                style="max-height: 12rem;">
             <div class="p-3">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight">{{ $animal->animal_name }}
                 </h5>
                 <p class="mb-2 text-lg font-bold">{{ $animal->type }}</p>
-                <div class="grid grid-flow-col gap-1">
+                <div class="grid grid-flow-col gap-2">
                     <a href=" {{ route('transaction.addAnimal', ['id'=>$animal->id]) }} " class="btn btn-primary"
                         role="button"><i class="fas fa-cart-plus"></i> Add Animal</a>
 
@@ -48,14 +49,15 @@
         <div
             class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
             @foreach ($serviceChunk as $service)
-            <img src="{{ asset('uploads/services/'.$service->images)}}" alt="I am A Pic" width="400">
+            <img src="{{ asset('uploads/services/'.$service->images)}}" alt="I am A Pic" width="400"
+                style="max-height: 12rem;">
             <div class="p-3">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight">{{ $service->service_name }}
                 </h5>
                 <p class="mb-2 text-lg font-bold">{{ $service->cost }}</p>
-                <div class="grid grid-flow-col gap-1">
+                <div class="grid grid-flow-col gap-2">
                     <a href=" {{ route('transaction.addToCart', ['id'=>$service->id]) }} " class="btn btn-primary"
-                        role="button"><i class="fas fa-cart-plus"></i> Add to Cart</a>
+                        role="button"><i class="fas fa-cart-plus"></i> Add Service </a>
 
                     <a href="#" class="btn btn-success" role="button">More Info</a>
                 </div>
