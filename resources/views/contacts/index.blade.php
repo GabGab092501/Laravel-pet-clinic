@@ -26,7 +26,7 @@
 
     <tr>
       <td class="text-white text-center text-2xl">
-        {{ $contact->id }}
+        <a href="{{route('contact.show',$contact->id)}}">{{$contact->id}}</a>
       </td>
       <td class="text-white text-center text-2xl">
         {{ $contact->name }}
