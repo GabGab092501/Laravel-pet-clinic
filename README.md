@@ -7,6 +7,6 @@
 -   `php artisan key:generate`
 -   `php artisan serve`
 -   `php artisan db:seed to run seeder`
-    `php artisan route::clear to clear route problems`
-    `php artisan view::clear to clear view problems`
-    `For Dummy Data of Personnel the Default Password is User123!`
+-   `php artisan route::clear to clear route problems`
+-   `php artisan view::clear to clear view problems`
+-   `For Dummy Data of Personnel the Default Password is User123!`
