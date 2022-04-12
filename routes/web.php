@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\animalController;
 use App\Http\Controllers\customerController;
 use App\Http\Controllers\personnelController;
-use App\Http\Controllers\diseaseInjuryController;
 use App\Http\Controllers\serviceController;
 use App\Http\Controllers\contactController;
 use App\Http\Controllers\UploadController;
@@ -54,18 +53,6 @@ Route::get("/customer/restore/{id}", [
 Route::get("/customer/forceDelete/{id}", [
     "uses" => "customerController@forceDelete",
     "as" => "customer.forceDelete",
-]);
-
-Route::resource("/diseaseinjury", diseaseInjuryController::class)->middleware(
-    "auth"
-);
-Route::get("/diseaseinjury/restore/{id}", [
-    "uses" => "diseaseInjuryController@restore",
-    "as" => "diseaseinjury.restore",
-]);
-Route::get("/diseaseinjury/forceDelete/{id}", [
-    "uses" => "diseaseInjuryController@forceDelete",
-    "as" => "diseaseinjury.forceDelete",
 ]);
 
 Route::resource("/personnel", "personnelController")->middleware("auth");
