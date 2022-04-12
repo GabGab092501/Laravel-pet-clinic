@@ -43,7 +43,7 @@
                 </div>
 
                 <div>
-                    <label for="customer_id" class="text-lg">Type</label>
+                    <label for="customer_id" class="text-lg">Owner</label>
                     {!! Form::select('customer_id',$customers, $animals->customer_id,['class' => 'block shadow-5xl
                     p-2 my-2 w-full', 'disabled' => true]) !!}
                 </div>

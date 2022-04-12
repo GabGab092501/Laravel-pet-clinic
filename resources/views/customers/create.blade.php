@@ -32,7 +32,7 @@
                     </div>
 
                     <div>
-                        <label for="phone_number" class="text-lg" r">Phone Number</label>
+                        <label for="phone_number" class="text-lg">Phone Number</label>
                         <input type="text" class="block shadow-5xl p-2 my-2 w-full" id="phone_number"
                             name="phone_number" placeholder="phone_number" value="{{old('phone_number')}}">
                         @if($errors->has('phone_number'))
