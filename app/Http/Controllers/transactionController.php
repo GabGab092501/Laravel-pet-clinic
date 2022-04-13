@@ -145,6 +145,7 @@ class transactionController extends Controller
     {
         $this->totalCost -= $this->services[$id]['cost'];
         unset($this->services[$id]);
+        unset($this->animals[$id]);
     }
 
     public function postCheckout(Request $request)
