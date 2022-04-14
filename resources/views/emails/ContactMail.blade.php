@@ -14,7 +14,6 @@
     <p>Name: {{ $contacts['name'] }}</p>
     <p>Email: {{ $contacts['email'] }}</p>
     <p>Phone Number: {{ $contacts['phone_number'] }}</p>
-    <p>Service Id: {{ $contacts['service_id'] }}</p>
     <p>Message: {{ $contacts['review'] }}</p>
 
 </body>

@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="grid grid-cols-2 py-2">
-                    <label for="role" class="text-lg mt-2">Pick Your Role</label>
+                    <label for="role" class="text-lg mt-2">Your Role</label>
                     {{ Form::text('role',null,['readonly'],array('class'=>'block shadow-5xl p-2 my-2
                     w-full','id'=>'role')) }}
                 </div>

@@ -22,7 +22,7 @@
                 </div>
 
                 <div>
-                    <label for="last_name" class="text-lg">Last_name</label>
+                    <label for="last_name" class="text-lg">Last Name</label>
                     {{ Form::text('last_name',null,array('class'=>'block shadow-5xl p-2 my-2 w-full','id'=>'last_name'))
                     }}
                     @if($errors->has('last_name'))

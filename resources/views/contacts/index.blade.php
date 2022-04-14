@@ -80,7 +80,7 @@
       </td>
     </tr>
     @empty
-    <p>No Contact Data in the Database</p>
+    <p>No Feedback Data in the Database</p>
     @endforelse
   </table>
   <div class="pt-6 px-4">{{ $contacts->links( )}}</div>

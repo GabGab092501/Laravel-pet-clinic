@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="grid grid-cols-2 py-2">
-                    <label for="last_name" class="text-start text-lg">Last_name</label>
+                    <label for="last_name" class="text-start text-lg">LastName</label>
                     {{ Form::text('last_name',null,['readonly'],array('class'=>'block shadow-5xl p-2 my-2
                     w-full','id'=>'last_name'))
                     }}

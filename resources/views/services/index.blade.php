@@ -74,7 +74,7 @@
             </td>
         </tr>
         @empty
-        <p>No service Data in the Database</p>
+        <p>No Service Data in the Database</p>
         @endforelse
     </table>
     <div class="pt-6 px-4">{{ $services->links()}}</div>

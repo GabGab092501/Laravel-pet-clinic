@@ -85,7 +85,7 @@
       </td>
     </tr>
     @empty
-    <p>No customer Data in the Database</p>
+    <p>No Customer Data in the Database</p>
     @endforelse
   </table>
 

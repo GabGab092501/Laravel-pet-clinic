@@ -46,7 +46,7 @@
                 </div>
 
                 <div>
-                    <label for="personnel_id" class="text-lg">Type</label>
+                    <label for="personnel_id" class="text-lg">Vet</label>
                     {!! Form::select('personnel_id',$personnels, $consultations->personnel_id ,['class' => 'block
                     shadow-5xl
                     p-2
@@ -58,7 +58,7 @@
                 </div>
 
                 <div>
-                    <label for="animal_id" class="text-lg">Type</label>
+                    <label for="animal_id" class="text-lg">Animal</label>
                     {!! Form::select('animal_id',$animals, $consultations->animal_id ,['class' => 'block
                     shadow-5xl
                     p-2

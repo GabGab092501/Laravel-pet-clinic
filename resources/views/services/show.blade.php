@@ -13,7 +13,7 @@
             'enctype'=>'multipart/form-data']) }}
             <div class="block">
                 <div class="grid grid-cols-2 py-2">
-                    <label for="service_name" class="text-lg">First Name</label>
+                    <label for="service_name" class="text-lg">Service Name</label>
                     {{ Form::text('service_name',null,['readonly'],array('class'=>'block shadow-5xl p-2 my-2
                     w-full','id'=>'service_name')) }}
                 </div>
