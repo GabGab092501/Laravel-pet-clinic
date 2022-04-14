@@ -70,7 +70,7 @@
                         </a></button>
                     <li class="nav-item">
                         <a href="{{ route('transaction.shoppingCart') }}">
-                            <i class="fa fa-shopping-cart" aria-hidden="true"></i> Shopping Cart
+                            <i class="fa fa-paw" aria-hidden="true"></i> Pet Transaction
                             <span class="text-xs text-white">{{ Session::has('cart') ? Session::get('cart')->totalCost :
                                 '' }}</span>
                         </a>
