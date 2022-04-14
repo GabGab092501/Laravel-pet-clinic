@@ -32,7 +32,7 @@
             <td class=" text-center text-3xl">
                 {{ $service->cost }}
             </td>
-            <td class="pl-10">
+            <td class="pl-12">
                 <img src="{{ asset('uploads/services/'.$service->images)}}" alt="I am A Pic" width="75" height="75">
             </td>
             <td class=" text-center">
@@ -50,7 +50,7 @@
             @if($service->deleted_at)
             <td>
                 <a href="{{ route('service.restore', $service->id) }}">
-                    <p class="text-center text-red-700 text-2xl bg-purple-500 p-2">
+                    <p class="text-center text-red-700 text-2xl bg-purple-500 py-2 mx-3">
                         Restore &rarr;
                     </p>
                 </a>
@@ -58,7 +58,7 @@
             @else
             <td>
                 <a href="#">
-                    <p class="text-center text-2xl bg-purple-500 p-2">
+                    <p class="text-center text-2xl bg-purple-500 py-2 mx-3">
                         Restore &rarr;
                     </p>
                 </a>

@@ -62,7 +62,7 @@
             @if($animal->deleted_at)
             <td>
                 <a href="{{ route('animals.restore', $animal->id) }}">
-                    <p class="text-center text-red-700 text-lg bg-purple-500 p-2">
+                    <p class="text-center text-red-700 text-lg bg-purple-500 p-2 mx-3">
                         Restore &rarr;
                     </p>
                 </a>
@@ -70,7 +70,7 @@
             @else
             <td>
                 <a href="#">
-                    <p class="text-center text-lg bg-purple-500 p-2">
+                    <p class="text-center text-lg bg-purple-500 p-2 mx-3">
                         Restore &rarr;
                     </p>
                 </a>
@@ -78,7 +78,7 @@
             @endif
             <td>
                 <a href="{{ route('animals.forceDelete', $animal->id) }}">
-                    <p class="text-center text-lg bg-warning p-2 m-2"
+                    <p class="text-center text-lg bg-warning p-2 mx-3"
                         onclick="return confirm('Do you want to delete this data permanently?')">
                         Destroy &rarr;
                     </p>
