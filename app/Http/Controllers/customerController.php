@@ -12,7 +12,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class customerController extends Controller
 {
-
     public function search()
     {
         $customers = Customer::rightJoin(

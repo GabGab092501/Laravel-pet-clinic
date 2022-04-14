@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PersonnelSeeder::class,
             CustomerSeeder::class,
-            ServiceSeeder::class
+            ServiceSeeder::class,
         ]);
     }
 }

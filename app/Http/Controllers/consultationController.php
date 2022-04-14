@@ -13,7 +13,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class consultationController extends Controller
 {
-
     public function search()
     {
         $consultations = Consultation::join(
@@ -22,12 +21,7 @@ class consultationController extends Controller
             "=",
             "consultations.personnel_id"
         )
-            ->join(
-                "animals",
-                "animals.id",
-                "=",
-                "consultations.animal_id"
-            )
+            ->join("animals", "animals.id", "=", "consultations.animal_id")
             ->select(
                 "personnels.full_name",
                 "animals.animal_name",
@@ -56,12 +50,7 @@ class consultationController extends Controller
             "=",
             "consultations.personnel_id"
         )
-            ->join(
-                "animals",
-                "animals.id",
-                "=",
-                "consultations.animal_id"
-            )
+            ->join("animals", "animals.id", "=", "consultations.animal_id")
             ->select(
                 "personnels.full_name",
                 "animals.animal_name",
@@ -95,12 +84,7 @@ class consultationController extends Controller
             "=",
             "consultations.personnel_id"
         )
-            ->join(
-                "animals",
-                "animals.id",
-                "=",
-                "consultations.animal_id"
-            )
+            ->join("animals", "animals.id", "=", "consultations.animal_id")
             ->select(
                 "personnels.full_name",
                 "animals.animal_name",
@@ -142,7 +126,7 @@ class consultationController extends Controller
         $personnels = Personnel::pluck("full_name", "id");
         return view("consultations.create", [
             "animals" => $animals,
-            "personnels" => $personnels
+            "personnels" => $personnels,
         ]);
     }
 
@@ -166,10 +150,9 @@ class consultationController extends Controller
             $consultations->save();
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->route('consultation.index')->with(
-                "error",
-                $e->getMessage()
-            );
+            return redirect()
+                ->route("consultation.index")
+                ->with("error", $e->getMessage());
         }
         DB::commit();
         return Redirect::to("/consultation")->withSuccessMessage(
@@ -191,7 +174,7 @@ class consultationController extends Controller
         return view("consultations.show", [
             "animals" => $animals,
             "personnels" => $personnels,
-            "consultations" => $consultations
+            "consultations" => $consultations,
         ]);
     }
 
@@ -209,7 +192,7 @@ class consultationController extends Controller
         return view("consultations.edit", [
             "animals" => $animals,
             "personnels" => $personnels,
-            "consultations" => $consultations
+            "consultations" => $consultations,
         ]);
     }
 
@@ -234,10 +217,9 @@ class consultationController extends Controller
             $consultations->update();
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->route('consultation.index')->with(
-                "error",
-                $e->getMessage()
-            );
+            return redirect()
+                ->route("consultation.index")
+                ->with("error", $e->getMessage());
         }
         DB::commit();
         return Redirect::to("/consultation")->withSuccessMessage(

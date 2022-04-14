@@ -18,9 +18,15 @@ class CustomerFactory extends Factory
     {
         return [
             "first_name" => $this->faker->name,
-            "last_name"  => $this->faker->name,
-            "phone_number" => $this->faker->numerify('###-###-####'),
-            'images' => $this->faker->image('public/uploads/customers', 640, 480, null, false),
+            "last_name" => $this->faker->name,
+            "phone_number" => $this->faker->numerify("###-###-####"),
+            "images" => $this->faker->image(
+                "public/uploads/customers",
+                640,
+                480,
+                null,
+                false
+            ),
         ];
     }
 }
