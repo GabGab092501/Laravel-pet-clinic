@@ -20,29 +20,45 @@ class Cart
 
     public function add($services, $id)
     {
-        $addService = ['cost' => $services->cost, 'services' => $services];
-        if ($this->services) {
-            if (array_key_exists($id, $this->services)) {
+        try {
+            $addService = ['cost' => $services->cost, 'services' => $services];
+            if ($this->services) {
+                if (array_key_exists($id, $this->services)) {
 
-                $addService = array_unique($id);
+                    $addService = array_unique($id);
+                }
             }
-        }
 
-        $addService['cost'] = $services->cost;
-        $this->services[$id] = $addService;
-        $this->totalCost += $services->cost;
+            $addService['cost'] = $services->cost;
+            $this->services[$id] = $addService;
+            $this->totalCost += $services->cost;
+        } catch (\Throwable  $e) {
+            return redirect()->route('data')->with(
+                "error",
+                $e->getMessage()
+            );
+        }
     }
+
+
 
     public function addAnimal($animals, $id)
     {
-        $addAnimal = ['name' => $animals->animal_name, 'animals' => $animals];
-        if ($this->animals) {
-            if (array_key_exists($id, $this->animals)) {
+        try {
+            $addAnimal = ['name' => $animals->animal_name, 'animals' => $animals];
+            if ($this->animals) {
+                if (array_key_exists($id, $this->animals)) {
 
-                $addAnimal = array_unique($id);
+                    $addAnimal = array_unique($id);
+                }
             }
+            $this->animals[$id] = $addAnimal;
+        } catch (\Throwable  $e) {
+            return redirect()->route('data')->with(
+                "error",
+                $e->getMessage()
+            );
         }
-        $this->animals[$id] = $addAnimal;
     }
 
 
