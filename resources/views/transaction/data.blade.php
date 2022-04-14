@@ -8,7 +8,7 @@
 </head>
 
 @if ($message = Session::get('error'))
-<div class="bg-red-500 p-4">
+<div class="bg-red-500 p-4 text-center">
     <strong class="text-white text-3xl pl-4 text-center">{{ $message }}</strong>
 </div>
 @endif

@@ -35,14 +35,14 @@
     </div>
     <hr>
     <div class="row">
-        <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+        <div class="grid justify-center">
             <a href="{{route ('checkout')}}"> <button type="button" class="btn btn-success">Checkout</button><a>
         </div>
     </div>
     @else
     <div class="row">
-        <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
-            <h2>No Items in Cart!</h2>
+        <div class="grid justify-center position-absolute top-50">
+            <h2 class="text-4xl text-red-700">You don't have any transaction!</h2>
         </div>
     </div>
 </div>
