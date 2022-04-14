@@ -20,8 +20,8 @@
         <tr class="text-center">
             <th class="w-screen text-3xl">Id</th>
             <th class="w-screen text-3xl">Date</th>
-            <th class="w-screen text-3xl">disease or Injury</th>
-            <th class="w-screen text-3xl">price</th>
+            <th class="w-screen text-3xl">Disease or Injury</th>
+            <th class="w-screen text-3xl">Price</th>
             <th class="w-screen text-3xl">Comment</th>
             <th class="w-screen text-3xl">Vet</th>
             <th class="w-screen text-3xl">Animal</th>

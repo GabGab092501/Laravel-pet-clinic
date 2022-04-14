@@ -14,7 +14,7 @@
             <th class="w-screen text-3xl">Id</th>
             <th class="w-screen text-3xl">Service Name</th>
             <th class="w-screen text-3xl">Cost</th>
-            <th class="w-screen text-3xl">Animal Pic</th>
+            <th class="w-screen text-3xl">Service Pic</th>
             <th class="w-screen text-3xl">Update</th>
             <th class="w-screen text-3xl">Delete</th>
             <th class="w-screen text-3xl">Restore</th>
