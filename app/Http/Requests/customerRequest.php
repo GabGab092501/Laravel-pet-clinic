@@ -24,6 +24,6 @@ class customerRequest extends FormRequest
      */
     public function rules()
     {
-        return Customer::VALIDATION_RULES;
+        return Customer::rules;
     }
 }
