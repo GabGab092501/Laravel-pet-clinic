@@ -16,18 +16,18 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->increments("id");
             $table->string(column: "date");
-            $table->integer(column: "personnel_id")->unsigned();
+            $table->integer(column: "hoomans_id")->unsigned();
             $table->timestamps();
             $table->softDeletes();
             $table
-                ->foreign("personnel_id")
+                ->foreign("hoomans_id")
                 ->references("id")
-                ->on("personnels")
+                ->on("hoomans")
                 ->onDelete("cascade");
         });
         Schema::create('transaction_line', function (Blueprint $table) {
             $table->integer(column: "transaction_id")->unsigned();
-            $table->integer(column: "animal_id")->unsigned();
+            $table->integer(column: "pet_id")->unsigned();
             $table->integer(column: "service_id")->unsigned();
             $table->timestamps();
             $table->softDeletes();
@@ -37,9 +37,9 @@ return new class extends Migration
                 ->on("transactions")
                 ->onDelete("cascade");
             $table
-                ->foreign("animal_id")
+                ->foreign("pet_id")
                 ->references("id")
-                ->on("animals")
+                ->on("pets")
                 ->onDelete("cascade");
             $table
                 ->foreign("service_id")
