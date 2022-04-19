@@ -6,14 +6,14 @@ class Cart
 {
     public $services = null;
     public $totalCost = 0;
-    public $animals = null;
+    public $[[pets] = null;
 
     public function __construct($oldService)
     {
 
         if ($oldService) {
             $this->services = $oldService->services;
-            $this->animals = $oldService->animals;
+            $this->[[pets] = $oldService->[[pets];
             $this->totalCost = $oldService->totalCost;
         }
     }
@@ -33,16 +33,16 @@ class Cart
         $this->totalCost += $services->cost;
     }
 
-    public function addAnimal($animals, $id)
+    public function addpets($[[pets], $id)
     {
-        $addAnimal = ['name' => $animals->animal_name, 'animals' => $animals];
-        if ($this->animals) {
-            if (array_key_exists($id, $this->animals)) {
+        $addpets = ['name' => $[[pets]->pets_name, '[[pets]' => $[[pets]];
+        if ($this->[[pets]) {
+            if (array_key_exists($id, $this->[[pets])) {
 
-                $addAnimal = array_unique($id);
+                $addpets = array_unique($id);
             }
         }
-        $this->animals[$id] = $addAnimal;
+        $this->[[pets][$id] = $addpets;
     }
 
 
@@ -50,6 +50,6 @@ class Cart
     {
         $this->totalCost -= $this->services[$id]['cost'];
         unset($this->services[$id]);
-        unset($this->animals[$id]);
+        unset($this->[[pets][$id]);
     }
 }
