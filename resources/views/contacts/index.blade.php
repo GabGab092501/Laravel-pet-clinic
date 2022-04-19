@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('home')
 
-@section('content')
+@section('contents')
 
 @if ($message = Session::get('success'))
 <div class="bg-red-500 p-4">
-  <strong class="text-white text-3xl pl-4">{{ $message }}</strong>
+  <strong class="text-black text-3xl pl-4">{{ $message }}</strong>
 </div>
 @endif
 
@@ -25,22 +25,22 @@
     @forelse ($contacts as $contact)
 
     <tr>
-      <td class="text-white text-center text-2xl">
+      <td class="text-black text-center text-2xl">
         <a href="{{route('contact.show',$contact->id)}}">{{$contact->id}}</a>
       </td>
-      <td class="text-white text-center text-2xl">
+      <td class="text-black text-center text-2xl">
         {{ $contact->name }}
       </td>
-      <td class="text-white text-center text-2xl">
+      <td class="text-black text-center text-2xl">
         {{ $contact->email }}
       </td>
-      <td class="text-white text-center text-2xl">
+      <td class="text-black text-center text-2xl">
         {{ $contact->phone_number }}
       </td>
-      <td class="text-white text-center text-2xl">
+      <td class="text-black text-center text-2xl">
         {{ $contact->service_name }}
       </td>
-      <td class="text-white text-center text-2xl">
+      <td class="text-black text-center text-2xl">
         {{ $contact->review }}
       </td>
 
