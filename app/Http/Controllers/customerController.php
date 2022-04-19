@@ -8,95 +8,10 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\View;
 use App\Models\Customer;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class customerController extends Controller
 {
 
-    public function search()
-    {
-        $customers = Customer::rightJoin(
-            "animals",
-            "animals.customer_id",
-            "=",
-            "customers.id"
-        )
-            ->rightjoin(
-                "transaction_line",
-                "transaction_line.animal_id",
-                "=",
-                "animals.id"
-            )
-            ->leftjoin(
-                "services",
-                "services.id",
-                "=",
-                "transaction_line.service_id"
-            )
-            ->leftjoin(
-                "transactions",
-                "transactions.id",
-                "=",
-                "transaction_line.transaction_id"
-            )
-            ->select(
-                "customers.first_name",
-                "animals.animal_name",
-                "services.service_name",
-                "services.cost",
-                "transactions.id",
-                "customers.deleted_at"
-            )
-
-            ->orderBy("customers.id", "ASC")
-            ->get();
-        return view("customers.search", [
-            "customers" => $customers,
-        ]);
-    }
-
-    public function result()
-    {
-        $result = $_GET["result"];
-        $customers = Customer::rightJoin(
-            "animals",
-            "animals.customer_id",
-            "=",
-            "customers.id"
-        )
-            ->rightjoin(
-                "transaction_line",
-                "transaction_line.animal_id",
-                "=",
-                "animals.id"
-            )
-            ->leftjoin(
-                "services",
-                "services.id",
-                "=",
-                "transaction_line.service_id"
-            )
-            ->leftjoin(
-                "transactions",
-                "transactions.id",
-                "=",
-                "transaction_line.transaction_id"
-            )
-            ->select(
-                "customers.first_name",
-                "animals.animal_name",
-                "services.service_name",
-                "services.cost",
-                "transactions.id",
-                "customers.deleted_at"
-            )
-
-            ->where("customers.first_name", "LIKE", "%" . $result . "%")
-            ->get();
-        return view("customers.result", [
-            "customers" => $customers,
-        ]);
-    }
 
     /**
      * Display a listing of the resource.
@@ -106,37 +21,25 @@ class customerController extends Controller
     public function index()
     {
         $Customers = Customer::leftJoin(
-            "animals",
+            "pets",
             "customers.id",
             "=",
-            "animals.customer_id"
+            "pets.customer_id"
         )
             ->select(
-                "Customers.id",
-                "Customers.first_name",
-                "Customers.last_name",
-                "Customers.phone_number",
-                "Customers.images",
-                "Customers.deleted_at",
-                "animals.animal_name"
+                "customers.id",
+                "customers.name",
+                "customers.contactNum",
+                "customers.pics",
+                "customers.deleted_at",
+                "pets.pets_name"
             )
-            ->orderBy("Customers.id", "ASC")
+            ->orderBy("customers.id", "ASC")
             ->withTrashed()
-            ->paginate(6);
-
-        if (session(key: "success_message")) {
-            Alert::image(
-                "Congratulations!",
-                session(key: "success_message"),
-                "https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s",
-                "200",
-                "200",
-                "I Am A Pic"
-            );
-        }
+            ->paginate(3);
 
         return view("customers.index", ["customers" => $Customers]);
-        //return view("Customers.index", compact("Customers"));
+       
     }
 
     /**
@@ -158,19 +61,17 @@ class customerController extends Controller
     public function store(customerRequest $request)
     {
         $Customers = new Customer();
-        $Customers->first_name = $request->input("first_name");
-        $Customers->last_name = $request->input("last_name");
-        $Customers->phone_number = $request->input("phone_number");
-        if ($request->hasfile("images")) {
-            $file = $request->file("images");
+        $Customers->name = $request->input("name");
+      
+        $Customers->contactNum = $request->input("contactNum");
+        if ($request->hasfile("pics")) {
+            $file = $request->file("pics");
             $filename = uniqid() . "_" . $file->getClientOriginalName();
-            $file->move("uploads/customers/", $filename);
-            $Customers->images = $filename;
+            $file->move("imagefolder/customers/", $filename);
+            $Customers->pics = $filename;
         }
         $Customers->save();
-        return Redirect::to("customer")->withSuccessMessage(
-            "New Customer Added!"
-        );
+        return Redirect::to("customer");
     }
 
     /**
@@ -207,23 +108,21 @@ class customerController extends Controller
     public function update(customerRequest $request, $id)
     {
         $Customers = Customer::find($id);
-        $Customers->first_name = $request->input("first_name");
-        $Customers->last_name = $request->input("last_name");
-        $Customers->phone_number = $request->input("phone_number");
-        if ($request->hasfile("images")) {
-            $destination = "uploads/customers/" . $Customers->images;
+        $Customers->name = $request->input("name");
+
+        $Customers->contactNum = $request->input("contactNum");
+        if ($request->hasfile("pics")) {
+            $destination = "imagefolder/customers/" . $Customers->pics;
             if (File::exists($destination)) {
                 File::delete($destination);
             }
-            $file = $request->file("images");
+            $file = $request->file("pics");
             $filename = uniqid() . "_" . $file->getClientOriginalName();
-            $file->move("uploads/customers/", $filename);
-            $Customers->images = $filename;
+            $file->move("imagefolder/customers/", $filename);
+            $Customers->pics = $filename;
         }
         $Customers->update();
-        return Redirect::to("customer")->withSuccessMessage(
-            "New Customer Updated!"
-        );
+        return Redirect::to("customer");
     }
 
     /**
@@ -235,9 +134,7 @@ class customerController extends Controller
     public function destroy($id)
     {
         Customer::destroy($id);
-        return Redirect::to("customer")->withSuccessMessage(
-            "New Customer Deleted!"
-        );
+        return Redirect::to("customer");
     }
 
     public function restore($id)
@@ -245,21 +142,17 @@ class customerController extends Controller
         Customer::onlyTrashed()
             ->findOrFail($id)
             ->restore();
-        return Redirect::route("customer.index")->withSuccessMessage(
-            "New Customer Restored!"
-        );
+        return Redirect::route("customer.index");
     }
 
     public function forceDelete($id)
     {
         $Customers = Customer::findOrFail($id);
-        $destination = "uploads/customers/" . $Customers->images;
+        $destination = "imagefolder/customers/" . $Customers->pics;
         if (File::exists($destination)) {
             File::delete($destination);
         }
         $Customers->forceDelete();
-        return Redirect::route("customer.index")->withSuccessMessage(
-            "New Customer Permanently Deleted!"
-        );
+        return Redirect::route("customer.index");
     }
 }
