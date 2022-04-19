@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('home')
 
-@section('content')
+@section('contents')
 
 @if ($message = Session::get('error'))
 <div class="bg-red-500 p-4">
@@ -24,7 +24,7 @@
             <th class="w-screen text-3xl">price</th>
             <th class="w-screen text-3xl">Comment</th>
             <th class="w-screen text-3xl">Vet</th>
-            <th class="w-screen text-3xl">Animal</th>
+            <th class="w-screen text-3xl">ws</th>
             <th class="w-screen text-3xl">Update</th>
             <th class="w-screen text-3xl">Delete</th>
             <th class="w-screen text-3xl">Restore</th>
@@ -33,25 +33,25 @@
 
         @forelse ($consultations as $consultation)
         <tr>
-            <td class="text-white text-center text-2xl">
+            <td class="text-black text-center text-2xl">
                 <a href="{{route('consultation.show',$consultation->id)}}">{{$consultation->id}}</a>
             </td>
-            <td class="text-white text-center text-2xl">
+            <td class="text-black text-center text-2xl">
                 {{ $consultation->date }}
             </td>
-            <td class="text-white text-center text-2xl">
+            <td class="text-black text-center text-2xl">
                 {{ $consultation->disease_injury }}
             </td>
-            <td class="text-white text-center text-2xl">
+            <td class="text-black text-center text-2xl">
                 {{ $consultation->price }}
             </td>
-            <td class="text-white text-center text-2xl">
+            <td class="text-black text-center text-2xl">
                 {{ $consultation->comment }}
             </td>
-            <td class="text-white text-center text-2xl">
+            <td class="text-black text-center text-2xl">
                 {{ $consultation->full_name }}
             </td>
-            <td class="text-white text-center text-2xl">
+            <td class="text-black text-center text-2xl">
                 {{ $consultation->animal_name }}
             </td>
             <td class="text-center">
@@ -102,7 +102,7 @@
         <form action="{{ url('results') }}" type="GET">
             <input type="result" name="result" id="result" class="text-center pb-1 px-2 w-full">
             <div class="grid w-full">
-                <button class="bg-green-800 text-white font-bold p-2 mt-3">Search</button>
+                <button class="bg-green-800 text-black font-bold p-2 mt-3">Search</button>
             </div>
     </span>
 
