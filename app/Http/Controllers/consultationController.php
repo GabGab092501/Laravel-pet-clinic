@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Personnel;
-use App\Models\Animal;
+use App\Models\Hoomans;
+use App\Models\Pets;
 use App\Models\Consultation;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\consultationRequest;
-use RealRashid\SweetAlert\Facades\Alert;
+
 
 class consultationController extends Controller
 {
@@ -17,27 +17,27 @@ class consultationController extends Controller
     public function search()
     {
         $consultations = Consultation::join(
-            "personnels",
-            "personnels.id",
+            "hoomans",
+            "hoomans.id",
             "=",
-            "consultations.personnel_id"
+            "consultations.hoomans_id"
         )
             ->join(
-                "animals",
-                "animals.id",
+                "pets",
+                "pets.id",
                 "=",
-                "consultations.animal_id"
+                "consultations.pets_id"
             )
             ->select(
-                "personnels.full_name",
-                "animals.animal_name",
+                "hoomans.name",
+                "pets.pets_name",
                 "consultations.id",
                 "consultations.date",
                 "consultations.disease_injury",
                 "consultations.price",
                 "consultations.comment",
-                "consultations.personnel_id",
-                "consultations.animal_id",
+                "consultations.hoomans_id",
+                "consultations.pets_id",
                 "consultations.deleted_at"
             )
             ->orderBy("consultations.id", "ASC")
@@ -51,31 +51,31 @@ class consultationController extends Controller
     {
         $result = $_GET["result"];
         $consultations = Consultation::join(
-            "personnels",
-            "personnels.id",
+            "hoomans",
+            "hoomans.id",
             "=",
-            "consultations.personnel_id"
+            "consultations.hoomans_id"
         )
             ->join(
-                "animals",
-                "animals.id",
+                "pets",
+                "pets.id",
                 "=",
-                "consultations.animal_id"
+                "consultations.pets_id"
             )
             ->select(
-                "personnels.full_name",
-                "animals.animal_name",
+                "hoomans.name",
+                "pets.pets_name",
                 "consultations.id",
                 "consultations.date",
                 "consultations.disease_injury",
                 "consultations.price",
                 "consultations.comment",
-                "consultations.personnel_id",
-                "consultations.animal_id",
+                "consultations.hoomans_id",
+                "consultations.pets_id",
                 "consultations.deleted_at"
             )
 
-            ->where("animals.animal_name", "LIKE", "%" . $result . "%")
+            ->where("pets.pets_name", "LIKE", "%" . $result . "%")
             ->get();
         return view("consultations.result", [
             "consultations" => $consultations,
@@ -90,43 +90,33 @@ class consultationController extends Controller
     public function index()
     {
         $consultations = Consultation::join(
-            "personnels",
-            "personnels.id",
+            "hoomans",
+            "hoomans.id",
             "=",
-            "consultations.personnel_id"
+            "consultations.hoomans_id"
         )
             ->join(
-                "animals",
-                "animals.id",
+                "pets",
+                "pets.id",
                 "=",
-                "consultations.animal_id"
+                "consultations.pets_id"
             )
             ->select(
-                "personnels.full_name",
-                "animals.animal_name",
+                "hoomans.name",
+                "pets.pets_name",
                 "consultations.id",
                 "consultations.date",
                 "consultations.disease_injury",
                 "consultations.price",
                 "consultations.comment",
-                "consultations.personnel_id",
-                "consultations.animal_id",
+                "consultations.hoomans_id",
+                "consultations.pets_id",
                 "consultations.deleted_at"
             )
             ->orderBy("consultations.id", "ASC")
             ->withTrashed()
             ->paginate(6);
 
-        if (session(key: "success_message")) {
-            Alert::image(
-                "Congratulations!",
-                session(key: "success_message"),
-                "https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s",
-                "200",
-                "200",
-                "I Am A Pic"
-            );
-        }
 
         return view("consultations.index", ["consultations" => $consultations]);
     }
@@ -138,11 +128,11 @@ class consultationController extends Controller
      */
     public function create()
     {
-        $animals = Animal::pluck("animal_name", "id");
-        $personnels = Personnel::pluck("full_name", "id");
+        $pets = Pets::pluck("pets_name", "id");
+        $hoomans = Hoomans::pluck("name", "id");
         return view("consultations.create", [
-            "animals" => $animals,
-            "personnels" => $personnels
+            "pets" => $pets,
+            "hoomans" => $hoomans
         ]);
     }
 
@@ -161,8 +151,8 @@ class consultationController extends Controller
             $consultations->disease_injury = $request->input("disease_injury");
             $consultations->price = $request->input("price");
             $consultations->comment = $request->input("comment");
-            $consultations->personnel_id = $request->input("personnel_id");
-            $consultations->animal_id = $request->input("animal_id");
+            $consultations->hoomans_id = $request->input("hoomans_id");
+            $consultations->pets_id = $request->input("pets_id");
             $consultations->save();
         } catch (\Exception $e) {
             DB::rollback();
@@ -172,9 +162,7 @@ class consultationController extends Controller
             );
         }
         DB::commit();
-        return Redirect::to("/consultation")->withSuccessMessage(
-            "New Consultation Data Added!"
-        );
+        return Redirect::to("/consultation")->with("error", "gagi");
     }
 
     /**
@@ -186,11 +174,11 @@ class consultationController extends Controller
     public function show($id)
     {
         $consultations = Consultation::find($id);
-        $animals = Animal::pluck("animal_name", "id");
-        $personnels = Personnel::pluck("full_name", "id");
+        $pets = Pets::pluck("pets_name", "id");
+        $hoomans = Hoomans::pluck("name", "id");
         return view("consultations.show", [
-            "animals" => $animals,
-            "personnels" => $personnels,
+            "pets" => $pets,
+            "hoomans" => $hoomans,
             "consultations" => $consultations
         ]);
     }
@@ -204,11 +192,11 @@ class consultationController extends Controller
     public function edit($id)
     {
         $consultations = Consultation::find($id);
-        $animals = Animal::pluck("animal_name", "id");
-        $personnels = Personnel::pluck("full_name", "id");
+        $pets = pets::pluck("pets_name", "id");
+        $hoomans = Hoomans::pluck("name", "id");
         return view("consultations.edit", [
-            "animals" => $animals,
-            "personnels" => $personnels,
+            "pets" => $pets,
+            "hoomans" => $hoomans,
             "consultations" => $consultations
         ]);
     }
@@ -229,8 +217,8 @@ class consultationController extends Controller
             $consultations->disease_injury = $request->input("disease_injury");
             $consultations->price = $request->input("price");
             $consultations->comment = $request->input("comment");
-            $consultations->personnel_id = $request->input("personnel_id");
-            $consultations->animal_id = $request->input("animal_id");
+            $consultations->hoomans_id = $request->input("hoomans_id");
+            $consultations->pets_id = $request->input("pets_id");
             $consultations->update();
         } catch (\Exception $e) {
             DB::rollback();
@@ -240,9 +228,7 @@ class consultationController extends Controller
             );
         }
         DB::commit();
-        return Redirect::to("/consultation")->withSuccessMessage(
-            "New Consultation Data Updated!"
-        );
+        return Redirect::to("/consultation");
     }
 
     /**
@@ -254,9 +240,7 @@ class consultationController extends Controller
     public function destroy($id)
     {
         Consultation::destroy($id);
-        return Redirect::route("consultation.index")->withSuccessMessage(
-            "Consultation Data Deleted!"
-        );
+        return Redirect::route("consultation.index");
     }
 
     public function restore($id)
@@ -264,16 +248,12 @@ class consultationController extends Controller
         Consultation::onlyTrashed()
             ->findOrFail($id)
             ->restore();
-        return Redirect::route("consultation.index")->withSuccessMessage(
-            "Consultation Data Restored!"
-        );
+        return Redirect::route("consultation.index");
     }
 
     public function forceDelete($id)
     {
         Consultation::findOrFail($id)->forceDelete();
-        return Redirect::route("consultation.index")->withSuccessMessage(
-            "Consultation Data Permanently Deleted!"
-        );
+        return Redirect::route("consultation.index");
     }
 }
