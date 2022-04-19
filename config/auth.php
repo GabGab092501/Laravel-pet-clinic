@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'personnels',
+        'passwords' => 'hoomans',
     ],
 
     /*
@@ -38,7 +38,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'personnels',
+            'provider' => 'hoomans',
         ],
     ],
 
@@ -60,9 +60,9 @@ return [
     */
 
     'providers' => [
-        'personnels' => [
+        'hoomans' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Personnel::class,
+            'model' => App\Models\Hoomans::class,
         ],
 
         // 'users' => [
@@ -87,8 +87,8 @@ return [
     */
 
     'passwords' => [
-        'personnels' => [
-            'provider' => 'personnels',
+        'hoomans' => [
+            'provider' => 'hoomans',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
