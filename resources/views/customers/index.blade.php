@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('home')
 
-@section('content')
+@section('contents')
 
 <div class="pt-8 pb-4 px-8">
   <a href="customer/create" class="p-3 border-none italic text-white bg-black text-lg">
@@ -10,13 +10,12 @@
 
 <div class="py-3">
   <table class="table-auto text-center">
-    <tr class="text-white">
+    <tr class="text-black">
       <th class="w-screen text-3xl">Id</th>
-      <th class="w-screen text-3xl">First Name</th>
-      <th class="w-screen text-3xl">Last Name</th>
-      <th class="w-screen text-3xl">Phone Number</th>
+      <th class="w-screen text-3xl">Name</th>
+      <th class="w-screen text-3xl">Contact Number</th>
       <th class="w-screen text-3xl">Customer Pic</th>
-      <th class="w-screen text-3xl">Animal</th>
+      <th class="w-screen text-3xl">pet</th>
       <th class="w-screen text-3xl">Update</th>
       <th class="w-screen text-3xl">Delete</th>
       <th class="w-screen text-3xl">Restore</th>
@@ -29,20 +28,18 @@
       <td class="text-center text-3xl">
         <a href="{{route('customer.show',$customer->id)}}">{{$customer->id}}</a>
       </td>
+  
       <td class="text-center text-3xl">
-        {{ $customer->first_name }}
+        {{ $customer->name }}
       </td>
       <td class="text-center text-3xl">
-        {{ $customer->last_name }}
-      </td>
-      <td class="text-center text-3xl">
-        {{ $customer->phone_number }}
+        {{ $customer->contactNum }}
       </td>
       <td class="pl-12">
-        <img src="{{ asset('uploads/customers/'.$customer->images)}}" alt="I am A Pic" width="75" height="75">
+        <img src="{{ asset('imagefolder/customers/'.$customer->pics)}}" alt="I am A Pic" width="75" height="75">
       </td>
       <td class=" text-center text-3xl">
-        {{ $customer->animal_name }}
+        {{ $customer->pets_name }}
       </td>
       <td class=" text-center">
         <a href="customer/{{ $customer->id }}/edit" class="text-center text-2xl bg-green-600 p-2">
