@@ -1,4 +1,4 @@
-@extends('body')
+@extends('home')
 
 @section('contents')
 <div class="pb-20 my-2">
@@ -51,23 +51,23 @@
                     <div>
                         <label for="comment" class="text-lg">Comment</label>
                         <input type="text" class="block shadow-5xl p-2 my-2 w-full" id="comment" name="comment"
-                            placeholder="Comment for Animal" value="{{old('comment')}}">
+                            placeholder="Comment for pets" value="{{old('comment')}}">
                         @if($errors->has('comment'))
                         <p class="text-center text-red-500">{{ $errors->first('comment') }}</p>
                         @endif
                     </div>
 
-                    <label for="personnel_id" class="text-lg">Personnel</label>
-                    <select name="personnel_id" id="personnel_id" class="block shadow-5xl p-2 w-full">
-                        @foreach ($personnels as $id => $personnel)
-                        <option value="{{ $id }}">{{ $personnel }}</option>
+                    <label for="hoomans_id" class="text-lg">hoomans</label>
+                    <select name="hoomans_id" id="hoomans_id" class="block shadow-5xl p-2 w-full">
+                        @foreach ($hoomans as $id => $hoomans)
+                        <option value="{{ $id }}">{{ $hoomans }}</option>
                         @endforeach
                     </select>
 
-                    <label for="animal_id" class="text-lg">Animals</label>
-                    <select name="animal_id" id="animal_id" class="block shadow-5xl p-2 w-full">
-                        @foreach ($animals as $id => $animal)
-                        <option value="{{ $id }}">{{ $animal }}</option>
+                    <label for="pets_id" class="text-lg">pets</label>
+                    <select name="pets_id" id="pets_id" class="block shadow-5xl p-2 w-full">
+                        @foreach ($pets as $id => $pets)
+                        <option value="{{ $id }}">{{ $pets }}</option>
                         @endforeach
                     </select>
 
