@@ -19,19 +19,19 @@ return new class extends Migration
             $table->string(column: "disease_injury");
             $table->integer(column: "price");
             $table->string(column: "comment");
-            $table->integer(column: "personnel_id")->unsigned();
-            $table->integer(column: "animal_id")->unsigned();
+            $table->integer(column: "hoomans_id")->unsigned();
+            $table->integer(column: "pets_id")->unsigned();
             $table->timestamps();
             $table->softDeletes();
             $table
-                ->foreign("personnel_id")
+                ->foreign("hoomans_id")
                 ->references("id")
-                ->on("personnels")
+                ->on("hoomans")
                 ->onDelete("cascade");
             $table
-                ->foreign("animal_id")
+                ->foreign("pets_id")
                 ->references("id")
-                ->on("animals")
+                ->on("pets")
                 ->onDelete("cascade");
         });
     }
