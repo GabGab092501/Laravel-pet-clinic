@@ -24,6 +24,6 @@ class serviceRequest extends FormRequest
      */
     public function rules()
     {
-        return Service::VALIDATION_RULES;
+        return Service::RULES;
     }
 }
