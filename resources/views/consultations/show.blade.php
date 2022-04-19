@@ -1,4 +1,4 @@
-@extends('body')
+@extends('home')
 
 @section('contents')
 <div class="pb-20 my-2">
@@ -36,8 +36,8 @@
                 </div>
 
                 <div>
-                    <label for="personnel_id" class="text-lg">Type</label>
-                    {!! Form::select('personnel_id',$personnels, $consultations->personnel_id ,['class' => 'block
+                    <label for="hoomans_id" class="text-lg">Type</label>
+                    {!! Form::select('hoomans_id',$hoomans, $consultations->hoomans_id ,['class' => 'block
                     shadow-5xl
                     p-2
                     my-2
@@ -45,8 +45,8 @@
                 </div>
 
                 <div>
-                    <label for="animal_id" class="text-lg">Type</label>
-                    {!! Form::select('animal_id',$animals, $consultations->animal_id ,['class' => 'block
+                    <label for="pets_id" class="text-lg">Type</label>
+                    {!! Form::select('pets_id',$pets, $consultations->pets_id ,['class' => 'block
                     shadow-5xl
                     p-2
                     my-2
