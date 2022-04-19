@@ -142,26 +142,22 @@ return [
     */
 
     'custom' => [
-        'first_name' => [
-            'required' => 'First name is required',
+        'name' => [
+            'required' => 'Full name is required',
             'min' => 'Try again! Your name is too short',
         ],
-        'last_name' => [
-            'required' => 'Last name is required',
-            'min' => 'Try again! Your name is too short',
-        ],
-        'phone_number' => [
+        'contactNum' => [
             'required' => 'Phone number is required',
             'min' => 'Try again! Your number is too short',
         ],
-        'images' => [
+        'pics' => [
             'required' => 'Image is required',
             'image' => 'The file must be an image',
             'mimes' => 'The image should be an jpg, png, jpeg or a gif',
             'max' => 'The file size that can be uploaded can only be 5048'
         ],
-        'animal_name' => [
-            'required' => 'Animal name is required',
+        'pets_name' => [
+            'required' => 'pets name is required',
             'alpha' => 'You can only put letters here',
             'min' => 'Try again! Your name is too short',
         ],
@@ -176,13 +172,10 @@ return [
             'alpha' => 'You can only put letters here',
         ],
         'type' => [
-            'required' => 'Animal Type is required',
+            'required' => 'pet Type is required',
             'alpha' => 'You can only put letters here',
         ],
-        'full_name' => [
-            'required' => 'Full name is required',
-            'min' => 'Try again! Your name is too short',
-        ],
+       
         'email' => [
             'required' => 'Email is required',
             'unique' => 'Sorry but this Email has already been used by an existing user',
