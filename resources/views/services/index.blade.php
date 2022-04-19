@@ -1,7 +1,6 @@
-@extends('layouts.app')
+@extends('home')
 
-@section('content')
-
+@section('contents')
 <div class="pt-8 pb-4 px-8">
     <a href="service/create" class="p-3 border-none italic text-white bg-black text-lg">
         Add a new service &rarr;
@@ -10,7 +9,7 @@
 
 <div class="py-3">
     <table class="table-auto">
-        <tr class="text-white text-center">
+        <tr class="text-black text-center">
             <th class="w-screen text-3xl">Id</th>
             <th class="w-screen text-3xl">Service Name</th>
             <th class="w-screen text-3xl">Cost</th>
