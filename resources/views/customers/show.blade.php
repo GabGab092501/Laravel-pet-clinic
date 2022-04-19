@@ -1,4 +1,4 @@
-@extends('body')
+@extends('home')
 
 @section('contents')
 <div class="pb-20 my-2">
@@ -13,27 +13,22 @@
             'enctype'=>'multipart/form-data']) }}
             <div class="block">
                 <div class="grid grid-cols-2 py-2">
-                    <label for="first_name" class="text-start text-lg">First Name</label>
-                    {{ Form::text('first_name',null,['readonly'],array('class'=>'block shadow-5xl p-2 my-2
-                    w-full','id'=>'first_name')) }}
+                    <label for="name" class="text-start text-lg">First Name</label>
+                    {{ Form::text('name',null,['readonly'],array('class'=>'block shadow-5xl p-2 my-2
+                    w-full','id'=>'name')) }}
                 </div>
 
-                <div class="grid grid-cols-2 py-2">
-                    <label for="last_name" class="text-start text-lg">Last_name</label>
-                    {{ Form::text('last_name',null,['readonly'],array('class'=>'block shadow-5xl p-2 my-2
-                    w-full','id'=>'last_name'))
-                    }}
-                </div>
+        
 
                 <div class="grid grid-cols-2 py-2">
-                    <label for="phone_number" class="text-lg">Phone Number</label>
-                    {{ Form::text('phone_number',null,['readonly'],array('class'=>'block shadow-5xl p-2
-                    my-2w-full','id'=>'phone_number')) }}
+                    <label for="contactNum" class="text-lg">Phone Number</label>
+                    {{ Form::text('contactNum',null,['readonly'],array('class'=>'block shadow-5xl p-2
+                    my-2w-full','id'=>'contactNum')) }}
                 </div>
 
                 <div>
-                    <label for="images" class="block text-lg pb-3">Customer Pic</label>
-                    <img src="{{ asset('uploads/customers/'.$Customers->images)}}" alt="I am A Pic" width="100"
+                    <label for="pics" class="block text-lg pb-3">Customer Pic</label>
+                    <img src="{{ asset('imagefolder/customers/'.$Customers->pics)}}" alt="I am A Pic" width="100"
                         height="100" class="ml-36 py-2">
                 </div>
 
