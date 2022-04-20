@@ -84,13 +84,13 @@
                     @guest
                     @if (Route::has('personnel.signin'))
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('personnel.signin') }}">{{ __('Sign In') }}</a>
+                        <a class="nav-link text-white" href="{{ route('personnel.signin') }}">Sign In</a>
                     </li>
                     @endif
 
                     @if (Route::has('personnel.signup'))
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('personnel.signup') }}">{{ __('Sign Up') }}</a>
+                        <a class="nav-link text-white" href="{{ route('personnel.signup') }}">Sign Up</a>
                     </li>
                     @endif
                     @else
@@ -103,7 +103,7 @@
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('personnel.logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
+                                Logout
                             </a>
 
                             <form id="logout-form" action="{{ route('personnel.logout') }}" method="POST"

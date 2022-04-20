@@ -45,7 +45,7 @@ class animalController extends Controller
             Alert::image(
                 "Congratulations!",
                 session(key: "success_message"),
-                "https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s",
+                "https://freight.cargo.site/w/367/i/658c2312424eedf51104e7dbaa820d5f5e5c0e0e63422fbffd2378026cc5bcd3/doge.gif",
                 "200",
                 "200",
                 "I Am A Pic"

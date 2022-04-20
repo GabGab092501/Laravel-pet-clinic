@@ -25,6 +25,13 @@ class PersonnelFactory extends Factory
                 "Volunteer",
                 "Employee",
             ]),
+            "images" => $this->faker->image(
+                "public/uploads/personnels",
+                640,
+                480,
+                null,
+                false
+            ),
         ];
     }
 }

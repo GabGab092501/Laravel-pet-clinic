@@ -9,6 +9,7 @@
             <th class="w-screen text-3xl">Full Name</th>
             <th class="w-screen text-3xl">Email</th>
             <th class="w-screen text-3xl">Position</th>
+            <th class="w-screen text-3xl">Personnel Pic</th>
             <th class="w-screen text-3xl">Update</th>
             <th class="w-screen text-3xl">Delete</th>
             <th class="w-screen text-3xl">Restore</th>
@@ -17,17 +18,20 @@
 
         @forelse ($personnels as $personnel)
         <tr>
-            <td class="text-center text-3xl">
+            <td class="text-center text-2xl">
                 <a href="{{route('personnel.show',$personnel->id)}}">{{$personnel->id}}</a>
             </td>
-            <td class="text-center text-3xl">
+            <td class="text-center text-2xl">
                 {{ $personnel->full_name }}
             </td>
-            <td class="text-center text-3xl">
+            <td class="text-center text-2xl">
                 {{ $personnel->email }}
             </td>
-            <td class="text-center text-3xl">
+            <td class="text-center text-2xl">
                 {{ $personnel->role }}
+            </td>
+            <td class="pl-12">
+                <img src="{{ asset('uploads/personnels/'.$personnel->images)}}" alt="I am A Pic" width="75" height="75">
             </td>
             <td class=" text-center">
                 <a href="personnel/{{ $personnel->id }}/edit" class="text-center text-2xl bg-green-600 p-2">

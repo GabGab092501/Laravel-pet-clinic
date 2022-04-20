@@ -29,6 +29,12 @@
                     w-full','id'=>'role')) }}
                 </div>
 
+                <div>
+                    <label for="images" class="block text-lg pb-3">Personnel Pic</label>
+                    <img src="{{ asset('uploads/personnels/'.$personnels->images)}}" alt="I am A Pic" width="100"
+                        height="100" class="ml-36 py-2">
+                </div>
+
                 <div class="grid justify-center w-full">
                     <a href="{{url()->previous()}}" class="bg-gray-800 text-white font-bold py-2 px-4 mt-5 text-center"
                         role="button">Go Back &rarr;</a>

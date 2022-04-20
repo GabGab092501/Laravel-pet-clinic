@@ -105,7 +105,7 @@ class consultationController extends Controller
             Alert::image(
                 "Congratulations!",
                 session(key: "success_message"),
-                "https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s",
+                " http://pa1.narvii.com/6344/669ea02234466a5f0290595f63c038473c825c86_00.gif",
                 "200",
                 "200",
                 "I Am A Pic"

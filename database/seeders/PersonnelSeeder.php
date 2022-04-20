@@ -15,7 +15,7 @@ class PersonnelSeeder extends Seeder
     public function run()
     {
         \App\Models\Personnel::factory()
-            ->count(1000)
+            ->count(10)
             ->create();
     }
 }

@@ -127,7 +127,7 @@ class customerController extends Controller
             Alert::image(
                 "Congratulations!",
                 session(key: "success_message"),
-                "https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s",
+                "https://media3.giphy.com/media/tKys00Ye9maGtn9pcq/giphy.gif?cid=ecf05e47knblbh9ucuhl5m1gjveld8lk5g6rt9skhd9ok636&rid=giphy.gif&ct=s",
                 "200",
                 "200",
                 "I Am A Pic"

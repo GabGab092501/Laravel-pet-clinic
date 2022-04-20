@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+
 class Personnel extends Authenticatable
 {
     public const VALIDATION_RULES = [
         "full_name" => ["required", "string", "min:5"],
         "email" => ["required", "string", "email", "unique:personnels"],
         "password" => ["required", "min:5", "confirmed"],
+        "images" => ["required", "image", "mimes:jpg,png,jpeg,gif", "max:5048"],
         "g-recaptcha-response" => "required|captcha",
     ];
 
@@ -32,7 +34,7 @@ class Personnel extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = ["full_name", "email", "password", "role"];
+    protected $fillable = ["full_name", "email", "password", "role", "images"];
 
     /**
      * The attributes that should be hidden for serialization.

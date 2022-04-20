@@ -33,13 +33,18 @@ class personnelController extends Controller
 
     public function postSignup(personnelRequest $request)
     {
-        $personnels = new Personnel([
-            "full_name" => $request->full_name,
-            "email" => $request->email,
-            "password" => Hash::make($request->password),
-            "role" => $request->role,
-        ]);
-
+        $personnels = new Personnel();
+        $personnels->full_name = $request->input("full_name");
+        $personnels->email = $request->input("email");
+        $personnels->password = Hash::make($request->input("password"));
+        $personnels->role = $request->input("role");
+        if ($request->hasfile("images")) {
+            $file = $request->file("images");
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . "." . $extension;
+            $file->move("uploads/personnels/", $filename);
+            $personnels->images = $filename;
+        }
         $personnels->save();
         Auth::login($personnels);
         return redirect::route("personnels.dashboard")->withSuccessMessage(
@@ -91,8 +96,8 @@ class personnelController extends Controller
             Alert::image(
                 "Congratulations!",
                 session(key: "success_message"),
-                "https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s",
-                "200",
+                "https://media0.giphy.com/media/1YcLOSW6JCNdsfSr5E/giphy.gif?cid=790b76115cd3d732681c09d4b2ea920e8c940bcfdb2711a6&rid=giphy.gif&ct=s",
+                "300",
                 "200",
                 "I Am A Pic"
             );
@@ -110,7 +115,7 @@ class personnelController extends Controller
      */
     public function create()
     {
-        //  return view("personnels.create");
+        // return view("personnels.create");
     }
 
     /**
@@ -121,20 +126,20 @@ class personnelController extends Controller
      */
     public function store(personnelRequest $request)
     {
-        //  $personnels = new Personnel();
-        //  $personnels->full_name = $request->input("full_name");
-        //  $personnels->email = $request->input("email");
-        //  $personnels->password = Hash::make($request->input("password"));
-        //  $personnels->role = $request->input("role");
-        //  if ($request->hasfile("images")) {
-        //      $file = $request->file("images");
-        //      $extension = $file->getClientOriginalExtension();
-        //      $filename = time() . "." . $extension;
-        //      $file->move("uploads/personnels/", $filename);
-        //      $personnels->images = $filename;
-        //  }
-        //  $personnels->save();
-        //  return Redirect::to("login")->with("success", "New Personnel Added!");
+        // $personnels = new Personnel();
+        // $personnels->full_name = $request->input("full_name");
+        // $personnels->email = $request->input("email");
+        // $personnels->password = Hash::make($request->input("password"));
+        // $personnels->role = $request->input("role");
+        // if ($request->hasfile("images")) {
+        //     $file = $request->file("images");
+        //     $extension = $file->getClientOriginalExtension();
+        //     $filename = time() . "." . $extension;
+        //     $file->move("uploads/personnels/", $filename);
+        //     $personnels->images = $filename;
+        // }
+        // $personnels->save();
+        // return Redirect::to("login")->with("success", "New Personnel Added!");
     }
 
     /**
@@ -173,11 +178,20 @@ class personnelController extends Controller
         $personnels = Personnel::find($id);
         $personnels->full_name = $request->input("full_name");
         $personnels->email = $request->input("email");
-        $personnels->password = Hash::make($request->input("password"));
         $personnels->role = $request->input("role");
+        if ($request->hasfile("images")) {
+            $destination = "uploads/personnels/" . $personnels->images;
+            if (File::exists($destination)) {
+                File::delete($destination);
+            }
+            $file = $request->file("images");
+            $filename = uniqid() . "_" . $file->getClientOriginalName();
+            $file->move("uploads/personnels/", $filename);
+            $personnels->images = $filename;
+        }
         $personnels->update();
         return Redirect::to("personnel")->withSuccessMessage(
-            "Personnel Data Updated!"
+            "New Personnel Data Updated!"
         );
     }
 
@@ -191,7 +205,7 @@ class personnelController extends Controller
     {
         Personnel::destroy($id);
         return Redirect::to("personnel")->withSuccessMessage(
-            "Personnel Data Deleted!"
+            "New Personnel Data Deleted!"
         );
     }
 
@@ -201,16 +215,20 @@ class personnelController extends Controller
             ->findOrFail($id)
             ->restore();
         return Redirect::route("personnel.index")->withSuccessMessage(
-            "Personnel Data Restored!"
+            "New Personnel Data Restored!"
         );
     }
 
     public function forceDelete($id)
     {
         $personnels = Personnel::findOrFail($id);
+        $destination = "uploads/personnels/" . $personnels->images;
+        if (File::exists($destination)) {
+            File::delete($destination);
+        }
         $personnels->forceDelete();
         return Redirect::route("personnel.index")->withSuccessMessage(
-            "Personnel Data Permanently Deleted!"
+            "New Personnel Permanently Deleted!"
         );
     }
 }

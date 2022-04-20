@@ -7,7 +7,7 @@
         Sign Up
     </h1>
 
-    <form method="POST" action="{{ route('personnel.signup') }}">
+    <form method="POST" action="{{ route('personnel.signup') }}" enctype="multipart/form-data">
         @csrf
 
         <div class="row mb-3">
@@ -65,6 +65,16 @@
                     <option>Veterinarian</option>
                     <option>Volunteer</option>
                 </select>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="images" class="text-lg">Personnel Pic</label>
+            <div class="col-md-6">
+                <input type="file" class="block shadow-5xl p-2 w-full" id="images" name="images">
+                @if($errors->has('images'))
+                <p class="text-center text-red-500">{{ $errors->first('images') }}</p>
+                @endif
             </div>
         </div>
 

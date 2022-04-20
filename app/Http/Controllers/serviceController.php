@@ -26,8 +26,8 @@ class serviceController extends Controller
             Alert::image(
                 "Congratulations!",
                 session(key: "success_message"),
-                "https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s",
-                "200",
+                "https://media3.giphy.com/media/wtgpiXTZKOyTS/giphy.gif?cid=ecf05e47i2u80ldzhzky9txtewne7v7jbeyeg4cpdqliftb4&rid=giphy.gif&ct=s",
+                "300",
                 "200",
                 "I Am A Pic"
             );

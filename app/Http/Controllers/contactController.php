@@ -73,7 +73,7 @@ class contactController extends Controller
             Alert::image(
                 "Congratulations!",
                 session(key: "success_message"),
-                "https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s",
+                "https://media3.giphy.com/media/YiHfUCv6h3GLKkqyKw/giphy.gif?cid=ecf05e470wd1ddblywz84vyaacsutiv57wgn9iq2q9b5yhwr&rid=giphy.gif&ct=s",
                 "200",
                 "200",
                 "I Am A Pic"
