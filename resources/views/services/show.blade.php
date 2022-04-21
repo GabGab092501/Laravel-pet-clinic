@@ -7,36 +7,33 @@
             Show Services
         </h1>
     </div>
-    <div>
-        <div class="grid grid-flow-col justify-center pt-4">
-            {{ Form::model($services,['route' => ['service.show',$services->id],'method'=>'PUT',
-            'enctype'=>'multipart/form-data']) }}
-            <div class="block">
-                <div class="grid grid-cols-2 py-2">
-                    <label for="service_name" class="text-lg">Service Name</label>
-                    {{ Form::text('service_name',null,['readonly'],array('class'=>'block shadow-5xl p-2 my-2
-                    w-full','id'=>'service_name')) }}
-                </div>
+    <div class="py-3">
+        <table class="table-auto">
+            <tr class="text-white text-center">
+                <th class="w-screen text-3xl">Id</th>
+                <th class="w-screen text-3xl">Service Name</th>
+                <th class="w-screen text-3xl">Cost</th>
+                <th class="w-screen text-3xl">Service Pic</th>
+            </tr>
 
-                <div class="grid grid-cols-2 py-2">
-                    <label for="cost" class="text-lg">Cost</label>
-                    {{ Form::text('cost',null,['readonly'],array('class'=>'block shadow-5xl p-2 my-2
-                    w-full','id'=>'cost'))
-                    }}
-                </div>
+            @forelse ($services as $service)
+            <tr>
+                <td class=" text-center text-3xl">
+                    <a href="{{route('service.show',$service->id)}}">{{$service->id}}</a>
+                </td>
+                <td class=" text-center text-3xl">
+                    {{ $service->service_name }}
+                </td>
+                <td class=" text-center text-3xl">
+                    {{ $service->cost }}
+                </td>
+                <td class="pl-48">
+                    <img src="{{ asset('uploads/services/'.$service->images)}}" alt="I am A Pic" width="75" height="75">
+                </td>
 
-                <div>
-                    <label for="images" class="block text-lg pb-3">Service Pic</label>
-                    <img src="{{ asset('uploads/services/'.$services->images)}}" alt="I am A Pic" width="100"
-                        height="100" class="ml-48 py-2">
-                </div>
-
-
-                <div class="grid justify-center w-full pl-12">
-                    <a href="{{url()->previous()}}" class="bg-gray-800 text-white font-bold py-2 px-4 mt-5 text-center"
-                        role="button">Go Back &rarr;</a>
-                </div>
-            </div>
-            </form>
-        </div>
+            </tr>
+            @empty
+            <p>No Service Data in the Database</p>
+            @endforelse
+        </table>
         @endsection

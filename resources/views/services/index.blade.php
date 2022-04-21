@@ -6,6 +6,8 @@
     <a href="service/create" class="p-3 border-none italic text-white bg-black text-lg">
         Add a new service &rarr;
     </a>
+    <a href="{{ route('review') }}" class="float-right btn btn-danger text-white font-bold">Send Your
+        Feedback</a>
 </div>
 
 <div class="py-3">

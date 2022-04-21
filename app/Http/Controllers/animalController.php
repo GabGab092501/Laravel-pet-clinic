@@ -7,7 +7,7 @@ use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
 use App\Http\Requests\animalRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -102,12 +102,26 @@ class animalController extends Controller
      */
     public function show($id)
     {
-        $animals = Animal::find($id);
-        $customers = Customer::pluck("first_name", "id");
-        return view("animals.show", [
-            "animals" => $animals,
-            "customers" => $customers,
-        ]);
+        $animals = Customer::leftJoin(
+            "animals",
+            "animals.id",
+            "=",
+            "animals.customer_id"
+        )
+            ->select(
+                "animals.id",
+                "animals.animal_name",
+                "animals.age",
+                "animals.gender",
+                "animals.type",
+                "animals.images",
+                "animals.deleted_at",
+                "animals.animal_name"
+            )
+            ->where('animals.id', $id)
+            ->get();
+
+        return View::make('animals.show', compact('animals'));
     }
 
     /**

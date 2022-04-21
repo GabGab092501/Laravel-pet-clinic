@@ -195,3 +195,8 @@ Route::get("remove/{id}", [
     "uses" => 'App\Http\Controllers\transactionController@getRemoveItem',
     "as" => "transaction.remove",
 ]);
+
+Route::get('comment/{id}', [
+    'uses' => 'transactionController@show',
+    'as' => 'transaction.show'
+]);

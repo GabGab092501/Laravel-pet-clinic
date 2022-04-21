@@ -7,52 +7,44 @@
             Show Animals
         </h1>
     </div>
-    <div>
-        <div class="grid grid-flow-col justify-center pt-4">
-            {{ Form::model($animals,['route' => ['animals.show',$animals->id],'method'=>'PUT',
-            'enctype'=>'multipart/form-data']) }}
-            <div class="block">
-                <div class="grid grid-cols-2 py-2">
-                    <label for="animal_name" class="text-lg">Animal Name</label>
-                    {{ Form::text('animal_name',null,['readonly'],array('class'=>'block shadow-5xl p-2 my-2
-                    w-full','id'=>'animal_name')) }}
-                </div>
+    <div class="py-3">
+        <table class="table-auto">
+            <tr class="text-white text-center">
+                <th class="w-screen text-3xl">Id</th>
+                <th class="w-screen text-3xl">Animal Name</th>
+                <th class="w-screen text-3xl">Age</th>
+                <th class="w-screen text-3xl">Gender</th>
+                <th class="w-screen text-3xl">Type of Animal</th>
+                <th class="w-screen text-3xl">Owner</th>
+                <th class="w-screen text-3xl">Animal Pic</th>
+            </tr>
 
-                <div class="grid grid-cols-2 py-2">
-                    <label for="age" class="text-lg">Age</label>
-                    {{ Form::text('age',null,['readonly'],array('class'=>'block shadow-5xl p-2 my-2
-                    w-full','id'=>'age')) }}
-                </div>
-
-                <div class="grid grid-cols-2 py-2">
-                    <label for="gender" class="text-lg">Gender</label>
-                    {{ Form::text('gender',null,['readonly'],array('class'=>'block shadow-5xl p-2 my-2
-                    w-full','id'=>'gender')) }}
-                </div>
-
-                <div class="grid grid-cols-2 py-2">
-                    <label for="type" class="text-lg">Type</label>
-                    {{ Form::text('type',null,['readonly'],array('class'=>'block shadow-5xl p-2 my-2
-                    w-full','id'=>'type')) }}
-                </div>
-
-                <div>
-                    <label for="images" class="block text-lg pb-3">Animal Pic</label>
-                    <img src="{{ asset('uploads/animals/'.$animals->images)}}" alt="I am A Pic" width="100" height="100"
-                        class="ml-36 py-2">
-                </div>
-
-                <div>
-                    <label for="customer_id" class="text-lg">Owner</label>
-                    {!! Form::text('customer_id',$customers, $animals->customer_id,['class' => 'block shadow-5xl
-                    p-2 my-2 w-full', 'disabled' => true]) !!}
-                </div>
-
-                <div class="grid justify-center w-full pr-11">
-                    <a href="{{url()->previous()}}" class="bg-gray-800 text-white font-bold py-2 px-4 mt-5 text-center"
-                        role="button">Go Back &rarr;</a>
-                </div>
-            </div>
-            </form>
-        </div>
+            @forelse ($animals as $animal)
+            <tr>
+                <td class=" text-center text-3xl">
+                    {{$animal->id}}
+                </td>
+                <td class=" text-center text-3xl">
+                    {{ $animal->animal_name }}
+                </td>
+                <td class=" text-center text-3xl">
+                    {{ $animal->age }}
+                </td>
+                <td class=" text-center text-3xl">
+                    {{ $animal->gender }}
+                </td>
+                <td class=" text-center text-3xl">
+                    {{ $animal->type }}
+                </td>
+                <td class=" text-center text-3xl">
+                    {{ $animal->first_name }}
+                </td>
+                <td class="pl-24">
+                    <img src="{{ asset('uploads/animals/'.$animal->images)}}" alt="I am A Pic" width="75" height="75">
+                </td>
+            </tr>
+            @empty
+            <p>No Animals Data in the Database</p>
+            @endforelse
+        </table>
         @endsection

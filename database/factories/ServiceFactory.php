@@ -17,14 +17,7 @@ class ServiceFactory extends Factory
     public function definition()
     {
         return [
-            "service_name" => $this->faker->randomElement([
-                "Ear clean",
-                "Cut teddy bear",
-                "Wash hair",
-                "Comb hair",
-                "Nail clipping",
-                "Blow dry",
-            ]),
+            "service_name" => $this->faker->name,
             "cost" => $this->faker->randomFloat(2, 0, 10000),
             "images" => $this->faker->image(
                 "public/uploads/services",

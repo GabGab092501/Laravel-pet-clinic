@@ -78,8 +78,12 @@ class serviceController extends Controller
      */
     public function show($id)
     {
-        $services = Service::find($id);
-        return view("services.show")->with("services", $services);
+        $services = DB::table('services')
+            ->select('services.id', 'services.service_name', 'services.cost', 'services.images')
+            ->where('services.id', $id)
+            ->get();
+
+        return View::make('transaction.show', compact('services'));
     }
 
     /**

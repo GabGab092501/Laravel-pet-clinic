@@ -267,7 +267,13 @@ class transactionController extends Controller
      */
     public function show($id)
     {
-        //
+        $services = DB::table('services')
+            ->rightJoin('contacts', 'contacts.service_id', 'services.id')
+            ->select('contacts.id', 'contacts.service_id', 'services.service_name', 'contacts.name', 'contacts.email', 'contacts.phone_number', 'contacts.review')
+            ->where('services.id', $id)
+            ->get();
+
+        return view('transaction.show', ['services' => $services]);
     }
 
     /**

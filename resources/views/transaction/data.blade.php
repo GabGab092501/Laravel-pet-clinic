@@ -59,7 +59,10 @@
                     <a href=" {{ route('transaction.addToCart', ['id'=>$service->id]) }} " class="btn btn-primary"
                         role="button"><i class="fas fa-cart-plus"></i> Add Service </a>
 
-                    <a href="#" class="btn btn-success" role="button">More Info</a>
+                    <a href=" {{route('transaction.show', ['id'=>$service->id]) }} " class="btn btn-success"
+                        role="button">More
+                        Info</a>
+
                 </div>
             </div>
         </div>

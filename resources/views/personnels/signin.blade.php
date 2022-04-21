@@ -50,8 +50,6 @@
                     Forgot Your Password
                 </a>
                 @endif
-                <a href="{{ route('review') }}" class="offset-sm-5 btn btn-danger text-white font-bold">Send Your
-                    Feedback</a>
             </div>
         </div>
     </form>

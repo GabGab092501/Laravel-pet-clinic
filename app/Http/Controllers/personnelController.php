@@ -9,7 +9,8 @@ use App\Http\Requests\loginRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
 use App\Models\Personnel;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -150,8 +151,12 @@ class personnelController extends Controller
      */
     public function show($id)
     {
-        $personnels = Personnel::find($id);
-        return view("personnels.show")->with("personnels", $personnels);
+        $personnels = DB::table('personnels')
+            ->select('personnels.id', 'personnels.full_name', 'personnels.email', 'personnels.role', 'personnels.images')
+            ->where('personnels.id', $id)
+            ->get();
+
+        return View::make('personnels.show', compact('personnels'));
     }
 
     /**

@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -16,7 +17,7 @@ return new class extends Migration {
             $table->increments("id");
             $table->string(column: "service_name");
             $table->string(column: "cost");
-            $table->string(column: "images");
+            $table->string(column: "images")->default('example.jpg');
             $table->timestamps();
             $table->softDeletes();
         });

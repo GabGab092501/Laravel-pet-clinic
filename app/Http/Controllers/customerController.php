@@ -180,8 +180,25 @@ class customerController extends Controller
      */
     public function show($id)
     {
-        $Customers = Customer::find($id);
-        return View::make("customers.show", compact("Customers"));
+        $customers = Customer::leftJoin(
+            "animals",
+            "customers.id",
+            "=",
+            "animals.customer_id"
+        )
+            ->select(
+                "customers.id",
+                "customers.first_name",
+                "customers.last_name",
+                "customers.phone_number",
+                "customers.images",
+                "customers.deleted_at",
+                "animals.animal_name"
+            )
+            ->where('customers.id', $id)
+            ->get();
+
+        return View::make('customers.show', compact('customers'));
     }
 
     /**
