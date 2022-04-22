@@ -10,7 +10,8 @@ use App\Http\Controllers\contactController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\consolationController;
 use App\Http\Controllers\transactionController;
-
+use App\Http\Controllers\classifyController;
+use App\Http\Controllers\diseasesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -163,6 +164,18 @@ Route::get('add-to-cart/{id}', [
 Route::get('add-animal/{id}', [
     'uses' => 'App\Http\Controllers\transactionController@getAnimal',
     'as' => 'transaction.addAnimal'
+]);
+
+Route::resource("/classify", "classifyController")->middleware("auth");
+Route::get("/classify/restore/{id}", [
+    "uses" => "classifyController@restore",
+    "as" => "classify.restore",
+]);
+
+Route::resource("/diseases", "diseasesController")->middleware("auth");
+Route::get("/diseases/restore/{id}", [
+    "uses" => "diseasesController@restore",
+    "as" => "diseases.restore",
 ]);
 
 Route::get('remove/{id}', [

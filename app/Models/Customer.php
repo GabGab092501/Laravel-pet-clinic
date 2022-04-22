@@ -11,7 +11,7 @@ class Customer extends Model
     public const rules = [
         "name" => ["required", "min:2"],
         "contactNum" => ["required", "min:8"],
-        "pics" => ["required", "image", "mimes:jpg,png,jpeg,gif", "max:5048"],
+        "pics" => ["required", "image", "mimes:jpg,png,jpeg,gif", "max:9999999"],
     ];
 
     use HasFactory;

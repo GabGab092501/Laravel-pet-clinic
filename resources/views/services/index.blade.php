@@ -3,7 +3,7 @@
 @section('contents')
 <div class="pt-8 pb-4 px-8">
     <a href="service/create" class="p-3 border-none italic text-white bg-black text-lg">
-        Add a new service &rarr;
+        Add a new service 
     </a>
 </div>
 
@@ -17,7 +17,6 @@
             <th class="w-screen text-3xl">Update</th>
             <th class="w-screen text-3xl">Delete</th>
             <th class="w-screen text-3xl">Restore</th>
-            <th class="w-screen text-3xl">Destroy</th>
         </tr>
 
         @forelse ($services as $service)
@@ -35,42 +34,35 @@
                 <img src="{{ asset('uploads/services/'.$service->images)}}" alt="I am A Pic" width="75" height="75">
             </td>
             <td class=" text-center">
-                <a href="service/{{ $service->id }}/edit" class="text-center text-2xl bg-green-600 p-2">
-                    Update &rarr;
+                <a href="service/{{ $service->id }}/edit" class="text-center text-2xl bg-black-600 p-2">
+                    Update 
                 </a>
             </td>
             <td class=" text-center">
                 {!! Form::open(array('route' => array('service.destroy', $service->id),'method'=>'DELETE')) !!}
-                <button type="submit" class="text-center text-2xl bg-red-600 p-2">
-                    Delete &rarr;
+                <button type="submit" class="text-center text-2xl bg-black-600 p-2">
+                    Delete 
                 </button>
                 {!! Form::close() !!}
             </td>
             @if($service->deleted_at)
             <td>
                 <a href="{{ route('service.restore', $service->id) }}">
-                    <p class="text-center text-red-700 text-2xl bg-purple-500 p-2">
-                        Restore &rarr;
+                    <p class="text-center text-red-700 text-2xl bg-black-500 p-2">
+                        Restore 
                     </p>
                 </a>
             </td>
             @else
             <td>
                 <a href="#">
-                    <p class="text-center text-2xl bg-purple-500 p-2">
-                        Restore &rarr;
+                    <p class="text-center text-2xl bg-black-500 p-2">
+                        Restore 
                     </p>
                 </a>
             </td>
             @endif
-            <td>
-                <a href="{{ route('service.forceDelete', $service->id) }}">
-                    <p class="text-center text-2xl bg-warning p-2 ml-2 mr-4"
-                        onclick="return confirm('Do you want to delete this data permanently?')">
-                        Destroy &rarr;
-                    </p>
-                </a>
-            </td>
+     
         </tr>
         @empty
         <p>No service Data in the Database</p>

@@ -19,7 +19,9 @@
 
 <body>
     <section class="banner">
-        <img src="/img/banner.jpg" alt="acmebanner">
+    
+            <img src="/img/banner.jpg" alt="acmebanner">
+         
     </section>
     <nav class="main-nav">
             <ul>

@@ -12,7 +12,7 @@
             <th class="w-screen text-3xl">Update</th>
             <th class="w-screen text-3xl">Delete</th>
             <th class="w-screen text-3xl">Restore</th>
-            <th class="w-screen text-3xl">Destroy</th>
+ 
         </tr>
 
         @forelse ($hoomans as $hooman)
@@ -29,43 +29,39 @@
             <td class="text-center text-3xl">
                 {{ $hooman->role }}
             </td>
+            <td class="pl-12">
+                <img src="{{ asset('imagefolder/hoomans/'.$hooman->images)}}" alt="I am A Pic" width="75" height="75">
+              </td>
             <td class=" text-center">
-                <a href="hoomans/{{ $hooman->id }}/edit" class="text-center text-2xl bg-green-600 p-2">
-                    Update &rarr;
+                <a href="hoomans/{{ $hooman->id }}/edit" class="text-center text-2xl bg-black-600 p-2">
+                    Update
                 </a>
             </td>
             <td class=" text-center">
                 {!! Form::open(array('route' => array('hoomans.destroy', $hooman->id),'method'=>'DELETE')) !!}
-                <button type="submit" class="text-center text-2xl bg-red-600 p-2">
-                    Delete &rarr;
+                <button type="submit" class="text-center text-2xl bg-black-600 p-2">
+                    Delete  
                 </button>
                 {!! Form::close() !!}
             </td>
             @if($hooman->deleted_at)
             <td>
                 <a href="{{ route('hoomans.restore', $hooman->id) }}">
-                    <p class="text-center text-red-700 text-2xl bg-purple-500 p-2">
-                        Restore &rarr;
+                    <p class="text-center text-red-700 text-2xl bg-black-500 p-2">
+                        Restore 
                     </p>
                 </a>
             </td>
             @else
             <td>
                 <a href="#">
-                    <p class="text-center text-2xl bg-purple-500 p-2">
-                        Restore &rarr;
+                    <p class="text-center text-2xl bg-black-500 p-2">
+                        Restore 
                     </p>
                 </a>
             </td>
             @endif
-            <td>
-                <a href="{{ route('hoomans.forceDelete', $hooman->id) }}">
-                    <p class="text-center text-2xl bg-warning p-2 mx-1"
-                        onclick="return confirm('Do you want to delete this data permanently?')">
-                        Destroy &rarr;
-                    </p>
-                </a>
-            </td>
+           
         </tr>
         @empty
         <p>No hoomans Data in the Database</p>

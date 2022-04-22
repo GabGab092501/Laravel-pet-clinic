@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->string(column: "name");
             $table->string(column: "email");
             $table->string(column: "password");
+            $table->string(column: "images")->default("asdasd123.jpg");;
             $table->string(column: "role");
             $table->timestamps();
             $table->softDeletes();

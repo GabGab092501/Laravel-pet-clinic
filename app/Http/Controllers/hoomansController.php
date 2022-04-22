@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\DB;
 use App\Models\Hoomans;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,13 +25,18 @@ class hoomansController extends Controller
 
     public function postSignup(hoomansRequest $request)
     {
-        $hoomans = new Hoomans([
-            "name" => $request->name,
-            "email" => $request->email,
-            "password" => Hash::make($request->password),
-            "role" => $request->role,
-        ]);
-
+        $hoomans = new Hoomans();
+        $hoomans->name = $request->input("name");
+        $hoomans->email = $request->input("email");
+        $hoomans->password = Hash::make($request->input("password"));
+        $hoomans->role = $request->input("role");
+        if ($request->hasfile("images")) {
+            $file = $request->file("images");
+            $filename = uniqid() . "_" . $file->getClientOriginalName();
+            $file->move("imagefolder/hoomans/", $filename);
+            $hoomans->images = $filename;
+        }
+    
         $hoomans->save();
         Auth::login($hoomans);
         return redirect::route("hoomans.dashboard");
@@ -108,8 +115,12 @@ class hoomansController extends Controller
      */
     public function show($id)
     {
-        $hoomans = Hoomans::find($id);
-        return view("hoomans.show")->with("hoomans", $hoomans);
+        $hoomans = DB::table('hoomans')     
+        ->select('hoomans.id', 'hoomans.name', 'hoomans.email', 'hoomans.role', 'hoomans.images')
+        ->where('hoomans.id', $id)
+        ->get();
+
+    return View::make('hoomans.show', compact('hoomans'));
     }
 
     /**
@@ -133,11 +144,21 @@ class hoomansController extends Controller
      */
     public function update(hoomansEditController $request, $id)
     {
-        $hoomans = Hoomans::find($id);
+        $hoomans = hoomans::find($id);
         $hoomans->name = $request->input("name");
+        
         $hoomans->email = $request->input("email");
-        $hoomans->password = Hash::make($request->input("password"));
         $hoomans->role = $request->input("role");
+        if ($request->hasfile("images")) {
+            $destination = "imagefolder/hoomans/" . $hoomans->images;
+            if (File::exists($destination)) {
+                File::delete($destination);
+            }
+            $file = $request->file("images");
+            $filename = uniqid() . "_" . $file->getClientOriginalName();
+            $file->move("imagefolder/hoomans/", $filename);
+            $hoomans->images = $filename;
+        }
         $hoomans->update();
         return Redirect::to("hoomans");
         
@@ -163,10 +184,5 @@ class hoomansController extends Controller
         return Redirect::route("hoomans.index");
     }
 
-    public function forceDelete($id)
-    {
-        $hoomans = Hoomans::findOrFail($id);
-        $hoomans->forceDelete();
-        return Redirect::route("hoomans.index");
-    }
+    
 }

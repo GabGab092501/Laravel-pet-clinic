@@ -82,8 +82,24 @@ class customerController extends Controller
      */
     public function show($id)
     {
-        $Customers = Customer::find($id);
-        return View::make("customers.show", compact("Customers"));
+        $customers = Customer::leftJoin(
+            "pets",
+            "customers.id",
+            "=",
+            "pets.customer_id"
+        )
+            ->select(
+                "customers.id",
+                "customers.name",
+                "customers.contactNum",
+                "customers.pics",
+                "customers.deleted_at",
+                "pets.pets_name"
+            )
+            ->where('customers.id', $id)
+            ->get();
+
+        return View::make('customers.show', compact('customers'));
     }
 
     /**
@@ -109,8 +125,6 @@ class customerController extends Controller
     {
         $Customers = Customer::find($id);
         $Customers->name = $request->input("name");
-
-        $Customers->contactNum = $request->input("contactNum");
         if ($request->hasfile("pics")) {
             $destination = "imagefolder/customers/" . $Customers->pics;
             if (File::exists($destination)) {

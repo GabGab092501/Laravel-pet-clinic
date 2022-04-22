@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Hoomans;
 use App\Models\Pets;
+use App\Models\diseases;
 use App\Models\Consultation;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
@@ -22,6 +23,13 @@ class consultationController extends Controller
             "=",
             "consultations.hoomans_id"
         )
+
+        ->join(
+            "diseases",
+            "diseases.id",
+            "=",
+            "consultations.pets_id"
+        )
             ->join(
                 "pets",
                 "pets.id",
@@ -33,13 +41,16 @@ class consultationController extends Controller
                 "pets.pets_name",
                 "consultations.id",
                 "consultations.date",
-                "consultations.disease_injury",
+        
+                "diseases.diseases",
                 "consultations.price",
                 "consultations.comment",
                 "consultations.hoomans_id",
                 "consultations.pets_id",
                 "consultations.deleted_at"
-            )
+            
+                )
+
             ->orderBy("consultations.id", "ASC")
             ->get();
         return view("consultations.search", [
@@ -56,6 +67,13 @@ class consultationController extends Controller
             "=",
             "consultations.hoomans_id"
         )
+
+        ->join(
+            "diseases",
+            "diseases.id",
+            "=",
+            "consultations.pets_id"
+        )
             ->join(
                 "pets",
                 "pets.id",
@@ -67,13 +85,15 @@ class consultationController extends Controller
                 "pets.pets_name",
                 "consultations.id",
                 "consultations.date",
-                "consultations.disease_injury",
+            
+                "diseases.diseases",
                 "consultations.price",
                 "consultations.comment",
                 "consultations.hoomans_id",
                 "consultations.pets_id",
                 "consultations.deleted_at"
-            )
+            
+                )
 
             ->where("pets.pets_name", "LIKE", "%" . $result . "%")
             ->get();
@@ -95,6 +115,13 @@ class consultationController extends Controller
             "=",
             "consultations.hoomans_id"
         )
+
+        ->join(
+            "diseases",
+            "diseases.id",
+            "=",
+            "consultations.pets_id"
+        )
             ->join(
                 "pets",
                 "pets.id",
@@ -106,13 +133,15 @@ class consultationController extends Controller
                 "pets.pets_name",
                 "consultations.id",
                 "consultations.date",
-                "consultations.disease_injury",
+            
+                "diseases.diseases",
                 "consultations.price",
                 "consultations.comment",
                 "consultations.hoomans_id",
                 "consultations.pets_id",
                 "consultations.deleted_at"
-            )
+            
+                )
             ->orderBy("consultations.id", "ASC")
             ->withTrashed()
             ->paginate(6);
@@ -130,9 +159,11 @@ class consultationController extends Controller
     {
         $pets = Pets::pluck("pets_name", "id");
         $hoomans = Hoomans::pluck("name", "id");
+        $diseases = diseases::pluck("diseases", "id");
         return view("consultations.create", [
             "pets" => $pets,
-            "hoomans" => $hoomans
+            "hoomans" => $hoomans,
+            "diseases" => $diseases
         ]);
     }
 
@@ -148,7 +179,7 @@ class consultationController extends Controller
             DB::beginTransaction();
             $consultations = new Consultation();
             $consultations->date = $request->input("date");
-            $consultations->disease_injury = $request->input("disease_injury");
+            $consultations->diseases_id = $request->input("diseases_id");
             $consultations->price = $request->input("price");
             $consultations->comment = $request->input("comment");
             $consultations->hoomans_id = $request->input("hoomans_id");
@@ -162,7 +193,7 @@ class consultationController extends Controller
             );
         }
         DB::commit();
-        return Redirect::to("/consultation")->with("error", "gagi");
+        return Redirect::to("/consultation")->with("error", "Consultation added");
     }
 
     /**
@@ -176,10 +207,12 @@ class consultationController extends Controller
         $consultations = Consultation::find($id);
         $pets = Pets::pluck("pets_name", "id");
         $hoomans = Hoomans::pluck("name", "id");
+        $diseases = diseases::pluck("diseases", "id");
         return view("consultations.show", [
             "pets" => $pets,
             "hoomans" => $hoomans,
-            "consultations" => $consultations
+            "consultations" => $consultations,
+            "diseases" => $diseases
         ]);
     }
 
@@ -194,10 +227,12 @@ class consultationController extends Controller
         $consultations = Consultation::find($id);
         $pets = pets::pluck("pets_name", "id");
         $hoomans = Hoomans::pluck("name", "id");
+        $diseases = diseases::pluck("name", "id");
         return view("consultations.edit", [
             "pets" => $pets,
             "hoomans" => $hoomans,
-            "consultations" => $consultations
+            "consultations" => $consultations,
+            "diseases" => $diseases
         ]);
     }
 
@@ -214,7 +249,7 @@ class consultationController extends Controller
             DB::beginTransaction();
             $consultations = Consultation::find($id);
             $consultations->date = $request->input("date");
-            $consultations->disease_injury = $request->input("disease_injury");
+            $consultations->diseases_id = $request->input("diseases_id");
             $consultations->price = $request->input("price");
             $consultations->comment = $request->input("comment");
             $consultations->hoomans_id = $request->input("hoomans_id");

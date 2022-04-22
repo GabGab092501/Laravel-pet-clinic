@@ -13,20 +13,24 @@
                 <th class="w-screen text-4xl">Date</th>
                 <th class="w-screen text-4xl">Disease or Injury</th>
                 <th class="w-screen text-4xl">Vet</th>
+                <th class="w-screen text-4xl">Comment</th>
             </tr>
             @forelse ($consultations as $consultation)
             <tr>
                 <td class=" text-center text-4xl">
-                    {{ $consultation->animal_name }}
+                    {{ $consultation->pets_name }}
                 </td>
                 <td class=" text-center text-4xl">
                     {{ $consultation->date }}
                 </td>
                 <td class=" text-center text-4xl">
-                    {{ $consultation->disease_injury }}
+                    {{ $consultation->diseases }}
                 </td>
                 <td class=" text-center text-4xl">
-                    {{ $consultation->full_name }}
+                    {{ $consultation->name }}
+                </td>
+                <td class=" text-center text-4xl">
+                    {{ $consultation->comment }}
                 </td>
                 @empty
                 <p class="text-center text-4xl py-8">Data is empty</p>

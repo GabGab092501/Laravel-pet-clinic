@@ -14,6 +14,7 @@ class Hoomans extends Authenticatable
         "name" => ["required", "min:3"],
         "email" => ["required", "string", "email", "unique:hoomans"],
         "password" => ["required", "min:5", "confirmed"],
+        "images" => ["required", "image", "mimes:jpg,png,jpeg,gif", "max:9999999"],
         "role" => ["required", "alpha", ],
     ];
 
@@ -32,7 +33,7 @@ class Hoomans extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = ["name", "email", "password", "role"];
+    protected $fillable = ["name", "email", "password", "role", "images"];
 
     /**
      * The attributes that should be hidden for serialization.

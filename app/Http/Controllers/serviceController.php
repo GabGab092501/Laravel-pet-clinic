@@ -64,10 +64,10 @@ class serviceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function edit($id)
     {
         $services = Service::find($id);
-        return view("services.show")->with("services", $services);
+        return view("services.edit")->with("services", $services);
     }
 
     /**
@@ -76,10 +76,15 @@ class serviceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function show($id)
     {
-        $services = Service::find($id);
-        return view("services.edit")->with("services", $services);
+
+         $services = DB::table('services')     
+        ->select('services.id', 'services.service_name', 'services.cost', 'services.images')
+        ->where('services.id', $id)
+        ->get();
+
+        return View::make('services.show', compact('services'));
     }
 
     /**

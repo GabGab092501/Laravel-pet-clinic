@@ -7,33 +7,43 @@
             Show Hoomans
         </h1>
     </div>
-    <div>
-        <div class="grid grid-flow-col justify-center pt-4">
-            {{ Form::model($hoomans,['route' => ['hoomans.show',$hoomans->id],'method'=>'PUT']) }}
-            <div class="block">
-                <div class="grid grid-cols-2 py-2">
-                    <label for="name" class="text-lg">Full Name</label>
-                    {{ Form::text('name',null,['readonly'],array('class'=>'block shadow-5xl p-2 my-2
-                    w-full','id'=>'name')) }}
-                </div>
+    <div class="py-3">
+        <table class="table-auto">
+            <tr class="text-black text-center">
+                <th class="w-screen text-3xl">Id</th>
+                <th class="w-screen text-3xl">Full Name</th>
+                <th class="w-screen text-3xl">Email</th>
+                <th class="w-screen text-3xl">Position</th>
+                <th class="w-screen text-3xl">Images</th>
 
-                <div class="grid grid-cols-2 py-2">
-                    <label for="email" class="text-lg">Email</label>
-                    {{ Form::email('email',null,['readonly'],array('class'=>'block shadow-5xl p-2 my-2
-                    w-full','id'=>'email')) }}
-                </div>
+                
+            </tr>
+    
+            @forelse ($hoomans as $hooman)
+            <tr>
+                <td class="text-center text-3xl">
+                    <a href="{{route('hoomans.show',$hooman->id)}}">{{$hooman->id}}</a>
+                </td>
+                <td class="text-center text-3xl">
+                    {{ $hooman->name }}
+                </td>
+                <td class="text-center text-3xl">
+                    {{ $hooman->email }}
+                </td>
+                <td class="text-center text-3xl">
+                    {{ $hooman->role }}
+                </td>
 
-                <div class="grid grid-cols-2 py-2">
-                    <label for="role" class="text-lg mt-2">Pick Your Role</label>
-                    {{ Form::text('role',null,['readonly'],array('class'=>'block shadow-5xl p-2 my-2
-                    w-full','id'=>'role')) }}
-                </div>
+                <td class="pl-12">
+                    <img src="{{ asset('imagefolder/hoomans/'.$hooman->images)}}" alt="I am A Pic" width="75" height="75">
+                  </td>
+    
+                  
+            </tr>
+            @empty
+            <p>No hoomans Data in the Database</p>
+            @endforelse
+        </table>
+    </div>
 
-                <div class="grid justify-center w-full">
-                    <a href="{{url()->previous()}}" class="bg-gray-800 text-white font-bold py-2 px-4 mt-5 text-center"
-                        role="button">Go Back &rarr;</a>
-                </div>
-            </div>
-            </form>
-        </div>
         @endsection

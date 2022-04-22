@@ -39,16 +39,13 @@
                         <p class="text-center text-red-500">{{ $errors->first('gender') }}</p>
                         @endif
                     </div>
-
-                    <div>
-                        <label for="type" class="text-lg">Type</label>
-                        <input type="text" class="block shadow-5xl p-2 my-2 w-full" id="type" name="type"
-                            placeholder="Type of Pets" value="{{old('type')}}">
-                        @if($errors->has('type'))
-                        <p class="text-center text-red-500">{{ $errors->first('type') }}</p>
-                        @endif
-                    </div>
-
+                    <label for="customer_id" class="text-lg">Customer</label>
+                    <select name="customer_id" id="customer_id" class="block shadow-5xl p-2 w-full">
+                        @foreach ($customers as $id => $customer)
+                        <option value="{{ $id }}">{{ $customer }}</option>
+                        @endforeach
+                    </select>
+                  
                     <div>
                         <label for="images" class="text-lg">Pets Pic</label>
                         <input type="file" class="block shadow-5xl p-2 w-full" id="images" name="images"
@@ -58,10 +55,10 @@
                         @endif
                     </div>
 
-                    <label for="customer_id" class="text-lg">Customer</label>
-                    <select name="customer_id" id="customer_id" class="block shadow-5xl p-2 w-full">
-                        @foreach ($customers as $id => $customer)
-                        <option value="{{ $id }}">{{ $customer }}</option>
+                    <label for="classify_id" class="text-lg">classify</label>
+                    <select name="classify_id" id="classify_id" class="block shadow-5xl p-2 w-full">
+                        @foreach ($classify as $id => $classify)
+                        <option value="{{ $id }}">{{ $classify }}</option>
                         @endforeach
                     </select>
 

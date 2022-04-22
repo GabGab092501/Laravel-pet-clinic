@@ -4,7 +4,7 @@
 
 <div class="pt-8 pb-4 px-8">
   <a href="customer/create" class="p-3 border-none italic text-white bg-black text-lg">
-    Add a new customer &rarr;
+    Add a new customer
   </a>
 </div>
 
@@ -19,14 +19,20 @@
       <th class="w-screen text-3xl">Update</th>
       <th class="w-screen text-3xl">Delete</th>
       <th class="w-screen text-3xl">Restore</th>
-      <th class="w-screen text-3xl">Destroy</th>
     </tr>
 
     @forelse ($customers as $customer)
 
     <tr>
+      @if($customer->deleted_at)
+      <td class="text-center text-3xl">
+        <a href="#">{{$customer->id}}</a>
+      </td>
+      @else
       <td class="text-center text-3xl">
         <a href="{{route('customer.show',$customer->id)}}">{{$customer->id}}</a>
+      </td>
+      @endif
       </td>
   
       <td class="text-center text-3xl">
@@ -41,15 +47,25 @@
       <td class=" text-center text-3xl">
         {{ $customer->pets_name }}
       </td>
+      @if($customer->deleted_at)
       <td class=" text-center">
-        <a href="customer/{{ $customer->id }}/edit" class="text-center text-2xl bg-green-600 p-2">
-          Update &rarr;
+        <a href="#">
+          <p class="text-center text-2xl bg-black-600 p-2">
+            Update 
+          </p>
         </a>
       </td>
+      @else
+      <td>
+        <a href="customer/{{ $customer->id }}/edit" class="text-center text-2xl bg-black-600 p-2">
+          Update 
+        </a>
+      </td>
+      @endif
       <td class=" text-center">
         {!! Form::open(array('route' => array('customer.destroy', $customer->id),'method'=>'DELETE')) !!}
-        <button type="submit" class="text-center text-2xl bg-red-600 p-2 my-2">
-          Delete &rarr;
+        <button type="submit" class="text-center text-2xl bg-black-600 p-2 my-2">
+          Delete
         </button>
         {!! Form::close() !!}
       </td>
@@ -57,29 +73,22 @@
       @if($customer->deleted_at)
       <td>
         <a href="{{ route('customer.restore', $customer->id) }}">
-          <p class="text-center text-red-700 text-2xl bg-purple-500 p-2 my-2">
-            Restore &rarr;
+          <p class="text-center text-red-700 text-2xl bg-black-600 p-2 my-2">
+            Restore
           </p>
         </a>
       </td>
       @else
       <td>
         <a href="#">
-          <p class="text-center text-2xl bg-purple-500 p-2 my-2">
-            Restore &rarr;
+          <p class="text-center text-2xl bg-black-500 p-2 my-2">
+            Restore
           </p>
         </a>
       </td>
       @endif
 
-      <td>
-        <a href="{{ route('customer.forceDelete', $customer->id) }}">
-          <p class="text-center text-2xl bg-warning p-2 ml-3 mr-4 my-2"
-            onclick="return confirm('Do you want to delete this data permanently?')">
-            Destroy &rarr;
-          </p>
-        </a>
-      </td>
+      
     </tr>
     @empty
     <p>No customer Data in the Database</p>

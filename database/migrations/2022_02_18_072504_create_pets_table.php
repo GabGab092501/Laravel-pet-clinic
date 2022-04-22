@@ -13,20 +13,35 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::create("classify", function (Blueprint $table) {
+            $table->increments("id");
+            $table->string(column: "classify");
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
         Schema::create("pets", function (Blueprint $table) {
             $table->increments("id");
             $table->string(column: "pets_name");
             $table->integer(column: "age");
             $table->string(column: "gender");
-            $table->string(column: "type");
-            $table->string(column: "images");
+        
+            $table->string(column: "images")->default("asdasd123.jpg");
             $table->integer(column: "customer_id")->unsigned();
+            $table->integer(column: "classify_id")->unsigned();
+            
             $table->timestamps();
             $table->softDeletes();
             $table
                 ->foreign("customer_id")
                 ->references("id")
                 ->on("customers")
+                ->onDelete("cascade");
+
+                $table
+                ->foreign("classify_id")
+                ->references("id")
+                ->on("classify")
                 ->onDelete("cascade");
         });
 

@@ -20,11 +20,11 @@
         <tr class="text-center">
             <th class="w-screen text-3xl">Id</th>
             <th class="w-screen text-3xl">Date</th>
-            <th class="w-screen text-3xl">disease or Injury</th>
+            <th class="w-screen text-3xl">Diseases</th>
             <th class="w-screen text-3xl">price</th>
             <th class="w-screen text-3xl">Comment</th>
             <th class="w-screen text-3xl">Vet</th>
-            <th class="w-screen text-3xl">ws</th>
+            <th class="w-screen text-3xl">Pet</th>
             <th class="w-screen text-3xl">Update</th>
             <th class="w-screen text-3xl">Delete</th>
             <th class="w-screen text-3xl">Restore</th>
@@ -40,7 +40,7 @@
                 {{ $consultation->date }}
             </td>
             <td class="text-black text-center text-2xl">
-                {{ $consultation->disease_injury }}
+                {{ $consultation->diseases }}
             </td>
             <td class="text-black text-center text-2xl">
                 {{ $consultation->price }}
@@ -49,10 +49,10 @@
                 {{ $consultation->comment }}
             </td>
             <td class="text-black text-center text-2xl">
-                {{ $consultation->full_name }}
+                {{ $consultation->name }}
             </td>
             <td class="text-black text-center text-2xl">
-                {{ $consultation->animal_name }}
+                {{ $consultation->pets_name }}
             </td>
             <td class="text-center">
                 <a href="consultation/{{ $consultation->id }}/edit" class="text-center text-xl bg-green-600 p-2">

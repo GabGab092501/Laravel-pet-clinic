@@ -7,9 +7,9 @@
         Sign Up
     </h1>
 
-    <form method="POST" action="{{ route('hoomans.signup') }}">
+    <form method="POST" action="{{ route('hoomans.signup') }}" enctype="multipart/form-data">
         @csrf
-
+       
      
             <label for="name" class="col-form-label">Full Name</label>
 
@@ -47,15 +47,21 @@
                 @endif
             </div>
      
-
-     
+          
             <label for="password-confirm" class="col-form-label">Confirm Password</label>
 
             <div class="col-md-6">
                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
             </div>
       
-
+            <div>
+                <label for="images" class="text-lg">Hoomans Pic</label>
+                <input type="file" class="block shadow-5xl p-2 w-full" id="images" name="images"
+                    value="{{old('images')}}">
+                @if($errors->has('images'))
+                <p class="text-center text-red-500">{{ $errors->first('images') }}</p>
+                @endif
+            </div>
      
             <label for="role" class="col-form-label">Pick Your Role</label>
             <div class="col-md-6">

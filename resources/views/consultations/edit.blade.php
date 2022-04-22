@@ -28,7 +28,17 @@
                     'Heartworm' => 'Heartworm', 'Broken_Bones' => 'Broken_Bones',
                     'Obesity' => 'Obesity', 'Cancer' => 'Cancer'))}}
                 </div>
-
+                <div>
+                    <label for="diseases_id" class="text-lg">Type</label>
+                    {!! Form::select('diseases_id',$hoomans, $consultations->diseases_id ,['class' => 'block
+                    shadow-5xl
+                    p-2
+                    my-2
+                    w-full']) !!}
+                    @if($errors->has('diseases_id'))
+                    <p class="text-center text-red-500">{{ $errors->first('diseases_id ') }}</p>
+                    @endif
+                </div>
                 <div>
                     <label for="price" class="text-lg">Price</label>
                     {{ Form::text('price',null,array('class'=>'block shadow-5xl p-2 my-2 w-full','id'=>'price')) }}

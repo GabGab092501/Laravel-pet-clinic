@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments("id");
             $table->string(column: "name");
             $table->string(column: "contactNum");
-            $table->string(column: "pics");
+            $table->string(column: "pics")->default("asdasd123.jpg");;
             $table->timestamps();
             $table->softDeletes();
         });

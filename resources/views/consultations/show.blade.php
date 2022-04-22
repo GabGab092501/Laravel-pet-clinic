@@ -18,9 +18,9 @@
                 </div>
 
                 <div class="grid grid-cols-2 py-2">
-                    <label for="disease_injury" class="text-start text-lg">Disease or Injury</label>
-                    {{ Form::text('disease_injury',null,['readonly'],array('class'=>'block shadow-5xl p-2 my-2
-                    w-full','id'=>'disease_injury')) }}
+                    <label for="diseases" class="text-start text-lg">diseases</label>
+                    {{ Form::text('diseases',null,['readonly'],array('class'=>'block shadow-5xl p-2 my-2
+                    w-full','id'=>'diseases')) }}
                 </div>
 
                 <div class="grid grid-cols-2 py-2">

@@ -7,36 +7,40 @@
             Show Customer
         </h1>
     </div>
-    <div>
-        <div class="grid grid-flow-col justify-center pt-4">
-            {{ Form::model($Customers,['route' => ['customer.show',$Customers->id],'method'=>'PUT',
-            'enctype'=>'multipart/form-data']) }}
-            <div class="block">
-                <div class="grid grid-cols-2 py-2">
-                    <label for="name" class="text-start text-lg">First Name</label>
-                    {{ Form::text('name',null,['readonly'],array('class'=>'block shadow-5xl p-2 my-2
-                    w-full','id'=>'name')) }}
-                </div>
+    <div class="py-3">
+        <table class="table-auto text-center">
+          <tr class="text-black">
+            <th class="w-screen text-3xl">Id</th>
+            <th class="w-screen text-3xl">Name</th>
+            <th class="w-screen text-3xl">Contact Number</th>
+            <th class="w-screen text-3xl">Customer Pic</th>
+            <th class="w-screen text-3xl">pet</th>
 
+          </tr>
+      
+          @forelse ($customers as $customer)
+      
+          <tr>
+            <td class="text-center text-3xl">
+              <a href="{{route('customer.show',$customer->id)}}">{{$customer->id}}</a>
+            </td>
         
-
-                <div class="grid grid-cols-2 py-2">
-                    <label for="contactNum" class="text-lg">Phone Number</label>
-                    {{ Form::text('contactNum',null,['readonly'],array('class'=>'block shadow-5xl p-2
-                    my-2w-full','id'=>'contactNum')) }}
-                </div>
-
-                <div>
-                    <label for="pics" class="block text-lg pb-3">Customer Pic</label>
-                    <img src="{{ asset('imagefolder/customers/'.$Customers->pics)}}" alt="I am A Pic" width="100"
-                        height="100" class="ml-36 py-2">
-                </div>
-
-                <div class="grid justify-center w-full pr-11">
-                    <a href="{{url()->previous()}}" class="bg-gray-800 text-white font-bold py-2 px-4 mt-5 text-center"
-                        role="button">Go Back &rarr;</a>
-                </div>
-            </div>
-            </form>
-        </div>
+            <td class="text-center text-3xl">
+              {{ $customer->name }}
+            </td>
+            <td class="text-center text-3xl">
+              {{ $customer->contactNum }}
+            </td>
+            <td class="pl-12">
+              <img src="{{ asset('imagefolder/customers/'.$customer->pics)}}" alt="I am A Pic" width="75" height="75">
+            </td>
+            <td class=" text-center text-3xl">
+              {{ $customer->pets_name }}
+            </td>
+        
+          </tr>
+          @empty
+          <p>No customer Data in the Database</p>
+          @endforelse
+        </table>
         @endsection

@@ -13,14 +13,22 @@ return new class extends Migration
      */
     public function up()
     {
+
+        Schema::create("diseases", function (Blueprint $table) {
+            $table->increments("id");
+            $table->string(column: "diseases");
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
         Schema::create('consultations', function (Blueprint $table) {
             $table->increments("id");
             $table->string(column: "date");
-            $table->string(column: "disease_injury");
             $table->integer(column: "price");
             $table->string(column: "comment");
             $table->integer(column: "hoomans_id")->unsigned();
             $table->integer(column: "pets_id")->unsigned();
+            $table->integer(column: "diseases_id")->unsigned();
             $table->timestamps();
             $table->softDeletes();
             $table
@@ -32,6 +40,11 @@ return new class extends Migration
                 ->foreign("pets_id")
                 ->references("id")
                 ->on("pets")
+                ->onDelete("cascade");
+                $table
+                ->foreign("diseases_id")
+                ->references("id")
+                ->on("diseases")
                 ->onDelete("cascade");
         });
     }

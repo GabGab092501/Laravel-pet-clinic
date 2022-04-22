@@ -38,10 +38,12 @@
                 </div>
 
                 <div>
-                    <label for="type" class="text-lg">Type</label>
-                    {{ Form::text('type',null,array('class'=>'block shadow-5xl p-2 my-2 w-full','id'=>'type')) }}
-                    @if($errors->has('type'))
-                    <p class="text-center text-red-500">{{ $errors->first('type') }}</p>
+                    <label for="classify_id" class="text-lg">Type</label>
+                    {!! Form::select('classify_id',$classifys, $pets->classify_id,['class' => 'block shadow-5xl p-2
+                    my-2
+                    w-full']) !!}
+                    @if($errors->has('classify_id'))
+                    <p class="text-center text-red-500">{{ $errors->first('classify_id') }}</p>
                     @endif
                 </div>
 
