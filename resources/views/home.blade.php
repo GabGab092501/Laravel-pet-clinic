@@ -25,13 +25,14 @@
     </section>
     <nav class="main-nav">
             <ul>
-                <li> <a href="{{ URL('dashboard') }}">Dashboard</a></li>
+                <li> <a href="{{ URL('dashboard') }}">Home</a></li>
                 <li> <a href="{{ URL('pets') }}">Pets</a></li>
                 <li><a href="{{ URL('customer') }}">Customer</a></li>
                 <li><a href={{ URL('service') }}>Service</a></li>
                 <li><a href="{{ URL('consultation') }}">Consultation</a></li>
                 <li><a href="{{ URL('contact') }}">Contacts</a></li>
                 <li><a href="{{ URL('hoomans') }}">Hoomans</a></li>
+                
                 <li><a href="{{ URL('logout') }}">Logout</a></li>
             </ul>
     </nav>
