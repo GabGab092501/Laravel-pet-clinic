@@ -60,8 +60,7 @@
                         role="button"><i class="fas fa-cart-plus"></i> Add Service </a>
 
                     <a href=" {{route('transaction.show', ['id'=>$service->id]) }} " class="btn btn-success"
-                        role="button">More
-                        Info</a>
+                        role="button">View Comment</a>
 
                 </div>
             </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Animal;
 use App\Models\Customer;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\File;
@@ -26,13 +27,19 @@ class animalController extends Controller
             "=",
             "animals.customer_id"
         )
+            ->join(
+                "type",
+                "type.id",
+                "=",
+                "animals.type_id"
+            )
             ->select(
                 "customers.first_name",
                 "animals.id",
                 "animals.animal_name",
                 "animals.age",
                 "animals.gender",
-                "animals.type",
+                "type.type",
                 "animals.images",
                 "animals.customer_id",
                 "animals.deleted_at"
@@ -62,9 +69,11 @@ class animalController extends Controller
      */
     public function create()
     {
+        $type = Type::pluck("type", "id");
         $customers = Customer::pluck("first_name", "id");
         return view("animals.create", [
             "customers" => $customers,
+            "type" => $type,
         ]);
     }
 
@@ -80,7 +89,7 @@ class animalController extends Controller
         $animals->animal_name = $request->input("animal_name");
         $animals->age = $request->input("age");
         $animals->gender = $request->input("gender");
-        $animals->type = $request->input("type");
+        $animals->type_id = $request->input("type_id");
         $animals->customer_id = $request->input("customer_id");
         if ($request->hasfile("images")) {
             $file = $request->file("images");
@@ -102,21 +111,28 @@ class animalController extends Controller
      */
     public function show($id)
     {
-        $animals = Customer::leftJoin(
-            "animals",
-            "animals.id",
+        $animals = Animal::join(
+            "customers",
+            "customers.id",
             "=",
             "animals.customer_id"
         )
+            ->join(
+                "type",
+                "type.id",
+                "=",
+                "animals.type_id"
+            )
             ->select(
+                "customers.first_name",
                 "animals.id",
                 "animals.animal_name",
                 "animals.age",
                 "animals.gender",
-                "animals.type",
+                "type.type",
                 "animals.images",
-                "animals.deleted_at",
-                "animals.animal_name"
+                "animals.customer_id",
+                "animals.deleted_at"
             )
             ->where('animals.id', $id)
             ->get();
@@ -133,10 +149,12 @@ class animalController extends Controller
     public function edit($id)
     {
         $animals = Animal::find($id);
+        $type = Type::pluck("type", "id");
         $customers = Customer::pluck("first_name", "id");
         return view("animals.edit", [
             "animals" => $animals,
             "customers" => $customers,
+            "type" => $type,
         ]);
     }
 
@@ -153,7 +171,7 @@ class animalController extends Controller
         $animals->animal_name = $request->input("animal_name");
         $animals->age = $request->input("age");
         $animals->gender = $request->input("gender");
-        $animals->type = $request->input("type");
+        $animals->type_id = $request->input("type_id");
         $animals->customer_id = $request->input("customer_id");
         if ($request->hasfile("images")) {
             $destination = "uploads/animals/" . $animals->images;

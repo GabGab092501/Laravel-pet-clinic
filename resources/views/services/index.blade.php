@@ -6,8 +6,6 @@
     <a href="service/create" class="p-3 border-none italic text-white bg-black text-lg">
         Add a new service &rarr;
     </a>
-    <a href="{{ route('review') }}" class="float-right btn btn-danger text-white font-bold">Send Your
-        Feedback</a>
 </div>
 
 <div class="py-3">
@@ -25,8 +23,15 @@
 
         @forelse ($services as $service)
         <tr>
-            <td class=" text-center text-3xl">
+            @if($service->deleted_at)
+            <td class="text-center text-3xl">
+                <a href="#">{{$service->id}}</a>
+            </td>
+            @else
+            <td class="text-center text-3xl">
                 <a href="{{route('service.show',$service->id)}}">{{$service->id}}</a>
+            </td>
+            @endif
             </td>
             <td class=" text-center text-3xl">
                 {{ $service->service_name }}
@@ -37,11 +42,21 @@
             <td class="pl-12">
                 <img src="{{ asset('uploads/services/'.$service->images)}}" alt="I am A Pic" width="75" height="75">
             </td>
+            @if($service->deleted_at)
             <td class=" text-center">
+                <a href="#">
+                    <p class="text-center text-2xl bg-green-600 p-2">
+                        Update &rarr;
+                    </p>
+                </a>
+            </td>
+            @else
+            <td>
                 <a href="service/{{ $service->id }}/edit" class="text-center text-2xl bg-green-600 p-2">
                     Update &rarr;
                 </a>
             </td>
+            @endif
             <td class=" text-center">
                 {!! Form::open(array('route' => array('service.destroy', $service->id),'method'=>'DELETE')) !!}
                 <button type="submit" class="text-center text-2xl bg-red-600 p-2">

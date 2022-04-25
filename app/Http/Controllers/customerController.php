@@ -7,6 +7,7 @@ use App\Http\Requests\customerRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\DB;
 use App\Models\Customer;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -21,8 +22,8 @@ class customerController extends Controller
             "customers.id"
         )
             ->rightjoin(
-                "transaction_line",
-                "transaction_line.animal_id",
+                "transactions",
+                "transactions.animal_id",
                 "=",
                 "animals.id"
             )
@@ -30,13 +31,13 @@ class customerController extends Controller
                 "services",
                 "services.id",
                 "=",
-                "transaction_line.service_id"
+                "transactions.service_id"
             )
             ->leftjoin(
                 "transactions",
                 "transactions.id",
                 "=",
-                "transaction_line.transaction_id"
+                "transactions.transaction_id"
             )
             ->select(
                 "customers.first_name",
@@ -46,7 +47,6 @@ class customerController extends Controller
                 "transactions.id",
                 "customers.deleted_at"
             )
-
             ->orderBy("customers.id", "ASC")
             ->get();
         return view("customers.search", [
@@ -64,8 +64,8 @@ class customerController extends Controller
             "customers.id"
         )
             ->rightjoin(
-                "transaction_line",
-                "transaction_line.animal_id",
+                "transactions",
+                "transactions.animal_id",
                 "=",
                 "animals.id"
             )
@@ -73,13 +73,7 @@ class customerController extends Controller
                 "services",
                 "services.id",
                 "=",
-                "transaction_line.service_id"
-            )
-            ->leftjoin(
-                "transactions",
-                "transactions.id",
-                "=",
-                "transaction_line.transaction_id"
+                "transactions.service_id"
             )
             ->select(
                 "customers.first_name",

@@ -9,7 +9,6 @@ use App\Models\Animal;
 use App\Models\Personnel;
 use App\Models\Transaction;
 use App\Models\Customer;
-use App\Models\Transaction_line;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
@@ -32,8 +31,8 @@ class transactionController extends Controller
             "customers.id"
         )
             ->rightjoin(
-                "transaction_line",
-                "transaction_line.animal_id",
+                "transactions",
+                "transactions.animal_id",
                 "=",
                 "animals.id"
             )
@@ -41,13 +40,7 @@ class transactionController extends Controller
                 "services",
                 "services.id",
                 "=",
-                "transaction_line.service_id"
-            )
-            ->leftjoin(
-                "transactions",
-                "transactions.id",
-                "=",
-                "transaction_line.transaction_id"
+                "transactions.service_id"
             )
             ->leftjoin(
                 "personnels",
@@ -57,15 +50,16 @@ class transactionController extends Controller
             )
             ->select(
                 "transactions.id",
+                "customers.first_name",
+                "customers.last_name",
                 "animals.animal_name",
                 "services.service_name",
                 "personnels.full_name",
                 "transactions.date",
-                "transactions.deleted_at",
-                "transaction_line.deleted_at"
+                "transactions.status",
             )
 
-            ->orderBy("transaction_line.transaction_id", "ASC")
+            ->orderBy("transactions.id", "ASC")
             ->withTrashed()
             ->paginate(6);
         if (session(key: "success_message")) {
@@ -85,7 +79,30 @@ class transactionController extends Controller
 
     public function getData()
     {
-        $animals = Animal::all();
+        $animals = Animal::join(
+            "customers",
+            "customers.id",
+            "=",
+            "animals.customer_id"
+        )
+            ->join(
+                "type",
+                "type.id",
+                "=",
+                "animals.type_id"
+            )
+            ->select(
+                "customers.first_name",
+                "animals.id",
+                "animals.animal_name",
+                "animals.age",
+                "animals.gender",
+                "type.type",
+                "animals.images",
+                "animals.customer_id",
+                "animals.deleted_at"
+            )
+            ->get();
         $services = Service::all();
         return view("transaction.data", [
             "services" => $services,
@@ -118,7 +135,8 @@ class transactionController extends Controller
         $request->session()->put("cart", $cart);
         Session::put("cart", $cart);
         $request->session()->save();
-        dd(Session::all());
+        return redirect()->back();
+        // dd(Session::all());
     }
 
     public function getAnimal(Request $request, $id)
@@ -132,7 +150,8 @@ class transactionController extends Controller
         $request->session()->put("cart", $cart);
         Session::put("cart", $cart);
         $request->session()->save();
-        dd(Session::all());
+        return redirect()->back();
+        // dd(Session::all());
     }
 
     public function getRemoveItem($id)
@@ -164,22 +183,17 @@ class transactionController extends Controller
         $cart = new Cart($oldCart);
         try {
             DB::beginTransaction();
-            $transactions = new Transaction();
-            $personnels = Personnel::where("id", Auth::id())->first();
-            $transactions->personnel_id = $personnels->id;
-            $transactions->date = now();
-            $transactions->save();
-
             foreach ($cart->services as $services) {
                 foreach ($cart->animals as $animals) {
                     $id = $services["services"]["id"];
                     $animal_id = $animals["animals"]["id"];
-                    DB::table("transaction_line")->insert([
+                    DB::table("transactions")->insert([
+                        "personnel_id" => Auth::id(),
                         "service_id" => $id,
                         "animal_id" => $animal_id,
-                        "transaction_id" => $transactions->id,
                         "created_at" => now(),
                         "updated_at" => now(),
+                        "date" => now(),
                     ]);
                 }
             }
@@ -203,8 +217,8 @@ class transactionController extends Controller
             "customers.id"
         )
             ->rightjoin(
-                "transaction_line",
-                "transaction_line.animal_id",
+                "transactions",
+                "transactions.animal_id",
                 "=",
                 "animals.id"
             )
@@ -212,13 +226,7 @@ class transactionController extends Controller
                 "services",
                 "services.id",
                 "=",
-                "transaction_line.service_id"
-            )
-            ->leftjoin(
-                "transactions",
-                "transactions.id",
-                "=",
-                "transaction_line.transaction_id"
+                "transactions.service_id"
             )
             ->select(
                 "customers.first_name",
@@ -230,6 +238,7 @@ class transactionController extends Controller
             )
 
             ->orderBy("transactions.id", "DESC")
+            // ->where("transactions.id")
             ->latest("transactions.id")
             ->take("6")
             ->get();
@@ -284,18 +293,16 @@ class transactionController extends Controller
      */
     public function edit($id)
     {
-        // $transactions = Transaction::find($id);
-        // $transaction_line = Transaction_line::find($id);
-        // $personnels = Personnel::pluck("full_name", "id");
-        // $animals = Animal::pluck("animal_name", "id");
-        // $services = Service::pluck("service_name", "id");
-        // return view("transaction.edit", [
-        //     "transactions" => $transactions,
-        //     "transaction_line" => $transaction_line,
-        //     "personnels" => $personnels,
-        //     "animals" => $animals,
-        //     "services" => $services,
-        // ]);
+        $transactions = Transaction::find($id);
+        $personnels = Personnel::pluck("full_name", "id");
+        $animals = Animal::pluck("animal_name", "id");
+        $services = Service::pluck("service_name", "id");
+        return view("transaction.edit", [
+            "transactions" => $transactions,
+            "personnels" => $personnels,
+            "animals" => $animals,
+            "services" => $services,
+        ]);
     }
 
     /**
@@ -307,18 +314,16 @@ class transactionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $transactions = Transaction::find($id);
-        // $transactions->date = $request->input("date");
-        // $transactions->personnel_id = $request->input("personnel_id");
-        // $transactions->update();
-
-        // $transaction_line = Transaction_line::find($id);
-        // $transaction_line->animal_id = $request->input("animal_id");
-        // $transaction_line->service_id = $request->input("service_id");
-        // $transaction_line->update();
-        // return Redirect::to("/transaction")->withSuccessMessage(
-        //     "Transaction Data Updated!"
-        // );
+        $transactions = Transaction::find($id);
+        $transactions->date = $request->input("date");
+        $transactions->status = $request->input("status");
+        $transactions->personnel_id = $request->input("personnel_id");
+        $transactions->animal_id = $request->input("animal_id");
+        $transactions->service_id = $request->input("service_id");
+        $transactions->update();
+        return Redirect::to("transaction")->withSuccessMessage(
+            "Transaction Data Updated!"
+        );
     }
 
     /**
@@ -327,15 +332,12 @@ class transactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function Delete($id)
     {
-        // $post = Transaction::findOrFail($id);
-        // $postGroups = Transaction::where('id', $post->id)->get();
-        // DB::table('transaction_line')->whereIn('transaction_id', $postGroups->pluck('id'))->delete();
-        // Transaction::where('transaction_id', $post->id)->delete();
-
-        // return Redirect::to("/transaction")->withSuccessMessage(
-        //     "Transaction Data Deleted!"
-        // );
+        $transactions = Transaction::findOrFail($id);
+        $transactions->forceDelete();
+        return Redirect::route("transaction.index")->withSuccessMessage(
+            "Transaction Data Deleted!"
+        );
     }
 }

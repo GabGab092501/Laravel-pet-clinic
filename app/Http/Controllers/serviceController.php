@@ -83,7 +83,7 @@ class serviceController extends Controller
             ->where('services.id', $id)
             ->get();
 
-        return View::make('transaction.show', compact('services'));
+        return View::make('services.show', compact('services'));
     }
 
     /**

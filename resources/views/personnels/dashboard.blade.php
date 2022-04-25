@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="text-center text-5xl pb-8 pt-6 font-bold text-blue-600">Welcome To ACME Pet Clinic, {{
+{{-- <h1 class="text-center text-5xl pb-8 pt-6 font-bold text-blue-600">Welcome To ACME Pet Clinic, {{
   Auth::user()->full_name }}</h1>
 <hr>
 <div class="py-3">
@@ -29,6 +29,6 @@
 <hr>
 <h1 class="text-center text-5xl pt-20 px-4 text-green-600">Our mission is to provide the highest quality animal care to
   your pet and improve his or her quality of life through the preservation, enhancement, and restoration of your pets
-  health.</h1>
+  health.</h1> --}}
 
 @endsection

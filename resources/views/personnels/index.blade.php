@@ -18,8 +18,15 @@
 
         @forelse ($personnels as $personnel)
         <tr>
-            <td class="text-center text-2xl">
+            @if($personnel->deleted_at)
+            <td class="text-center text-3xl">
+                <a href="#">{{$personnel->id}}</a>
+            </td>
+            @else
+            <td class="text-center text-3xl">
                 <a href="{{route('personnel.show',$personnel->id)}}">{{$personnel->id}}</a>
+            </td>
+            @endif
             </td>
             <td class="text-center text-2xl">
                 {{ $personnel->full_name }}
@@ -33,11 +40,21 @@
             <td class="pl-12">
                 <img src="{{ asset('uploads/personnels/'.$personnel->images)}}" alt="I am A Pic" width="75" height="75">
             </td>
+            @if($personnel->deleted_at)
             <td class=" text-center">
+                <a href="#">
+                    <p class="text-center text-2xl bg-green-600 p-2">
+                        Update &rarr;
+                    </p>
+                </a>
+            </td>
+            @else
+            <td>
                 <a href="personnel/{{ $personnel->id }}/edit" class="text-center text-2xl bg-green-600 p-2">
                     Update &rarr;
                 </a>
             </td>
+            @endif
             <td class=" text-center">
                 {!! Form::open(array('route' => array('personnel.destroy', $personnel->id),'method'=>'DELETE')) !!}
                 <button type="submit" class="text-center text-2xl bg-red-600 p-2">

@@ -8,7 +8,23 @@
             Show Customer
         </h1>
     </div>
-    <div>
+    @forelse ($customers as $customer)
+    <section class="flex flex-wrap justify-center gap-3 p-12 w-full">
+        <div
+            class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+            <img src="{{ asset('uploads/customers/'.$customer->images)}}" alt="I am A Pic" width="400"
+                style="max-height: 12rem;">
+            <div class="p-3">
+                <h5 class="mb-2 text-2xl font-bold text-center tracking-tight">{{ $customer->first_name }}
+                </h5>
+                ID<p class="mb-2 text-lg font-bold">{{ $customer->id }}</p>
+                Last Name<p class="mb-2 text-lg font-bold">{{ $customer->last_name }}</p>
+                Phone Number<p class="mb-2 text-lg font-bold">{{ $customer->phone_number }}</p>
+                Pet<p class="mb-2 text-lg font-bold">{{ $customer->animal_name }}</p>
+            </div>
+        </div>
+    </section>
+    {{-- <div>
         <div class="py-3">
             <table class="table-auto text-center">
                 <tr class="text-white">
@@ -42,7 +58,7 @@
                     <td class=" text-center text-3xl">
                         {{ $customer->animal_name }}
                     </td>
-                </tr>
+                </tr> --}}
                 @empty
                 <p>No Customer Data in the Database</p>
                 @endforelse

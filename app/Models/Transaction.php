@@ -10,13 +10,11 @@ class Transaction extends Model
 {
     use HasFactory;
 
-    use SoftDeletes;
+    // use SoftDeletes;
 
-    protected $dates = ["deleted_at"];
+    // protected $dates = ["deleted_at"];
 
     protected $table = "transactions";
-
-    protected $fillable = ["date", "personnel_id"];
 
     protected $primaryKey = "id";
 

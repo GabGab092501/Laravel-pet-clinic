@@ -10,9 +10,9 @@ class Transaction_line extends Model
 {
     use HasFactory;
 
-    use SoftDeletes;
+    // use SoftDeletes;
 
-    protected $dates = ["deleted_at"];
+    // protected $dates = ["deleted_at"];
 
     protected $table = "transaction_line";
 

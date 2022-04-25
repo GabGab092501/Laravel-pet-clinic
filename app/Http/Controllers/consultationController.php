@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Personnel;
 use App\Models\Animal;
+use App\Models\diseaseInjury;
 use App\Models\Consultation;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
@@ -22,12 +23,13 @@ class consultationController extends Controller
             "consultations.personnel_id"
         )
             ->join("animals", "animals.id", "=", "consultations.animal_id")
+            ->join("disease_injury", "disease_injury.id", "=", "consultations.disease_injury_id")
             ->select(
                 "personnels.full_name",
                 "animals.animal_name",
                 "consultations.id",
                 "consultations.date",
-                "consultations.disease_injury",
+                "disease_injury.disease_injury",
                 "consultations.price",
                 "consultations.comment",
                 "consultations.personnel_id",
@@ -51,12 +53,13 @@ class consultationController extends Controller
             "consultations.personnel_id"
         )
             ->join("animals", "animals.id", "=", "consultations.animal_id")
+            ->join("disease_injury", "disease_injury.id", "=", "consultations.disease_injury_id")
             ->select(
                 "personnels.full_name",
                 "animals.animal_name",
                 "consultations.id",
                 "consultations.date",
-                "consultations.disease_injury",
+                "disease_injury.disease_injury",
                 "consultations.price",
                 "consultations.comment",
                 "consultations.personnel_id",
@@ -85,12 +88,13 @@ class consultationController extends Controller
             "consultations.personnel_id"
         )
             ->join("animals", "animals.id", "=", "consultations.animal_id")
+            ->join("disease_injury", "disease_injury.id", "=", "consultations.disease_injury_id")
             ->select(
                 "personnels.full_name",
                 "animals.animal_name",
                 "consultations.id",
                 "consultations.date",
-                "consultations.disease_injury",
+                "disease_injury.disease_injury",
                 "consultations.price",
                 "consultations.comment",
                 "consultations.personnel_id",
@@ -124,9 +128,11 @@ class consultationController extends Controller
     {
         $animals = Animal::pluck("animal_name", "id");
         $personnels = Personnel::pluck("full_name", "id");
+        $disease_injury = diseaseInjury::pluck("disease_injury", "id");
         return view("consultations.create", [
             "animals" => $animals,
             "personnels" => $personnels,
+            "disease_injury" => $disease_injury,
         ]);
     }
 
@@ -142,7 +148,7 @@ class consultationController extends Controller
             DB::beginTransaction();
             $consultations = new Consultation();
             $consultations->date = $request->input("date");
-            $consultations->disease_injury = $request->input("disease_injury");
+            $consultations->disease_injury_id = $request->input("disease_injury_id");
             $consultations->price = $request->input("price");
             $consultations->comment = $request->input("comment");
             $consultations->personnel_id = $request->input("personnel_id");
@@ -171,10 +177,12 @@ class consultationController extends Controller
         $consultations = Consultation::find($id);
         $animals = Animal::pluck("animal_name", "id");
         $personnels = Personnel::pluck("full_name", "id");
+        $disease_injury = diseaseInjury::pluck("disease_injury", "id");
         return view("consultations.show", [
             "animals" => $animals,
             "personnels" => $personnels,
             "consultations" => $consultations,
+            "disease_injury" => $disease_injury,
         ]);
     }
 
@@ -189,10 +197,12 @@ class consultationController extends Controller
         $consultations = Consultation::find($id);
         $animals = Animal::pluck("animal_name", "id");
         $personnels = Personnel::pluck("full_name", "id");
+        $disease_injury = diseaseInjury::pluck("disease_injury", "id");
         return view("consultations.edit", [
             "animals" => $animals,
             "personnels" => $personnels,
             "consultations" => $consultations,
+            "disease_injury" => $disease_injury,
         ]);
     }
 
@@ -209,7 +219,7 @@ class consultationController extends Controller
             DB::beginTransaction();
             $consultations = Consultation::find($id);
             $consultations->date = $request->input("date");
-            $consultations->disease_injury = $request->input("disease_injury");
+            $consultations->disease_injury_id = $request->input("disease_injury_id");
             $consultations->price = $request->input("price");
             $consultations->comment = $request->input("comment");
             $consultations->personnel_id = $request->input("personnel_id");

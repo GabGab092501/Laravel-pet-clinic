@@ -26,8 +26,15 @@
 
         @forelse ($animals as $animal)
         <tr>
-            <td class=" text-center text-3xl">
+            @if($animal->deleted_at)
+            <td class="text-center text-3xl">
+                <a href="#">{{$animal->id}}</a>
+            </td>
+            @else
+            <td class="text-center text-3xl">
                 <a href="{{route('animals.show',$animal->id)}}">{{$animal->id}}</a>
+            </td>
+            @endif
             </td>
             <td class=" text-center text-3xl">
                 {{ $animal->animal_name }}
@@ -47,11 +54,21 @@
             <td class="pl-10">
                 <img src="{{ asset('uploads/animals/'.$animal->images)}}" alt="I am A Pic" width="75" height="75">
             </td>
+            @if($animal->deleted_at)
             <td class=" text-center">
-                <a href="animals/{{ $animal->id }}/edit" class="text-center text-lg bg-green-600 p-2">
+                <a href="#">
+                    <p class="text-center text-2xl bg-green-600 p-2">
+                        Update &rarr;
+                    </p>
+                </a>
+            </td>
+            @else
+            <td>
+                <a href="animals/{{ $animal->id }}/edit" class="text-center text-2xl bg-green-600 p-2">
                     Update &rarr;
                 </a>
             </td>
+            @endif
             <td class=" text-center">
                 {!! Form::open(array('route' => array('animals.destroy', $animal->id),'method'=>'DELETE')) !!}
                 <button type="submit" class="text-center text-lg bg-red-600 p-2">

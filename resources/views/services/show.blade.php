@@ -7,7 +7,21 @@
             Show Services
         </h1>
     </div>
-    <div class="py-3">
+    @forelse ($services as $service)
+    <section class="flex flex-wrap justify-center gap-3 p-12 w-full">
+        <div
+            class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+            <img src="{{asset('uploads/services/'.$service->images)}}" alt="I am A Pic" width="400"
+                style="max-height: 12rem;">
+            <div class="p-3">
+                <h5 class="mb-2 text-2xl font-bold text-center tracking-tight">{{ $service->service_name }}
+                </h5>
+                ID<p class="mb-2 text-lg font-bold">{{$service->id}}</p>
+                Cost<p class="mb-2 text-lg font-bold">{{ $service->cost }}</p>
+            </div>
+        </div>
+    </section>
+    {{-- <div class="py-3">
         <table class="table-auto">
             <tr class="text-white text-center">
                 <th class="w-screen text-3xl">Id</th>
@@ -31,7 +45,7 @@
                     <img src="{{ asset('uploads/services/'.$service->images)}}" alt="I am A Pic" width="75" height="75">
                 </td>
 
-            </tr>
+            </tr> --}}
             @empty
             <p>No Service Data in the Database</p>
             @endforelse

@@ -1,6 +1,9 @@
 @extends('body')
 
 @section('contents')
+
+<a href="{{ route('review') }}" class=" mt-4 ml-4 btn btn-danger text-white font-bold">Add Comment</a>
+
 <div class="py-3">
     <table class="table-auto">
         <tr class="text-white text-center">

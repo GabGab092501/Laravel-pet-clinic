@@ -21,15 +21,6 @@
                 </div>
 
                 <div>
-                    <label for="disease_injury" class="text-lg">Disease or Injury</label>
-                    {{ Form::select('disease_injury',array('Cataracts' => 'Cataracts', 'Arthritis' => 'Arthritis',
-                    'Ear_Infections' => 'Ear_Infections', 'Kennel_Cough' => 'Kennel_Cough',
-                    'Diarrhea' => 'Diarrhea', 'Fleas_and_ticks' => 'Fleas_and_ticks',
-                    'Heartworm' => 'Heartworm', 'Broken_Bones' => 'Broken_Bones',
-                    'Obesity' => 'Obesity', 'Cancer' => 'Cancer'))}}
-                </div>
-
-                <div>
                     <label for="price" class="text-lg">Price</label>
                     {{ Form::text('price',null,array('class'=>'block shadow-5xl p-2 my-2 w-full','id'=>'price')) }}
                     @if($errors->has('price'))
@@ -54,6 +45,19 @@
                     w-full']) !!}
                     @if($errors->has('personnel_id'))
                     <p class="text-center text-red-500">{{ $errors->first('personnel_id ') }}</p>
+                    @endif
+                </div>
+
+                <div>
+                    <label for="disease_injury_id" class="text-lg">Vet</label>
+                    {!! Form::select('disease_injury_id',$disease_injury, $consultations->disease_injury_id ,['class' =>
+                    'block
+                    shadow-5xl
+                    p-2
+                    my-2
+                    w-full']) !!}
+                    @if($errors->has('disease_injury_id'))
+                    <p class="text-center text-red-500">{{ $errors->first('disease_injury_id ') }}</p>
                     @endif
                 </div>
 

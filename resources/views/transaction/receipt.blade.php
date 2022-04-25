@@ -23,9 +23,6 @@
                 <thead class="bg-gray-50">
                     <tr>
                         <th class="text-center px-4 py-2 text-xs text-gray-500 ">
-                            Transaction Id
-                        </th>
-                        <th class="text-center px-4 py-2 text-xs text-gray-500 ">
                             Customer
                         </th>
                         <th class="text-center px-4 py-2 text-xs text-gray-500 ">
@@ -41,11 +38,6 @@
                 </thead>
                 <tbody class="bg-white">
                     <tr class="whitespace-nowrap">
-                        <td class="text-center px-6 py-4">
-                            <div class="text-sm text-gray-900">
-                                {{ $customer->id }}
-                            </div>
-                        </td>
                         <td class="text-center px-6 py-4">
                             <div class="text-sm text-gray-900">
                                 {{ $customer->first_name }}

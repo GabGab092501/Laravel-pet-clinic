@@ -7,6 +7,8 @@ use App\Http\Controllers\customerController;
 use App\Http\Controllers\personnelController;
 use App\Http\Controllers\serviceController;
 use App\Http\Controllers\contactController;
+use App\Http\Controllers\typeController;
+use App\Http\Controllers\diseaseInjuryController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\consolationController;
 use App\Http\Controllers\transactionController;
@@ -97,9 +99,13 @@ Route::get("/result", "App\Http\Controllers\customerController@result")
     ->name("result")
     ->middleware("auth");
 
-Route::resource("/transaction", transactionController::class)->middleware(
-    "auth"
-);
+Route::get('/transaction', 'transactionController@index')->name("transaction.index");
+Route::get('/transaction/{id}/edit', 'transactionController@edit')->name('transaction.edit')->middleware("auth");
+Route::post('/transaction/update/{id}', ['uses' => 'transactionController@update', 'as' => 'transaction.update'])->middleware("auth");
+Route::get("/transaction/Delete/{id}", [
+    "uses" => "transactionController@Delete",
+    "as" => "transaction.Delete",
+])->middleware("auth");
 
 Route::get("/", function () {
     return view("welcome");
@@ -158,6 +164,18 @@ Route::post("reset", [
 Route::get("reset", [
     "uses" => "personnelController@Reset",
     "as" => "personnel.reset",
+]);
+
+Route::resource("/type", "typeController")->middleware("auth");
+Route::get("/type/restore/{id}", [
+    "uses" => "typeController@restore",
+    "as" => "type.restore",
+]);
+
+Route::resource("/diseaseInjury", "diseaseInjuryController")->middleware("auth");
+Route::get("/diseaseInjury/restore/{id}", [
+    "uses" => "diseaseInjuryController@restore",
+    "as" => "diseaseInjury.restore",
 ]);
 
 Route::get("shopping-cart", [

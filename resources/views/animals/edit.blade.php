@@ -38,20 +38,22 @@
                 </div>
 
                 <div>
-                    <label for="type" class="text-lg">Type</label>
-                    {{ Form::text('type',null,array('class'=>'block shadow-5xl p-2 my-2 w-full','id'=>'type')) }}
-                    @if($errors->has('type'))
-                    <p class="text-center text-red-500">{{ $errors->first('type') }}</p>
-                    @endif
-                </div>
-
-                <div>
                     <label for="images" class="block text-lg pb-3">Animal Pic</label>
                     {{ Form::file('images',null,array('class'=>'block shadow-5xl p-2 my-2 w-full','id'=>'images')) }}
                     <img src="{{ asset('uploads/animals/'.$animals->images)}}" alt="I am A Pic" width="100" height="100"
                         class="ml-24 py-2">
                     @if($errors->has('images'))
                     <p class="text-center text-red-500">{{ $errors->first('images') }}</p>
+                    @endif
+                </div>
+
+                <div>
+                    <label for="type_id" class="text-lg">Type</label>
+                    {!! Form::select('type_id',$type, $animals->type_id,['class' => 'block shadow-5xl p-2
+                    my-2
+                    w-full']) !!}
+                    @if($errors->has('type_id'))
+                    <p class="text-center text-red-500">{{ $errors->first('type_id') }}</p>
                     @endif
                 </div>
 

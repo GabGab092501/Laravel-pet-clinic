@@ -13,16 +13,29 @@ return new class extends Migration
      */
     public function up()
     {
+
+        Schema::create("type", function (Blueprint $table) {
+            $table->increments("id");
+            $table->string(column: "type");
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
         Schema::create("animals", function (Blueprint $table) {
             $table->increments("id");
             $table->string(column: "animal_name");
             $table->integer(column: "age");
             $table->string(column: "gender");
-            $table->string(column: "type");
             $table->string(column: "images")->default('example.jpg');
+            $table->integer(column: "type_id")->unsigned();
             $table->integer(column: "customer_id")->unsigned();
             $table->timestamps();
             $table->softDeletes();
+            $table
+                ->foreign("type_id")
+                ->references("id")
+                ->on("type")
+                ->onDelete("cascade");
             $table
                 ->foreign("customer_id")
                 ->references("id")
@@ -39,5 +52,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists("animals");
+        Schema::dropIfExists("type");
     }
 };

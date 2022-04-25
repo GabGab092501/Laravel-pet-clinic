@@ -23,23 +23,6 @@
                     </div>
 
                     <div>
-                        <label for="disease_injury" class="text-lg">Disease or Injury</label>
-                        <select name="disease_injury" id="disease_injury" class="block shadow-5xl p-2 my-2 w-full"
-                            value="{{old('disease_injury')}}">
-                            <option>Cataracts</option>
-                            <option>Arthritis</option>
-                            <option>Ear_Infections</option>
-                            <option>Kennel_Cough</option>
-                            <option>Diarrhea</option>
-                            <option>Fleas_and_ticks</option>
-                            <option>Heartworm</option>
-                            <option>Broken_Bones</option>
-                            <option>Obesity</option>
-                            <option>Cancer</option>
-                        </select>
-                    </div>
-
-                    <div>
                         <label for="price" class="text-lg">Price</label>
                         <input type="text" class="block shadow-5xl p-2 my-2 w-full" id="price" name="price"
                             placeholder="Price" value="{{old('price')}}">
@@ -61,6 +44,13 @@
                     <select name="personnel_id" id="personnel_id" class="block shadow-5xl p-2 w-full">
                         @foreach ($personnels as $id => $personnel)
                         <option value="{{ $id }}">{{ $personnel }}</option>
+                        @endforeach
+                    </select>
+
+                    <label for="disease_injury_id" class="text-lg">Disease & Injury</label>
+                    <select name="disease_injury_id" id="disease_injury_id" class="block shadow-5xl p-2 w-full">
+                        @foreach ($disease_injury as $id => $disease_injury)
+                        <option value="{{ $id }}">{{ $disease_injury }}</option>
                         @endforeach
                     </select>
 

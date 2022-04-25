@@ -26,8 +26,15 @@
     @forelse ($customers as $customer)
 
     <tr>
+      @if($customer->deleted_at)
+      <td class="text-center text-3xl">
+        <a href="#">{{$customer->id}}</a>
+      </td>
+      @else
       <td class="text-center text-3xl">
         <a href="{{route('customer.show',$customer->id)}}">{{$customer->id}}</a>
+      </td>
+      @endif
       </td>
       <td class="text-center text-3xl">
         {{ $customer->first_name }}
@@ -44,11 +51,23 @@
       <td class=" text-center text-3xl">
         {{ $customer->animal_name }}
       </td>
+
+      @if($customer->deleted_at)
       <td class=" text-center">
+        <a href="#">
+          <p class="text-center text-2xl bg-green-600 p-2">
+            Update &rarr;
+          </p>
+        </a>
+      </td>
+      @else
+      <td>
         <a href="customer/{{ $customer->id }}/edit" class="text-center text-2xl bg-green-600 p-2">
           Update &rarr;
         </a>
       </td>
+      @endif
+
       <td class=" text-center">
         {!! Form::open(array('route' => array('customer.destroy', $customer->id),'method'=>'DELETE')) !!}
         <button type="submit" class="text-center text-2xl bg-red-600 p-2 my-2">

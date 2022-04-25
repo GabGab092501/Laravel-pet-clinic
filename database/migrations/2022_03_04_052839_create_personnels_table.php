@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string(column: "password");
             $table->string(column: "role");
             $table->string(column: "images")->default('example.jpg');
+            $table->timestamp("email_verified_at")->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

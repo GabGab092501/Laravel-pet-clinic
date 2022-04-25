@@ -41,15 +41,6 @@
                     </div>
 
                     <div>
-                        <label for="type" class="text-lg">Type</label>
-                        <input type="text" class="block shadow-5xl p-2 my-2 w-full" id="type" name="type"
-                            placeholder="Type of Animal" value="{{old('type')}}">
-                        @if($errors->has('type'))
-                        <p class="text-center text-red-500">{{ $errors->first('type') }}</p>
-                        @endif
-                    </div>
-
-                    <div>
                         <label for="images" class="text-lg">Animal Pic</label>
                         <input type="file" class="block shadow-5xl p-2 w-full" id="images" name="images"
                             value="{{old('images')}}">
@@ -57,6 +48,13 @@
                         <p class="text-center text-red-500">{{ $errors->first('images') }}</p>
                         @endif
                     </div>
+
+                    <label for="type_id" class="text-lg">Type</label>
+                    <select name="type_id" id="type_id" class="block shadow-5xl p-2 w-full">
+                        @foreach ($type as $id => $type)
+                        <option value="{{ $id }}">{{ $type }}</option>
+                        @endforeach
+                    </select>
 
                     <label for="customer_id" class="text-lg">Customer</label>
                     <select name="customer_id" id="customer_id" class="block shadow-5xl p-2 w-full">

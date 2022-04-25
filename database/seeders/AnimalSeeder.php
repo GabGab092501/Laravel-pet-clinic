@@ -19,13 +19,14 @@ class AnimalSeeder extends Seeder
     {
         $faker = Faker::create();
         $customer = DB::table('customers')->pluck('id');
+        $type = DB::table('type')->pluck('id');
         foreach (range(1, 10) as $index) {
             Animal::create([
                 'customer_id' => $faker->randomElement($customer),
                 'animal_name' => $faker->name(),
                 'age' => $faker->randomDigit(),
                 'gender' => $faker->randomElement(['Male', 'Female']),
-                'type' => $faker->randomElement(['Dog', 'Cat', 'Hamster']),
+                'type_id' => $faker->randomElement($type),
                 "images" => $faker->image(
                     "public/uploads/animals",
                     640,
