@@ -36,6 +36,17 @@
             <button><a href={{ URL('personnel') }}>
                     <h5 class="mr-4">Personnel</h5>
                 </a></button>
+            <a href="{{ URL('detail') }}" class="w3-bar-item w3-button w3-mobile">
+                <h5>Test</h5>
+            </a>
+
+            <li class="nav-item">
+                <a href="{{ route('transaction.shoppingCart') }}">
+                    <i class="fa fa-paw" aria-hidden="true"></i> Pet Transaction
+                    <span class="text-xs text-white">{{ Session::has('cart') ? Session::get('cart')->totalCost :
+                        '' }}</span>
+                </a>
+            </li>
         </ul>
     </nav>
 </header>

@@ -12,6 +12,77 @@ use App\Models\Customer;
 class customerController extends Controller
 {
 
+    public function search()
+    {
+        $customers = Customer::rightJoin(
+            "pets",
+            "pets.customer_id",
+            "=",
+            "customers.id"
+        )
+            ->rightjoin(
+                "transacs",
+                "transacs.pets_id",
+                "=",
+                "pets.id"
+            )
+            ->rightjoin(
+                "services",
+                "services.id",
+                "=",
+                "transacs.service_id"
+            )
+            ->select(
+                "customers.name",
+                "pets.pets_name",
+                "services.service_name",
+                "services.cost",
+                "transacs.id",
+            )
+            ->orderBy("customers.id", "ASC")
+            ->get();
+        return view("customers.search", [
+            "customers" => $customers,
+        ]);
+    }
+
+    public function result()
+    {
+        $result = $_GET["result"];
+        $customers = Customer::rightJoin(
+            "pets",
+            "pets.customer_id",
+            "=",
+            "customers.id"
+        )
+            ->rightjoin(
+                "transacs",
+                "transacs.pets_id",
+                "=",
+                "pets.id"
+            )
+            ->rightjoin(
+                "services",
+                "services.id",
+                "=",
+                "transacs.service_id"
+            )
+            ->select(
+                "customers.name",
+                "pets.pets_name",
+                "services.service_name",
+                "services.cost",
+                "transacs.id",
+                "customers.deleted_at"
+            )
+
+            ->where("customers.name", "LIKE", "%" . $result . "%")
+            ->get();
+        return view("customers.result", [
+            "customers" => $customers,
+        ]);
+    }
+
 
     /**
      * Display a listing of the resource.
@@ -39,7 +110,6 @@ class customerController extends Controller
             ->paginate(3);
 
         return view("customers.index", ["customers" => $Customers]);
-       
     }
 
     /**
@@ -62,7 +132,7 @@ class customerController extends Controller
     {
         $Customers = new Customer();
         $Customers->name = $request->input("name");
-      
+
         $Customers->contactNum = $request->input("contactNum");
         if ($request->hasfile("pics")) {
             $file = $request->file("pics");

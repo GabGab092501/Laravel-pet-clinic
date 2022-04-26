@@ -13,31 +13,21 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create("transacs", function (Blueprint $table) {
             $table->increments("id");
             $table->string(column: "date");
-            $table->integer(column: "hoomans_id")->unsigned();
+            $table->string(column: "status")->default('On Going');
+            $table->integer(column: "hooman_id")->unsigned();
+            $table->integer(column: "pets_id")->unsigned();
+            $table->integer(column: "service_id")->unsigned();
             $table->timestamps();
-            $table->softDeletes();
             $table
-                ->foreign("hoomans_id")
+                ->foreign("hooman_id")
                 ->references("id")
                 ->on("hoomans")
                 ->onDelete("cascade");
-        });
-        Schema::create('transaction_line', function (Blueprint $table) {
-            $table->integer(column: "transaction_id")->unsigned();
-            $table->integer(column: "pet_id")->unsigned();
-            $table->integer(column: "service_id")->unsigned();
-            $table->timestamps();
-            $table->softDeletes();
             $table
-                ->foreign("transaction_id")
-                ->references("id")
-                ->on("transactions")
-                ->onDelete("cascade");
-            $table
-                ->foreign("pet_id")
+                ->foreign("pets_id")
                 ->references("id")
                 ->on("pets")
                 ->onDelete("cascade");

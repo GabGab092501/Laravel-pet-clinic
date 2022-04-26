@@ -9,8 +9,7 @@
     <title>Search Pets</title>
 </head>
 
-<body
-    style="background-image:linear-gradient(rgba(212, 212, 212, 0.1),rgba(212,212,212,0.1)), url(https://wallpapercave.com/wp/B1sODrM.jpg); background-size:cover;">
+<body>
     <hr>
     <h1 class="text-center text-blue-600 text-3xl font-bold pt-6">CUSTOMER TRANSACTION</h1>
     <div class="py-3">
@@ -29,10 +28,10 @@
                     {{ $customer->id }}
                 </td>
                 <td class=" text-center text-4xl">
-                    {{ $customer->first_name }}
+                    {{ $customer->name }}
                 </td>
                 <td class=" text-center text-4xl">
-                    {{ $customer->animal_name }}
+                    {{ $customer->pets_name }}
                 </td>
                 <td class=" text-center text-4xl">
                     {{ $customer->service_name }}

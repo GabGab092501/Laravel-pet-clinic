@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create("contacts", function (Blueprint $table) {
+        Schema::create("comments", function (Blueprint $table) {
             $table->increments("id");
             $table->string(column: "name");
             $table->string(column: "email");
-            $table->string(column: "phone_number");
-            $table->string(column: "review");
+            $table->string(column: "feedback");
             $table->integer(column: "service_id")->unsigned();
             $table->timestamps();
             $table->softDeletes();
@@ -37,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists("contacts");
+        Schema::dropIfExists("comments");
     }
 };

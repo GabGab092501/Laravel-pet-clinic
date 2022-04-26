@@ -1,4 +1,4 @@
-@extends('home')
+{{-- @extends('home')
 
 @section('contents')
 
@@ -86,4 +86,4 @@
   <div class="pt-6 px-4">{{ $contacts->links( )}}</div>
 </div>
 </div>
-@endsection
+@endsection --}}

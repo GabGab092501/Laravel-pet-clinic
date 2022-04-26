@@ -6,10 +6,9 @@ use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Cart;
 use App\Models\Pets;
-use App\Models\Personnel;
+use App\Models\Hoomans;
 use App\Models\Transaction;
 use App\Models\Customer;
-use App\Models\Transaction_line;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
@@ -31,9 +30,15 @@ class transactionController extends Controller
             "=",
             "customers.id"
         )
+            ->leftjoin(
+                "hoomans",
+                "hoomans.id",
+                "=",
+                "transacs.hoomans_id"
+            )
             ->rightjoin(
-                "transaction_line",
-                "transaction_line.pets_id",
+                "transacs",
+                "transacs.pets_id",
                 "=",
                 "pets.id"
             )
@@ -41,152 +46,153 @@ class transactionController extends Controller
                 "services",
                 "services.id",
                 "=",
-                "transaction_line.service_id"
-            )
-            ->leftjoin(
-                "transactions",
-                "transactions.id",
-                "=",
-                "transaction_line.transaction_id"
-            )
-            ->leftjoin(
-                "hoomans",
-                "hoomans.id",
-                "=",
-                "transactions.personnel_id"
-            )
-            ->select(
-                "transactions.id",
-                "pets.pets_name",
-                "services.service_name",
-                "hoomans.name",
-                "transactions.date",
-                "transactions.deleted_at",
-                "transaction_line.deleted_at",
+                "transacs.service_id"
             )
 
-            ->orderBy("transaction_line.transaction_id", "ASC")
+            ->select(
+                "transacs.id",
+                "customers.full_name",
+                "pets.pets_name",
+                "services.service_name",
+                "hoomans.full_name",
+                "transacs.date",
+                "transacs.status",
+            )
+
+            ->orderBy("transacs.id", "ASC")
             ->withTrashed()
             ->paginate(6);
-        if (session(key: "success_message")) {
-            Alert::image(
-                "Congratulations!",
-                session(key: "success_message"),
-                "https://media1.giphy.com/media/RlI8KU5ZPym0f1bZoF/giphy.gif?cid=6c09b952413438a6eef5934ef4253170b611937fa7566f75&rid=giphy.gif&ct=s",
-                "200",
-                "200",
-                "I Am A Pic"
-            );
-        }
         return view("transaction.index", [
             "customers" => $customers,
         ]);
     }
 
-    public function getData()
+    public function getDetail()
     {
-        $pets = pets::all();
+        $pets = Pets::join(
+            "customers",
+            "customers.id",
+            "=",
+            "pets.customer_id"
+        )
+            ->join(
+                "classify",
+                "classify.id",
+                "=",
+                "pets.classify_id"
+            )
+            ->select(
+                "customers.name",
+                "pets.id",
+                "pets.pets_name",
+                "pets.gender",
+                "classify.classify",
+                "pets.images",
+                "pets.customer_id",
+                "pets.deleted_at"
+            )
+            ->get();
         $services = Service::all();
-        return view('transaction.data', [
-            'services' => $services,
-            'pets' => $pets,
+        return view("transaction.detail", [
+            "services" => $services,
+            "pets" => $pets,
         ]);
     }
 
     public function getCart()
     {
-        if (!Session::has('cart')) {
-            return view('transaction.shopping-cart');
+        if (!Session::has("cart")) {
+            return view("transaction.shopping-cart");
         }
-        $oldService = Session::get('cart');
+        $oldService = Session::get("cart");
         $cart = new Cart($oldService);
-        return view('transaction.shopping-cart', ['services' => $cart->services, 'pets' => $cart->pets, 'totalCost' => $cart->totalCost]);
+        return view("transaction.shopping-cart", [
+            "services" => $cart->services,
+            "pets" => $cart->pets,
+            "totalCost" => $cart->totalCost,
+        ]);
     }
 
     public function getAddToCart(Request $request, $id)
     {
         $services = Service::find($id);
-        $oldService = Session::has('cart') ? $request->session()->get('cart') : null;
+        $oldService = Session::has("cart")
+            ? $request->session()->get("cart")
+            : null;
         $cart = new Cart($oldService);
         $cart->add($services, $services->id);
-        $request->session()->put('cart', $cart);
-        Session::put('cart', $cart);
+        $request->session()->put("cart", $cart);
+        Session::put("cart", $cart);
         $request->session()->save();
-        dd(Session::all());
+        return redirect()->route("detail");
     }
 
-    public function getpets(Request $request, $id)
+    public function getPet(Request $request, $id)
     {
-        $pets = pets::find($id);
-        $oldService = Session::has('cart') ? $request->session()->get('cart') : null;
+        $pets =  pets::find($id);
+        $oldService = Session::has("cart")
+            ? $request->session()->get("cart")
+            : null;
         $cart = new Cart($oldService);
-        $cart->addpets($pets, $pets->id);
-        $request->session()->put('cart', $cart);
-        Session::put('cart', $cart);
+        $cart->addPet($pets, $pets->id);
+        $request->session()->put("cart", $cart);
+        Session::put("cart", $cart);
         $request->session()->save();
-        dd(Session::all());
+        return redirect()->route("detail");
     }
-
 
     public function getRemoveItem($id)
     {
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $oldCart = Session::has("cart") ? Session::get("cart") : null;
         $cart = new Cart($oldCart);
         $cart->removeService($id);
         if (count($cart->services) > 0) {
-            Session::put('cart', $cart);
+            Session::put("cart", $cart);
         } else {
-            Session::forget('cart');
+            Session::forget("cart");
         }
-        return redirect()->route('transaction.shoppingCart');
     }
 
     public function removeService($id)
     {
-        $this->totalCost -= $this->services[$id]['cost'];
+        $this->totalCost -= $this->services[$id]["cost"];
         unset($this->services[$id]);
+        unset($this->pets[$id]);
     }
 
     public function postCheckout(Request $request)
     {
-        if (!Session::has('cart')) {
-            return redirect()->route('transaction.index');
+        if (!Session::has("cart")) {
+            return redirect()->route("transaction.index");
         }
-        $oldCart = Session::get('cart');
+        $oldCart = Session::get("cart");
         $cart = new Cart($oldCart);
         try {
             DB::beginTransaction();
-            $transactions = new Transaction();
-            $hoomans =  Personnel::where('id', Auth::id())->first();
-            $transactions->personnel_id = $hoomans->id;
-            $transactions->date = now();
-            $transactions->save();
-
             foreach ($cart->services as $services) {
                 foreach ($cart->pets as $pets) {
-                    $id = $services['services']['id'];
-                    $pets_id = $pets['pets']['id'];
-                    DB::table('transaction_line')->insert(
-                        [
-                            'service_id' => $id,
-                            'pets_id' => $pets_id,
-                            'transaction_id' => $transactions->id,
-                            'created_at' => now(),
-                            'updated_at' => now(),
-                        ]
-                    );
+                    $id = $services["services"]["id"];
+                    $pets_id = $pets["pets"]["id"];
+                    DB::table("transacs")->insert([
+                        "hooman_id" => Auth::id(),
+                        "service_id" => $id,
+                        "pets_id" => $pets_id,
+                        "date" => now(),
+                    ]);
                 }
             }
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->route('transaction.shoppingCart')->with('error', $e->getMessage());
+            return redirect()
+                ->route("transaction.shoppingCart")
+                ->with("error", $e->getMessage());
         }
         DB::commit();
-        Session::forget('cart');
-        return redirect()->route('receipt');
+        Session::forget("cart");
+        return redirect()->route("resibo");
     }
 
-    public function getReceipt()
+    public function getResibo()
     {
         $customers = Customer::rightJoin(
             "pets",
@@ -194,38 +200,35 @@ class transactionController extends Controller
             "=",
             "customers.id"
         )
+
             ->rightjoin(
-                "transaction_line",
-                "transaction_line.pets_id",
+                "transacs",
+                "transacs.pets_id",
                 "=",
                 "pets.id"
             )
-            ->leftjoin(
+            ->rightjoin(
                 "services",
                 "services.id",
                 "=",
-                "transaction_line.service_id"
+                "transacs.service_id"
             )
-            ->leftjoin(
-                "transactions",
-                "transactions.id",
-                "=",
-                "transaction_line.transaction_id"
-            )
+
             ->select(
-                "customers.first_name",
+                "customers.name",
                 "pets.pets_name",
                 "services.service_name",
                 "services.cost",
-                "transactions.id",
-                "customers.deleted_at"
+                "transacs.id",
+                "transacs.service_id",
             )
 
-            ->orderBy("transactions.id", "DESC")
-            ->latest('transactions.id')
-            ->take('6')
+            ->orderBy("transacs.id", "DESC")
+            // ->where("transacs.id")
+            ->latest("transacs.id")
+            ->take("6")
             ->get();
-        return view("transaction.receipt", [
+        return view("transaction.resibo", [
             "customers" => $customers,
         ]);
     }
@@ -259,7 +262,13 @@ class transactionController extends Controller
      */
     public function show($id)
     {
-        //
+        $services = DB::table('services')
+            ->rightJoin('comments', 'comments.service_id', 'services.id')
+            ->select('comments.id', 'comments.service_id', 'services.service_name', 'comments.name', 'comments.email', 'comments.feedback')
+            ->where('services.id', $id)
+            ->get();
+
+        return view('transaction.show', ['services' => $services]);
     }
 
     /**
@@ -270,18 +279,16 @@ class transactionController extends Controller
      */
     public function edit($id)
     {
-        // $transactions = Transaction::find($id);
-        // $transaction_line = Transaction_line::find($id);
-        // $hoomans = Personnel::pluck("name", "id");
-        // $pets = pets::pluck("pets_name", "id");
-        // $services = Service::pluck("service_name", "id");
-        // return view("transaction.edit", [
-        //     "transactions" => $transactions,
-        //     "transaction_line" => $transaction_line,
-        //     "hoomans" => $hoomans,
-        //     "pets" => $pets,
-        //     "services" => $services,
-        // ]);
+        $transactions = Transaction::find($id);
+        $hoomans = Hoomans::pluck("full_name", "id");
+        $pets = Pets::pluck("pets_name", "id");
+        $services = Service::pluck("service_name", "id");
+        return view("transaction.edit", [
+            "transactions" => $transactions,
+            "hoomans" => $hoomans,
+            "pets" => $pets,
+            "services" => $services,
+        ]);
     }
 
     /**
@@ -293,18 +300,14 @@ class transactionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $transactions = Transaction::find($id);
-        // $transactions->date = $request->input("date");
-        // $transactions->personnel_id = $request->input("personnel_id");
-        // $transactions->update();
-
-        // $transaction_line = Transaction_line::find($id);
-        // $transaction_line->pets_id = $request->input("pets_id");
-        // $transaction_line->service_id = $request->input("service_id");
-        // $transaction_line->update();
-        // return Redirect::to("/transaction")->withSuccessMessage(
-        //     "Transaction Data Updated!"
-        // );
+        $transactions = Transaction::find($id);
+        $transactions->date = $request->input("date");
+        $transactions->status = $request->input("status");
+        $transactions->hooman_id = $request->input("hooman_id");
+        $transactions->pets_id = $request->input("pets_id");
+        $transactions->service_id = $request->input("service_id");
+        $transactions->update();
+        return Redirect::to("transaction");
     }
 
     /**
@@ -313,15 +316,10 @@ class transactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function Delete($id)
     {
-        // $post = Transaction::findOrFail($id);
-        // $postGroups = Transaction::where('id', $post->id)->get();
-        // DB::table('transaction_line')->whereIn('transaction_id', $postGroups->pluck('id'))->delete();
-        // Transaction::where('transaction_id', $post->id)->delete();
-
-        // return Redirect::to("/transaction")->withSuccessMessage(
-        //     "Transaction Data Deleted!"
-        // );
+        $transactions = Transaction::findOrFail($id);
+        $transactions->forceDelete();
+        return Redirect::route("transaction.index");
     }
 }

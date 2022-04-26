@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Transaction_line extends Model
+class Comment extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,9 @@ class Transaction_line extends Model
 
     protected $dates = ["deleted_at"];
 
-    protected $table = "transaction_line";
+    protected $table = "comments";
 
-    protected $fillable = ["transaction_id", "service_id"];
+    protected $primaryKey = "id";
+
+    protected $guarded = ["id"];
 }

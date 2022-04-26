@@ -12,6 +12,7 @@ use App\Http\Controllers\consolationController;
 use App\Http\Controllers\transactionController;
 use App\Http\Controllers\classifyController;
 use App\Http\Controllers\diseasesController;
+use App\Http\Controllers\commentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -146,12 +147,12 @@ Route::get('checkout', [
     'as' => 'checkout',
 ]);
 
-Route::get('/receipt', 'App\Http\Controllers\transactionController@getReceipt')->name("receipt")->middleware("auth");
+Route::get('/resibo', 'App\Http\Controllers\transactionController@getResibo')->name("resibo")->middleware("auth");
 
 
-Route::get('data', [
-    'uses' => 'App\Http\Controllers\transactionController@getData',
-    'as' => 'data',
+Route::get('detail', [
+    'uses' => 'App\Http\Controllers\transactionController@getDetail',
+    'as' => 'detail',
     'middleware' => 'auth'
 ]);
 
@@ -161,9 +162,9 @@ Route::get('add-to-cart/{id}', [
     'as' => 'transaction.addToCart'
 ]);
 
-Route::get('add-animal/{id}', [
-    'uses' => 'App\Http\Controllers\transactionController@getAnimal',
-    'as' => 'transaction.addAnimal'
+Route::get('add-pet/{id}', [
+    'uses' => 'App\Http\Controllers\transactionController@getPet',
+    'as' => 'transaction.addPet'
 ]);
 
 Route::resource("/classify", "classifyController")->middleware("auth");
@@ -182,3 +183,14 @@ Route::get('remove/{id}', [
     'uses' => 'App\Http\Controllers\transactionController@getRemoveItem',
     'as' => 'transaction.remove'
 ]);
+
+Route::get("/comment", [commentController::class, "comment"])->name("comment");
+Route::post("/send", [commentController::class, "send"])->name("send");
+Route::get('comment/{id}', [
+    'uses' => 'transactionController@show',
+    'as' => 'transaction.show'
+]);
+
+Route::get("/resibo", 'App\Http\Controllers\transactionController@getResibo')
+    ->name("resibo")
+    ->middleware("auth");
