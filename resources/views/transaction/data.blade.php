@@ -16,7 +16,7 @@
 <body style="background-image:linear-gradient(rgba(212, 212, 212, 0.1),rgba(212,212,212,0.1)),
     url(https://wallpapercave.com/wp/B1sODrM.jpg); background-size:cover;">
     <div class="pt-8 pb-4 px-8 grid justify-end">
-        <a href="{{url()->previous()}}" class="p-3 border-none italic text-white bg-black text-lg">
+        <a href="{{ URL('dashboard') }}" class="p-3 border-none italic text-white bg-black text-lg">
             Go Back &rarr;
         </a>
     </div>
