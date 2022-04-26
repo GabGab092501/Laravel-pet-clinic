@@ -47,7 +47,7 @@ Route::get("/animals/forceDelete/{id}", [
 ]);
 
 Route::resource("/customer", "customerController")->middleware("auth");
-//Route::resource("/customer", customerController::class);
+
 Route::get("/customer/restore/{id}", [
     "uses" => "customerController@restore",
     "as" => "customer.restore",
@@ -58,7 +58,7 @@ Route::get("/customer/forceDelete/{id}", [
 ]);
 
 Route::resource("/personnel", "personnelController")->middleware("auth");
-//Route::resource("/personnel", personnelController::class);
+
 Route::get("/personnel/restore/{id}", [
     "uses" => "personnelController@restore",
     "as" => "personnel.restore",
