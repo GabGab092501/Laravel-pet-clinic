@@ -23,9 +23,9 @@
             @foreach ($servicesChunk as $pet)
             <img src="{{ asset('uploads/pets/'.$pet->images)}}" alt="I am A Pic" width="400" style="max-height: 12rem;">
             <div class="p-3">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight">{{ $pet->pet_name }}
+                <h5 class="mb-2 text-2xl font-bold tracking-tight">{{ $pet->pets_name }}
                 </h5>
-                <p class="mb-2 text-lg font-bold">{{ $pet->type }}</p>
+                <p class="mb-2 text-lg font-bold">{{ $pet->classify }}</p>
                 <div class="grid grid-flow-col gap-2">
                     <a href=" {{ route('transaction.addPet', ['id'=>$pet->id]) }} " class="btn btn-warning"
                         role="button"><i class="fas fa-cart-plus"></i> Add pet</a>
@@ -45,7 +45,7 @@
             <img src="{{ asset('uploads/services/'.$services->images)}}" alt="I am A Pic" width="400"
                 style="max-height: 12rem;">
             <div class="p-3">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight">{{ $services->services_name }}
+                <h5 class="mb-2 text-2xl font-bold tracking-tight">{{ $services->service_name }}
                 </h5>
                 <p class="mb-2 text-lg font-bold">{{ $services->cost }}</p>
                 <div class="grid grid-flow-col gap-2">
