@@ -14,16 +14,12 @@
 @endif
 
 <body>
-    <div class="pt-8 pb-4 px-8 grid justify-end">
-        <a href="{{url()->previous()}}" class="p-3 border-none italic text-white bg-black text-lg">
-            Go Back &rarr;
-        </a>
-    </div>
-    <h1 class="text-center text-3xl text-white">CHOOSE YOUR PET</h1>
-    <section class="flex flex-wrap justify-center gap-3 p-12 w-full">
+ 
+    <h1 class="text-start text-3xl text-black"> PET</h1>
+    <section class="grid grid-flow-row justify-start gap-3 p-12 w-full">
         @foreach ($pets->chunk(1) as $servicesChunk)
         <div
-            class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+            class="">
             @foreach ($servicesChunk as $pet)
             <img src="{{ asset('uploads/pets/'.$pet->images)}}" alt="I am A Pic" width="400" style="max-height: 12rem;">
             <div class="p-3">
@@ -31,21 +27,20 @@
                 </h5>
                 <p class="mb-2 text-lg font-bold">{{ $pet->type }}</p>
                 <div class="grid grid-flow-col gap-2">
-                    <a href=" {{ route('transaction.addPet', ['id'=>$pet->id]) }} " class="btn btn-primary"
+                    <a href=" {{ route('transaction.addPet', ['id'=>$pet->id]) }} " class="btn btn-warning"
                         role="button"><i class="fas fa-cart-plus"></i> Add pet</a>
 
-                    <a href="#" class="btn btn-success" role="button">More Info</a>
+                  
                 </div>
             </div>
         </div>
         @endforeach
         @endforeach
-    </section>
-    <h1 class="text-center text-3xl text-white pt-3">CHOOSE YOUR services</h1>
-    <section class="flex flex-wrap gap-3 justify-center p-12 w-full">
+
+    <h1 class="text-start text-3xl text-black pt-3"> SERVICES</h1>
         @foreach ($services->chunk(1) as $servicesChunk)
         <div
-            class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+            class="">
             @foreach ($servicesChunk as $services)
             <img src="{{ asset('uploads/services/'.$services->images)}}" alt="I am A Pic" width="400"
                 style="max-height: 12rem;">
@@ -54,10 +49,10 @@
                 </h5>
                 <p class="mb-2 text-lg font-bold">{{ $services->cost }}</p>
                 <div class="grid grid-flow-col gap-2">
-                    <a href=" {{ route('transaction.addToCart', ['id'=>$services->id]) }} " class="btn btn-primary"
+                    <a href=" {{ route('transaction.addToCart', ['id'=>$services->id]) }} " class="btn btn-warning"
                         role="button"><i class="fas fa-cart-plus"></i> Add services </a>
 
-                    <a href=" {{route('transaction.show', ['id'=>$services->id]) }} " class="btn btn-success"
+                    <a href=" {{route('transaction.show', ['id'=>$services->id]) }} " class="btn btn-danger"
                         role="button">View Comment</a>
 
                 </div>

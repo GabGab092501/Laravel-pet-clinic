@@ -30,9 +30,7 @@
             <button><a href="{{ URL('consultation') }}">
                     <h5>Consultations</h5>
                 </a></button>
-            <button><a href="{{ URL('contact') }}">
-                    <h5 class="mr-4">Feedback</h5>
-                </a></button>
+        
             <button><a href={{ URL('personnel') }}>
                     <h5 class="mr-4">Personnel</h5>
                 </a></button>

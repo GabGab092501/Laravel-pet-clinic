@@ -32,7 +32,7 @@ class Cart
             $this->totalCost += $services->cost;
         } catch (\Throwable $e) {
             return redirect()
-                ->route("info")
+                ->route("detail")
                 ->with("error", $e->getMessage());
         }
     }
@@ -52,7 +52,7 @@ class Cart
             $this->pets[$id] = $addPet;
         } catch (\Throwable $e) {
             return redirect()
-                ->route("info")
+                ->route("detail")
                 ->with("error", $e->getMessage());
         }
     }

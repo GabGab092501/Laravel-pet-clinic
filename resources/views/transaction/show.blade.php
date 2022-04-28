@@ -2,11 +2,11 @@
 
 @section('contents')
 
-<a href="{{ route('comment') }}" class=" mt-4 ml-4 btn btn-danger text-white font-bold">Add Comment</a>
+<a href="{{ route('comment') }}" class="  grid justify-end text-3xl">Add Comment</a>
 
 <div class="py-3">
     <table class="table-auto">
-        <tr class="text-white text-center">
+        <tr class="text-black text-center">
             <th class="w-screen text-3xl">Id</th>
             <th class="w-screen text-3xl">Name</th>
             <th class="w-screen text-3xl">Email</th>
@@ -36,6 +36,8 @@
         <p>No One Commented</p>
         @endforelse
     </table>
+
 </div>
+
 </div>
 @endsection

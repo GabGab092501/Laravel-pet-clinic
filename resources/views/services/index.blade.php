@@ -33,11 +33,21 @@
             <td class="pl-10">
                 <img src="{{ asset('uploads/services/'.$service->images)}}" alt="I am A Pic" width="75" height="75">
             </td>
-            <td class=" text-center">
-                <a href="service/{{ $service->id }}/edit" class="text-center text-2xl bg-black-600 p-2">
-                    Update 
-                </a>
-            </td>
+            @if($service->deleted_at)
+      <td class=" text-center">
+        <a href="#">
+          <p class="text-center text-2xl bg-black-600 p-2">
+            Update 
+          </p>
+        </a>
+      </td>
+      @else
+      <td>
+        <a href="service/{{ $service->id }}/edit" class="text-center text-2xl bg-black-600 p-2">
+          Update 
+        </a>
+      </td>
+      @endif
             <td class=" text-center">
                 {!! Form::open(array('route' => array('service.destroy', $service->id),'method'=>'DELETE')) !!}
                 <button type="submit" class="text-center text-2xl bg-black-600 p-2">

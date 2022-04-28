@@ -30,7 +30,7 @@
             <li><a href="{{ URL('customer') }}">Customer</a></li>
             <li><a href={{ URL('service') }}>Service</a></li>
             <li><a href="{{ URL('consultation') }}">Consultation</a></li>
-            <li><a href="{{ URL('contact') }}">Contacts</a></li>
+       
             <li><a href="{{ URL('hoomans') }}">Hoomans</a></li>
             <a href="{{ URL('detail') }}">
                 <h5>Pet Transac</h5>

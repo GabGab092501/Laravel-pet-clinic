@@ -10,7 +10,7 @@
 
 <div class="pt-8 pb-4 px-8">
     <a href="consultation/create" class="p-3 border-none italic text-white bg-black text-lg">
-        Add a new consultation &rarr;
+        Add a new consultation 
     </a>
 
 </div>
@@ -55,40 +55,40 @@
                 {{ $consultation->pets_name }}
             </td>
             <td class="text-center">
-                <a href="consultation/{{ $consultation->id }}/edit" class="text-center text-xl bg-green-600 p-2">
-                    Update &rarr;
+                <a href="consultation/{{ $consultation->id }}/edit" class="text-center text-xl  p-2">
+                    Update 
                 </a>
             </td>
             <td class="text-center">
                 {!! Form::open(array('route' => array('consultation.destroy', $consultation->id),'method'=>'DELETE'))
                 !!}
-                <button type="submit" class="text-center text-xl bg-red-600 p-2 my-2">
-                    Delete &rarr;
+                <button type="submit" class="text-center text-xl  p-2 my-2">
+                    Delete 
                 </button>
                 {!! Form::close() !!}
             </td>
             @if($consultation->deleted_at)
             <td>
                 <a href="{{ route('consultation.restore', $consultation->id) }}">
-                    <p class="text-center text-red-700 text-lg bg-purple-500 p-2">
-                        Restore &rarr;
+                    <p class="text-center text-red-700 text-lg  p-2">
+                        Restore 
                     </p>
                 </a>
             </td>
             @else
             <td>
                 <a href="#">
-                    <p class="text-center text-lg bg-purple-500 p-2">
-                        Restore &rarr;
+                    <p class="text-center text-lg  p-2">
+                        Restore 
                     </p>
                 </a>
             </td>
             @endif
             <td>
                 <a href="{{ route('consultation.forceDelete', $consultation->id) }}">
-                    <p class="text-center text-lg bg-warning p-2 m-2"
+                    <p class="text-center text-lg  p-2 m-2"
                         onclick="return confirm('Do you want to delete this data permanently?')">
-                        Destroy &rarr;
+                        Destroy 
                     </p>
                 </a>
             </td>
@@ -102,7 +102,7 @@
         <form action="{{ url('results') }}" type="GET">
             <input type="result" name="result" id="result" class="text-center pb-1 px-2 w-full">
             <div class="grid w-full">
-                <button class="bg-green-800 text-black font-bold p-2 mt-3">Search</button>
+                <button class="text-black font-bold p-2 mt-3">Search</button>
             </div>
     </span>
 

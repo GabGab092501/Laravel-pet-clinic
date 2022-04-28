@@ -56,15 +56,15 @@
             @if($pet->deleted_at)
             <td class=" text-center">
               <a href="#">
-                <p class="text-center text-2xl bg-green-600 p-2">
-                  Update &rarr;
+                <p class="text-center text-2xl  p-2">
+                  Update 
                 </p>
               </a>
             </td>
             @else
             <td>
-              <a href="pets/{{ $pet->id }}/edit" class="text-center text-2xl bg-green-600 p-2">
-                Update &rarr;
+              <a href="pets/{{ $pet->id }}/edit" class="text-center text-2xl  p-2">
+                Update 
               </a>
             </td>
             @endif
