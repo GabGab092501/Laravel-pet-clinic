@@ -71,7 +71,7 @@
                     <li class="nav-item">
                         <a href="{{ route('transaction.shoppingCart') }}">
                             <i class="fa fa-paw" aria-hidden="true"></i> Pet Transaction
-                            <span class="text-xs text-white">{{ Session::has('cart') ? Session::get('cart')->totalCost :
+                            <span class="text-xs text-white">{{ Session::has('cart') ? '':
                                 '' }}</span>
                         </a>
                     </li>

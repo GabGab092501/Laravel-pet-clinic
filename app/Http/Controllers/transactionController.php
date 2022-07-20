@@ -204,12 +204,17 @@ class transactionController extends Controller
                 ->with("error", $e->getMessage());
         }
         DB::commit();
-        Session::forget("cart");
         return redirect()->route("receipt");
     }
 
     public function getReceipt()
     {
+        if (!Session::has("cart")) {
+            return view("transaction.shopping-cart");
+        }
+        $oldService = Session::get("cart");
+        $cart = new Cart($oldService);
+
         $customers = Customer::rightJoin(
             "animals",
             "animals.customer_id",
@@ -240,11 +245,15 @@ class transactionController extends Controller
             ->orderBy("transactions.id", "DESC")
             // ->where("transactions.id")
             ->latest("transactions.id")
-            ->take("6")
+            ->take("3")
             ->get();
         return view("transaction.receipt", [
+            "services" => $cart->services,
+            "animals" => $cart->animals,
+            "totalCost" => $cart->totalCost,
             "customers" => $customers,
         ]);
+        Session::forget("cart");
     }
 
     /**
