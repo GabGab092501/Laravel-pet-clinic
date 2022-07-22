@@ -1,6 +1,6 @@
 ## Create Database Name prototype.
 
-# SETUP
+## SETUP
 
 -   `composer install`
 -   `setup env from env example and remove the example from the env example`
